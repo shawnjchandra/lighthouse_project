@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <script th:inline="javascript" defer>
+        let text = /*[[${name}]]*/ "Default Text";
+        console.log(text);
+    </script>
+</head>
+<body>
+    <h1>Welcome to Index Page</h1>
+    <!-- <p><a href="/page">Go to page</a></p> -->
+    <p>Text <span data-th-text="#{name}"></span> Other Text</p>
+
+    <div th:if="${isAuth}">Hello, <span th:text="${name}">World</span></div>
+    <div th:if="${isAuth} == false">Please login</div>
+    <div th:class="${isAuth} ? yes : no">Test</div>
+
+    <ul>
+        <li th:each="item : ${arrAngka}"><span th:text="${item}"></span></li>
+    </ul>
+</body>
+</html>
