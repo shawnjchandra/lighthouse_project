@@ -15,13 +15,19 @@ public class MainController {
         model.addAttribute("isAuth", false);
         model.addAttribute("arrAngka", "1,2");
         model.addAttribute("item", "objek ke - ");
-        return "pencarian";
+        return "index";
     }
 
     @GetMapping("/pencarian")
     public String penc(Model model) {
 
         return "pencarian";
+    }
+
+    @GetMapping("/edit-data")
+    public String editData(Model model) {
+
+        return "editData";
     }
 
 }
