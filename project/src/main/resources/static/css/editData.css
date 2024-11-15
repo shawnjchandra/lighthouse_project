@@ -127,7 +127,7 @@ select {
 button {
     padding: 10px 15px;
     /* Padding inside button */
-    background-color: #28a745;
+    background-color: var(--primary-color);
     /* Green background color */
     color: white;
     /* White text color */
@@ -140,7 +140,7 @@ button {
 }
 
 button:hover {
-    background-color: #218838;
+    background-color: var(--secondary-color);
     /* Darker shade on hover */
 }
 

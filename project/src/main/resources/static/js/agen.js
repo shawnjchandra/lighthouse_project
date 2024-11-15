@@ -1,9 +1,13 @@
 (function(){
     let doc = document.location.pathname;
-
+    console.log(doc)
     switch(doc){
         case "/edit-data":
             editDataFunc();    
+            break;
+        case "/kelola-jadwal":
+            const currentApartmentFilter = 'APT'; // Default to show all apartments
+            filterByApartment(currentApartmentFilter);
             break;
     }
     
@@ -63,4 +67,45 @@ function saveChanges(){
     let editUnitNum = document.querySelector("#editUnitNumber").value;
     let editType = document.querySelector("#editUnitType").value;
 
+    // 
+}
+
+// Fitur Kelola Jadwal
+
+
+function filterByApartment(apartmentCode) {
+
+    currentApartmentFilter = apartmentCode;
+    applyFilters();
+}
+
+function applyFilters() {
+    let startDate = document.getElementById("start-date").value;
+    let endDate = document.getElementById("end-date").value;
+    let table = document.getElementById("availability-table");
+    let rows = table.getElementsByTagName("tr");
+
+    for (let i = 1; i < rows.length; i++) {
+        let codeCell = rows[i].getElementsByTagName("td")[0];
+        let startDateCell = rows[i].getElementsByTagName("td")[1];
+        let endDateCell = rows[i].getElementsByTagName("td")[2];
+        let statusCell = rows[i].getElementsByTagName("td")[3];
+        
+        if (codeCell && startDateCell && endDateCell && statusCell) {
+            let rowCode = codeCell.textContent || codeCell.innerText;
+            let rowStartDate = startDateCell.textContent || startDateCell.innerText;
+            let rowEndDate = endDateCell.textContent || endDateCell.innerText;
+            let rowStatus = statusCell.textContent || statusCell.innerText;
+
+            let isWithinDateRange = (!startDate || rowStartDate >= startDate) && (!endDate || rowEndDate <= endDate);
+            let isApartmentMatch = currentApartmentFilter === 'APT' || rowCode === currentApartmentFilter;
+
+            // Check if the row is within the date range and if it is available
+            if (isApartmentMatch && isWithinDateRange) {
+                rows[i].style.display = rowStatus === "Tersedia" ? "" : "none";
+            } else {
+                rows[i].style.display = "none";
+            }
+        }
+    }
 }

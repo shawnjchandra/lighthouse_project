@@ -30,4 +30,10 @@ public class MainController {
         return "editData";
     }
 
+    @GetMapping("/kelola-jadwal")
+    public String kelolaJadwal(Model model) {
+
+        return "kelolaJadwal";
+    }
+
 }
