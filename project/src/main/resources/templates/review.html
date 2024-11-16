@@ -4,9 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Give review for unit</title>
-    <link rel="stylesheet" href="review.css">
+    <link rel="stylesheet" th:href="@{css/review.css}">
+    <script rel="text/javascript" th:src="@{js/pelanggan.js}"defer></script>
 </head>
 <body>
+    <!-- navbar -->
+    <div class="navbar-container">
+        <nav class = "navbar">
+           
+            <a href="#" class="logo">
+                <img th:src="@{images/LHlogoresized.png}" height="32" width="32" alt="">
+            </a>
+            <ul class="navbar-links">
+                <li id="link-pencarian"><a href="#">Pencarian</a></li>
+                <!-- <li id="link-pemesanan"><a href="#">Pemesanan</a></li>
+                <li id="link-Pembayaran"><a href="#">Pembayaran</a></li> -->
+                <li id="link-riwayat"><a href="#">Riwayat Transaksi</a></li>
+                <!-- <li id="link-review"><a href="#">Review</a></li> -->
+            </ul>
+            <div class="auth-buttons">
+                <button class="auth-btn">Sign In</button>
+                <button class="auth-btn">Sign Up</button>
+                <button class="auth-btn" hidden>Sign Out</button>
+    
+            </div>
+            
+        </nav>
+
+    </div>
+
+    <!-- body -->
     <div class="review-body">
 
         <div class="top">
