@@ -20,7 +20,7 @@ body {
 }
 
 /* Main container */
-.Review {
+.review-body {
     width: 1035px;
     height: 680px;
     background: #D9D9D9;
@@ -40,7 +40,7 @@ body {
 }
 
 /* Unit picture */
-.UnitPict {
+.unit-picture {
     width: 184px;
     height: 183px;
     background: #B4B4B4;
@@ -50,7 +50,7 @@ body {
 }
 
 /* Title text */
-.NounitTower {
+.unit-name {
     color: black;
     font-size: 32px;
     font-weight: 400;
@@ -58,7 +58,7 @@ body {
 }
 
 /* Form styling */
-.ReviewForm {
+.review-form {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -73,7 +73,7 @@ body {
     line-height: 1.4;
 }
 
-.Textarea {
+.text-area {
     width: 100%;
     height: 150px;
     padding: 12px;
@@ -86,33 +86,33 @@ body {
     resize: none;
 }
 
-.Textarea:focus {
+.text-area:focus {
     border-color: var(--primary-color);
     outline: none;
 }
 
 /* Rating section */
-.Rating {
+.rating {
     display: flex;
     gap: 12px;
     font-size: 16px;
 }
 
-.Rating label {
+.rating label {
     display: flex;
     align-items: center;
     gap: 4px;
     cursor: pointer;
 }
 
-.Rating input {
+.rating input {
     width: 16px;
     height: 16px;
     accent-color: #1D72B8;
 }
 
 /* Submit button */
-.SubmitButton {
+.submit-button {
     align-self: flex-end;
     background: #1D72B8;
     color: white;
@@ -124,7 +124,7 @@ body {
     cursor: pointer;
 }
 
-.SubmitButton:hover {
+.submit-button:hover {
     background: #155a8c;
 }
 

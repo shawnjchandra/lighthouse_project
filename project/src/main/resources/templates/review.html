@@ -7,19 +7,21 @@
     <link rel="stylesheet" href="review.css">
 </head>
 <body>
-    <div class="Review">
+    <div class="review-body">
 
         <div class="top">
-            <div class="UnitPict"></div>
-            <div class="NounitTower">noUnit / tower / </div>
+            <div class="unit-picture">
+                <img src="" alt="">
+            </div>
+            <div class="unit-name">noUnit / tower / </div>
         </div>
             
             <!-- form -->
-            <form action="/submit-review" method="POST" class="ReviewForm">
+            <form action="/submit-review" method="POST" class="review-form">
                 
                 <!-- radio button for rating -->
                 <div class="rating-label">Berikan nilai untuk unit ini:</div>
-                <div class="Rating">
+                <div class="rating">
                     <label><input type="radio" name="rating" value="1"> 1</label>
                     <label><input type="radio" name="rating" value="2"> 2</label>
                     <label><input type="radio" name="rating" value="3"> 3</label>
@@ -29,8 +31,8 @@
 
                 <!-- text area -->
                 <div class="text-area-label">Berikan ulasan untuk unit ini</div>
-                <textarea name="review" placeholder="Berikan ulasan untuk unit ini..." class="Textarea"></textarea>
-                <button type="submit" class="SubmitButton">Submit</button>
+                <textarea name="review" placeholder="Berikan ulasan untuk unit ini..." class="text-area"></textarea>
+                <button type="submit" class="submit-button">Submit</button>
             </form>
     </div>
 </body>
