@@ -17,4 +17,23 @@ public class MainController {
         model.addAttribute("item", "objek ke - ");
         return "index";
     }
+
+    @GetMapping("/pencarian")
+    public String penc(Model model) {
+
+        return "pencarian";
+    }
+
+    @GetMapping("/edit-data")
+    public String editData(Model model) {
+
+        return "editData";
+    }
+
+    @GetMapping("/kelola-jadwal")
+    public String kelolaJadwal(Model model) {
+
+        return "kelolaJadwal";
+    }
+
 }
