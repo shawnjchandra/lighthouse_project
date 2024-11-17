@@ -134,3 +134,71 @@ body {
     font-weight: 400;
     line-height: 1.4;
 }
+
+/* NAVBAR */
+.navbar{
+    position: fixed; /* Sticks the navbar to the top */
+    top: 0; /* Aligns it at the top of the page */
+    left: 0;
+    right: 0;
+    border-bottom: 1px dashed black;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--primary-color);
+    padding-top: 2px;
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 100%;
+  }
+  
+  .navbar-links{
+    display: flex;
+    list-style: none;
+    flex-direction: row;
+    text-decoration: none;
+    padding: 0px 5px 0px 5px;
+  }
+  
+  .navbar-links li{
+    margin: 0 25px;
+  }
+  
+  .navbar-links a{
+    color: white;
+    font-weight: bold ;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  
+  .navbar-links a:hover{
+    color: black;
+    
+  }
+  
+  .logo{
+    background-color: white;
+    border-radius: 50%;
+    padding: 7px;
+    margin: 3px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .auth-buttons{
+    display: flex;
+  }
+  
+  .auth-btn{
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+  }
+
+  
+  
