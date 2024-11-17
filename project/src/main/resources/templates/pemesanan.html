@@ -45,6 +45,11 @@
             </div>
         
             <div class="booking-container">
+
+                <div class="price-container">
+                    <h2 id="base-price"></h2>
+                </div>
+
                 <!-- Toggle Buttons -->
                 <div class="toggle-buttons">
                     <button type="button" id="day-btn" class="toggle-btn">Day</button>
@@ -65,6 +70,9 @@
                     <div class="form-group" id="duration-group" style="display: none;">
                         <label for="duration">Duration</label>
                         <select id="duration" name="duration"></select>
+                    </div>
+                    <div class="total-price-container">
+                        <h2 id="total-price">Total Price: $0</h2>
                     </div>
                     <button type="submit" class="submit-btn">Submit</button>
                 </form>
