@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{css/kelolaJadwal.css}">
+    <script rel="text/javascript" th:src="@{js/agen.js}" defer></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="navbar-container">
+        <nav class="navbar">
+    
+            <a href="#" class="logo">
+                <img th:src="@{images/LHlogoresized.png}" height="32" width="32" alt="">
+            </a>
+            <ul class="navbar-links">
+                <li id="link-editDataUnit"><a href="#">Data Unit</a></li>
+                <li id="link-jadwalKetersediaan"><a href="#">Jadwal Ketersediaan</a></li>
+                
+                <li id="link-pemesananUnit"><a href="#">Data Pemesanan</a></li>
+                <!--Fitur Pengawasan Unit -->
+                
+                <li id="link-cico"><a href="#">Data CICO</a></li>
+                <!-- Pengawasan Check In Check Out Unit -->
+
+                <li id="link-utilitas"><a href="#">Laporan Utilitas</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <button class="auth-btn">Sign In</button>
+
+                <!-- <button class="auth-btn">Sign Up</button> -->
+                 <!-- Agen ga perlu sign up, asumsi sudah di daftarkan sejak awal bekerja -->
+                <button class="auth-btn" hidden>Sign Out</button>
+    
+            </div>
+    
+        </nav>
+    
+    </div>
+    <div class="jadwal-container">
+        <h2>Jadwal Ketersediaan Unit Apartemen</h2>
+
+        <div class="filter-buttons">
+            <button onclick="filterByApartment('APT')">Semua</button>
+            <button onclick="filterByApartment('APT001')">Apartemen A</button>
+            <button onclick="filterByApartment('APT002')">Apartemen B</button>
+            <button onclick="filterByApartment('APT003')">Apartemen C</button>
+            <button onclick="filterByApartment('APT004')">Apartemen D</button>
+        </div>
+
+        <label for="start-date">Tanggal Awal:</label>
+        <input type="date" id="start-date" onchange="applyFilters()">
+        <label for="end-date">Tanggal Akhir:</label>
+        <input type="date" id="end-date" onchange="applyFilters()">
+
+        <table id="availability-table">
+            <thead>
+                <tr>
+                    <th>Kode Unit</th>
+                    <th>Tanggal Mulai</th>
+                    <th>Tanggal Selesai</th>
+                    <th>Status Ketersediaan</th>
+                    <th>Tarif Sewa Harian</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>APT001</td>
+                    <td>2023-10-01</td>
+                    <td>2023-10-02</td>
+                    <td>Tersedia</td>
+                    <td>Rp 500.000</td>
+                </tr>
+                <tr>
+                    <td>APT002</td>
+                    <td>2023-10-01</td>
+                    <td>2023-10-01</td>
+                    <td>Tidak Tersedia</td>
+                    <td>Rp 600.000</td>
+                </tr>
+                <tr>
+                    <td>APT003</td>
+                    <td>2023-10-02</td>
+                    <td>2023-10-03</td>
+                    <td>Tersedia</td>
+                    <td>Rp 450.000</td>
+                </tr>
+                <tr>
+                    <td>APT004</td>
+                    <td>2023-10-03</td>
+                    <td>2023-10-04</td>
+                    <td>Tersedia</td>
+                    <td>Rp 550.000</td>
+                </tr>
+                <tr>
+                    <td>APT001</td>
+                    <td>2023-10-04</td>
+                    <td>2023-10-05</td>
+                    <td>Tidak Tersedia</td>
+                    <td>Rp 500.000</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</body>
+</html>
