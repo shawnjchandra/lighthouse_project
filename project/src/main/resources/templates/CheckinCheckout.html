@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="CheckinCheckout.css">
+</head>
+<body>
+  <!-- navbar -->
+  <div class="navbar-container">
+    <nav class = "navbar">
+       
+        <a href="#" class="logo">
+            <img th:src="@{images/LHlogoresized.png}" height="32" width="32" alt="">
+        </a>
+        <ul class="navbar-links">
+            <li id="link-pencarian"><a href="#">Pencarian</a></li>
+            <!-- <li id="link-pemesanan"><a href="#">Pemesanan</a></li>
+            <li id="link-Pembayaran"><a href="#">Pembayaran</a></li> -->
+            <li id="link-riwayat"><a href="#">Riwayat Transaksi</a></li>
+            <!-- <li id="link-review"><a href="#">Review</a></li> -->
+        </ul>
+        <div class="auth-buttons">
+            <button class="auth-btn">Sign In</button>
+            <button class="auth-btn">Sign Up</button>
+            <button class="auth-btn" hidden>Sign Out</button>
+
+        </div>
+        
+    </nav>
+
+</div>
+  <div class="container">
+    
+    <div class="top">
+      <img class="unit-picture" src="unit-picture0.svg" />
+      <div class="unit-desc">noUnit / tower / type</div>
+    </div>
+
+    <div class="main">
+      <!-- label -->
+
+      <div class="checkin-label">
+        <table><tbody>
+          <tr>
+            <th>Tanggal Pemesanan</th>
+            <td>: dd/mm/yy</td>
+          </tr>
+          <tr>
+            <th>Tanggal check-in</th>
+            <td>: dd/mm/yy</td>
+          </tr>
+          <tr>
+            <th>Tanggal check-out</th>
+            <td>: dd/mm/yy</td>
+          </tr>
+        </tbody>
+        </table>
+      </div>
+      <div class="bottom">
+        <button type="submit" class="checkin-button">Check-in</button>
+        <button type="submit" class="checkout-button">Check-out</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
