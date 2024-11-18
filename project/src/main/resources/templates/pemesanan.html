@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" th:href="@{css/pemesanan.css}">
+        <script rel="text/javascript" th:src="@{js/pemesanan.js}"defer></script>
+        <title>Pencarian</title>
+    </head>
+    <body>
+        <div class="navbar-container">
+            <nav class = "navbar">
+            
+                <a href="#" class="logo">
+                    <img th:src="@{images/LHlogoresized.png}" height="32" width="32" alt="">
+                </a>
+                <ul class="navbar-links">
+                    <li id="link-pencarian"><a href="#">Pencarian</a></li>
+                    <!-- <li id="link-pemesanan"><a href="#">Pemesanan</a></li>
+                    <li id="link-Pembayaran"><a href="#">Pembayaran</a></li> -->
+                    <li id="link-riwayat"><a href="#">Riwayat Transaksi</a></li>
+                    <!-- <li id="link-review"><a href="#">Review</a></li> -->
+                </ul>
+                <div class="auth-buttons">
+                    <button class="auth-btn">Sign In</button>
+                    <button class="auth-btn">Sign Up</button>
+                    <button class="auth-btn" hidden>Sign Out</button>
+        
+                </div>
+                
+            </nav>
+
+        </div>
+        
+        <div class="container">
+            <div class="details-container">
+                <h2>Apartment Name</h2>
+                <p><strong>Address:</strong> 123 Main Street, City, Country</p>
+                <p><strong>Description:</strong> A beautiful, modern apartment located in the heart of the city. Perfect for a short or long-term stay.</p>
+                <p><strong>Room Size:</strong> 80 m²</p>
+                <p><strong>Facilities:</strong> Free Wi-Fi, Air Conditioning, Kitchen, Washing Machine, TV</p>
+                <p><strong>Check-in Time:</strong> 2:00 PM</p>
+                <p><strong>Check-out Time:</strong> 11:00 AM</p>
+                <p><strong>Building Rules:</strong> No pets, No smoking, Quiet hours from 10 PM to 7 AM</p>
+            </div>
+        
+            <div class="booking-container">
+
+                <div class="price-container">
+                    <h2 id="base-price"></h2>
+                </div>
+
+                <!-- Toggle Buttons -->
+                <div class="toggle-buttons">
+                    <button type="button" id="day-btn" class="toggle-btn">Day</button>
+                    <button type="button" id="month-btn" class="toggle-btn">Month</button>
+                    <button type="button" id="year-btn" class="toggle-btn">Year</button>
+                </div>
+        
+                <!-- Booking Form -->
+                <form class="booking-form">
+                    <div class="form-group">
+                        <label for="check-in">Check-in Date</label>
+                        <input type="date" id="check-in" name="checkIn" readonly>
+                    </div>
+                    <div class="form-group" id="check-out-group">
+                        <label for="check-out">Check-out Date</label>
+                        <input type="date" id="check-out" name="checkOut" readonly>
+                    </div>
+                    <div class="form-group" id="duration-group" style="display: none;">
+                        <label for="duration">Duration</label>
+                        <select id="duration" name="duration"></select>
+                    </div>
+                    <div class="total-price-container">
+                        <h2 id="total-price">Total Price: $0</h2>
+                    </div>
+                    <button type="submit" class="submit-btn">Submit</button>
+                </form>
+            </div>
+        </div>          
+        
+        <footer></footer>
+    </body>
+</html>

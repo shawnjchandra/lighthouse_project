@@ -1,0 +1,189 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+:root{
+    --primary-color : #4098fd;
+    --secondary-color : #e5533d;
+}
+button{
+    transition: 0.3s;
+}
+
+.navbar{
+    border-bottom: 1px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--primary-color);
+    padding-top: 2px;
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 100%;
+    position: fixed;
+    top: 0; /* Aligns it at the top of the page */
+  left: 0;
+  right: 0;
+}
+
+.navbar-links{
+    display: flex;
+    list-style: none;
+    flex-direction: row;
+    text-decoration: none;
+    padding: 0px 5px 0px 5px;
+}
+
+.navbar-links li{
+    margin: 0 25px;
+}
+
+.navbar-links a{
+    color: white;
+    font-weight: bold ;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.navbar-links a:hover{
+    color: black;
+    
+}
+
+.logo{
+    background-color: white;
+    border-radius: 50%;
+    padding: 7px;
+    margin: 3px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.auth-buttons{
+    display: flex;
+}
+
+.auth-btn{
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+.auth-btn:hover{
+    background-color:  #e5533d;
+}
+
+/* Submit button */
+.submit-button {
+    align-self: flex-end;
+    background: #1D72B8;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 400;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background: #155a8c;
+}
+
+/* container */
+/* Styles to center the container */
+.container {
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    /* justify-content: center; */
+    height: 100vh;
+    padding: 20px;
+    margin-top: 50px;
+    text-align: center;
+}
+
+.customer-list {
+    margin-top: 20px;
+    border-top: 1px solid #ddd;
+    padding-top: 15px;
+}
+
+.customer-list ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.customer-list li {
+    margin: 5px 0;
+    font-weight: bold;
+}
+
+#check-out-list, #check-in-list{
+    margin-top: 20px;
+    border-top: 1px solid #ddd;
+    padding-top: 15px;
+}
+
+.container {
+    margin: 80px auto 0 auto; /* Adds margin below the navbar */
+    max-width: 80%;
+    text-align: center;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.container h1 {
+    margin-bottom: 20px;
+    color: var(--primary-color);
+}
+
+.period-picker {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.period-picker label {
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.utilitas-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.utilitas-table th, .utilitas-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.utilitas-table th {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.utilitas-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.utilitas-table tr:hover {
+    background-color: #ddd;
+}
+
+.utilitas-table td[colspan="6"] {
+    font-weight: bold;
+    text-align: right;
+}

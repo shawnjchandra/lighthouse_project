@@ -1,0 +1,163 @@
+/* NAVBAR TEMPLATE */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #4098fd;
+    --secondary-color: #e5533d;
+}
+
+button {
+    transition: 0.3s;
+}
+
+.navbar {
+    border-bottom: 1px dashed black;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--primary-color);
+    padding-top: 2px;
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 100%;
+    position: fixed;
+}
+
+.navbar-links {
+    display: flex;
+    list-style: none;
+    flex-direction: row;
+    text-decoration: none;
+    padding: 0px 5px 0px 5px;
+}
+
+.navbar-links li {
+    margin: 0 25px;
+}
+
+.navbar-links a {
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.navbar-links a:hover {
+    color: black;
+
+}
+
+.logo {
+    background-color: white;
+    border-radius: 50%;
+    padding: 7px;
+    margin: 3px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.auth-buttons {
+    display: flex;
+}
+
+.auth-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+.auth-btn:hover {
+    background-color: #e5533d;
+}
+
+/* CONTAINER */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+header {
+    background: #147ef6;
+    /* Green background */
+    margin-top: 54px;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+}
+
+header h1 {
+    margin: 0;
+}
+
+.cta-button {
+    background: #FF5722;
+    /* Orange background */
+    width: 200px;
+    color: white;
+    margin-top: 10px;
+    padding: 15px 25px;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+main {
+    padding: 20px 0;
+}
+
+#features {
+    background: #f4f4f4;
+    /* Light grey background */
+    padding: 20px 0;
+}
+
+.feature {
+    margin: 20px 0;
+}
+
+footer {
+    background: #333;
+    /* Dark background */
+    position: fixed;
+    bottom :0;
+    color: white;
+    width: 100%;
+    text-align: center;
+    padding: 20px 0;
+
+
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    display: inline;
+    margin: 0 15px;
+}
