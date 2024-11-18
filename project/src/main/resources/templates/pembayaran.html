@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{css/pembayaran.css}">
+    <script th:src="@{js/pembayaran.js}" defer></script>
+    <title>Pembayaran</title>
+</head>
+<body>
+    <div class="navbar-container">
+        <nav class="navbar">
+            <a href="#" class="logo">
+                <img th:src="@{images/LHlogoresized.png}" height="32" width="32" alt="">
+            </a>
+            <ul class="navbar-links">
+                <li id="link-pencarian"><a href="#">Pencarian</a></li>
+                <li id="link-riwayat"><a href="#">Riwayat Transaksi</a></li>
+            </ul>
+            <div class="auth-buttons">
+                <button class="auth-btn">Sign In</button>
+                <button class="auth-btn">Sign Up</button>
+                <button class="auth-btn" hidden>Sign Out</button>
+            </div>
+        </nav>
+    </div>
+
+    <div class="container">
+        <h1>Payment</h1>
+
+        <!-- Tenant Information Section -->
+        <h2>Tenant Information</h2>
+        <div class="tenant-info">
+            <table>
+                <tr>
+                    <td><label for="tenant-name">Name:</label></td>
+                    <td><input type="text" id="tenant-name" placeholder="Enter your name" required></td>
+                    <td><label for="tenant-email">Email:</label></td>
+                    <td><input type="email" id="tenant-email" placeholder="Enter your email" required></td>
+                </tr>
+                <tr>
+                    <td><label for="tenant-country">Country:</label></td>
+                    <td><input type="text" id="tenant-country" placeholder="Enter your country" required></td>
+                    <td><label for="tenant-phone">Phone Number:</label></td>
+                    <td><input type="tel" id="tenant-phone" placeholder="Enter your phone" required></td>
+                </tr>
+                <tr>
+                    <td><label for="tenant-id">ID Number:</label></td>
+                    <td><input type="text" id="tenant-id" placeholder="Enter your ID" required></td>
+                    <td><label for="tenant-address">Address:</label></td>
+                    <td><input type="text" id="tenant-address" placeholder="Enter your address" required></td>
+                </tr>
+            </table>
+        </div>
+
+        <label>
+            <input type="radio" name="booking-type" value="self" id="for-myself" checked> Book for Myself
+        </label>
+
+        <label>
+            <input type="radio" name="booking-type" value="others" id="for-others"> Book for Others
+        </label>
+
+        <!-- Guest Information Section -->
+        <div class="guest-info">
+            <h2>Guest Information</h2>
+            <table>
+                <tr>
+                    <td><label for="guest-name">Name:</label></td>
+                    <td><input type="text" id="guest-name" placeholder="Enter guest name" required></td>
+                    <td><label for="guest-email">Email:</label></td>
+                    <td><input type="email" id="guest-email" placeholder="Enter guest email" required></td>
+                </tr>
+                <tr>
+                    <td><label for="guest-country">Country:</label></td>
+                    <td><input type="text" id="guest-country" placeholder="Enter guest country" required></td>
+                    <td><label for="guest-phone">Phone Number:</label></td>
+                    <td><input type="tel" id="guest-phone" placeholder="Enter guest phone" required></td>
+                </tr>
+                <tr>
+                    <td><label for="guest-id">ID Number:</label></td>
+                    <td><input type="text" id="guest-id" placeholder="Enter guest ID" required></td>
+                    <td><label for="guest-address">Address:</label></td>
+                    <td><input type="text" id="guest-address" placeholder="Enter guest address" required></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="form-group">
+            <label><input type="checkbox" id="terms-checkbox"> I agree to the terms and conditions</label>
+        </div>
+
+        <!-- Payment Method Part -->
+        <div class="payment-method-part" style="display: none;">
+            <h2 id>Payment Method</h2>
+            <div class="form-group">
+                <label><input type="radio" name="paymentMethod" value="creditCard"> Credit Card</label>
+                <label><input type="radio" name="paymentMethod" value="bankTransfer"> Bank Transfer</label>
+            </div>
+        </div>
+    
+        <!-- Payment Details Part -->
+        <div class="payment-details-part" style="display: none;">
+
+            <h2>Payment Details</h2>
+
+            <div class="credit-card-details" style="display: none;">
+                <table>
+                    <tr>
+                        <td><label for="card-name">Cardholder's Name</label></td>
+                        <td><input type="text" id="card-name" name="cardName" placeholder="Enter your name" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="card-number">Card Number</label></td>
+                        <td><input type="text" id="card-number" name="cardNumber" placeholder="Enter your card number" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="expiry-date">Expiry Date</label></td>
+                        <td><input type="text" id="expiry-date" name="expiryDate" placeholder="Enter the expiry date" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="cvv">CVV</label></td>
+                        <td><input type="text" id="cvv" name="cvv" placeholder="Enter your CVV" required></td>
+                    </tr>
+                </table>
+            </div>
+    
+            <div class="bank-transfer-details" style="display: none;">
+                <table>
+                    <tr>
+                        <td><label for="account-holder">Account Holder</label></td>
+                        <td><input type="text" id="account-holder" name="accountHolder" placeholder="Enter your name" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="bank-name">Bank Name</label></td>
+                        <td><input type="text" id="bank-name" name="bankName" placeholder="Enter bank name" required></td>
+                    </tr>
+                    <tr>
+                        <td><label for="bank-account">Account Number</label></td>
+                        <td><input type="text" id="bank-account" name="bankAccount" placeholder="Enter your bank account number" required></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    
+        <button class="submit-btn" style="display: none;">Process Payment</button>
+    </div>
+
+    <footer></footer>
+</body>
+</html>

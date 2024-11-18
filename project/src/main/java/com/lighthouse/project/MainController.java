@@ -17,4 +17,9 @@ public class MainController {
         model.addAttribute("item", "objek ke - ");
         return "index";
     }
+
+    @GetMapping("/pembayaran")
+    public String pembayaran(){
+        return "pembayaran";
+    }
 }
