@@ -25,6 +25,7 @@ public class MainController {
 
 
 
+
     // Pelanggan
     @GetMapping("/pencarian")
     public String penc(Model model) {
@@ -82,7 +83,6 @@ public class MainController {
 
         return "register";
     }
-
 
 
 
