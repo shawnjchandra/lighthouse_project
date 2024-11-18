@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../static/css/pelaporanUtilitas.css">
-    <title>Document</title>
+    <link rel="stylesheet" th:href="@{css/pelaporanUtilitas.css}">
+    <title>Pelaporan Utilitas</title>
 </head>
 <body>
     <div class="navbar-container">
         <nav class = "navbar">
            
             <a href="#" class="logo">
-                <img src="../static/images/LHlogoresized.png" height="32" width="32" alt="">
+                <img th:src="@{images/LHlogoresized.png}" height="32" width="32" alt="">
             </a>
             <ul class="navbar-links">
                 <li id="link-pencarian"><a href="#">Pencarian</a></li>

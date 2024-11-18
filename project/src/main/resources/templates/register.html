@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
-    <link rel="stylesheet" href="../static/css/register.css"> 
+    <title>Register Page</title>
+    <link rel="stylesheet" th:href="@{css/register.css}"> 
 </head>
 <body>
     <div class="login-container">
         <div class="image-section">
-            <img src="../static/images/vertical-shot-white-building-clear-sky.jpg" alt="User" class="profile-image">
+            <img th:src="@{images/vertical-shot-white-building-clear-sky.jpg}" alt="User" class="profile-image">
         </div>``
         <div class="form-section">
             <div class="logo-container">
-                <img src="../static/images/LHlogo.png" alt="Logo" class="logo">
+                <img th:src="@{images/LHlogoresized.png}" height="64" width="64" alt="Logo" class="logo">
             </div>
             <h2>Register</h2>
             <form action="#" method="POST">
