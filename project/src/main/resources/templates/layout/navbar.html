@@ -34,9 +34,9 @@
 
         </div>
         <div class="auth-buttons">
-            <button class="auth-btn" th:if="${default}" th:href="@{login}">Sign In</button>
-            <button class="auth-btn" th:if="${default}" th:href="@{register}">Sign Up</button>
-            <button class="auth-btn" th:unless="${default}">Sign Out</button>
+            <a class="auth-btn" th:if="${default}" th:href="@{/login}">Sign In</a>
+            <a class="auth-btn" th:if="${default}" th:href="@{/register}">Sign Up</a>
+            <a class="auth-btn" th:unless="${default}">Sign Out</a>
 
         </div>
      

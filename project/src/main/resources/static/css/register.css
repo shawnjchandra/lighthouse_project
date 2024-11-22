@@ -96,6 +96,10 @@ input {
     background-color: #03045e;;
 }
 
+.hidden{
+    display: none;
+}
+
 
 
 .signup-link {

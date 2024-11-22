@@ -19,9 +19,5 @@ public class PenggunaModel {
     String email;
     String username;
     String pass;
-    int tipe;
-    int idagen;
-    int idpel;
-
-
+    String tipe;
 }
