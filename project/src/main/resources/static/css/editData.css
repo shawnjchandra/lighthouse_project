@@ -16,7 +16,6 @@ button {
 }
 
 .navbar {
-    border-bottom: 1px dashed black;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -25,7 +24,7 @@ button {
     padding-top: 2px;
     padding-left: 5px;
     padding-right: 5px;
-    width: 98%;
+    width: 100%;
     position: fixed;
 }
 
@@ -85,13 +84,12 @@ button {
 /* Basic styles for the form and table */
 body {
     font-family: Arial, sans-serif;
-    /* Font for the page */
-    padding: 20px;
-    /* Padding around the body */
     background-color: #f4f4f4;
-    /* Background color */
+    margin: 0;
 }
-
+.main-container{
+    padding-top: 50px;
+}
 h1 {
     margin-bottom: 20px;
     /* Space below the heading */
@@ -144,29 +142,37 @@ button:hover {
     /* Darker shade on hover */
 }
 
-table {
-    width: 100%;
-    /* Full width of the container */
+.utilitas-table {
+    width: 70%;
     border-collapse: collapse;
-    /* Remove space between cells */
-    margin-top: 20px;
-    /* Space above the table */
+    /* margin-top: 20px; */
+    margin: 0 auto;
 }
 
-th,
-td {
-    padding: 10px;
-    /* Padding inside cells */
+.utilitas-table th, .utilitas-table td {
     border: 1px solid #ddd;
-    /* Cell border */
-    text-align: left;
-    /* Align text to the left */
+    padding: 8px;
+    text-align: center;
 }
 
-th {
-    background-color: #f2f2f2;
-    /* Background color for headers */
+.utilitas-table th {
+    background-color: var(--primary-color);
+    color: white;
 }
+
+.utilitas-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.utilitas-table tr:hover {
+    background-color: #ddd;
+}
+
+.utilitas-table td[colspan="6"] {
+    font-weight: bold;
+    text-align: right;
+}
+
 
 .modal {
     display: none;

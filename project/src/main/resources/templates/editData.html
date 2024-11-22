@@ -38,9 +38,9 @@
         </nav>
     
     </div>
-    <div>
-        <h1>Manage Apartment Units</h1>
+    <div class="main-container">
         <div class="form-container">
+            <h1>Manage Apartment Units</h1>
             <form id="unitForm">
                 <label for="tower">Tower:</label>
                 <!-- <input type="text" id="tower" placeholder="Enter Tower Code" required> -->
@@ -58,31 +58,41 @@
                 <input type="number" id="floor" placeholder="Enter Floor Number" required min="0">
     
                 <label for="unitNumber">Unit Number:</label>
-                <input type="text" id="unitNumber" placeholder="Enter Unit Number" required>
+                <input type="number" id="unitNumber" placeholder="Enter Unit Number" required>
     
                 <label for="unitType">Unit Type:</label>
                 <select id="unitType" required>
                     <option value="'studio'">Studio</option>
                     <option value="'2BR'">2 Bedroom</option>
                 </select>
+
+                <label for="unitPrice">Unit Price:</label>
+                <input type="number" id="unitPrice" placeholder="Enter Unit Price" required>
     
                 <button type="submit">Add Unit</button>
             </form>
         </div>
     
-        <table id="unitTable">
+        <table class="utilitas-table">
             <thead>
                 <tr>
-                    <th>Tower</th>
                     <th>Floor</th>
                     <th>Unit Number</th>
                     <th>Unit Type</th>
-                    <th>Edit Data</th>
+                    <th>Unit Price</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                <!-- Dynamic rows will be added here -->
-                 
+                <tr>
+                    <td>Row 1</td>
+                    <td>Data</td>
+                    <td>Data</td>
+                    <td>Data</td>
+                    <td>
+                        <button class="edit-btn" onclick="openEditModal(this)">Edit</button>
+                    </td>
+                </tr>
             </tbody>
         </table>
 
