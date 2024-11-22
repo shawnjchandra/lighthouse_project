@@ -34,35 +34,34 @@
     <div class="container">
         <div class="search-bar">
             <div class="input-container">
-                <input type="text"  id="searchInput" placeholder="Search..">
-                <button id="confirmButton">Confirm</button>
+                <input type="text" id="searchInput" placeholder="Search..">
+                <select id="filterSelect">
+                    <option value="" disabled selected style="color: lightgray;">Select</option>
+                    <option value="number">Number</option>
+                    <option value="towerUnit">Tower</option>
+                    <option value="floor">Floor</option>
+                    <option value="room">Room</option>
+                </select>
             </div>
-            <select  id="filterSelect">
-                <option active style="color: lightgray;">Select</option>
-                <option value="number">Number</option>
-                <option value="towerUnit">Tower</option>
-                <option value="floor">Floor</option>
-                <option value="room">room</option>
-            </select> 
+            <button id="confirmButton">Confirm</button>
         </div>
-        <table id="dynamicTable">
-            <thead>
-                <tr>
-                    <th>Number</th>
-                    <th>Tower Unit</th>
-                    <th>Floor</th>
-                    <th>Room</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>A</td>
-                    <td>1</td>
-                    <td>101</td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="card-container" id="cardContainer">
+            <div class="card" th:onclick="goToPemesanan(1)">
+                <img th:src="@{images/images.jpeg}"  width="256" height="128" alt="">
+                <h3>Room Number: 1</h3>
+                <p>Tower Unit: A</p>
+                <p>Floor: 1</p>
+                <p>Room: 101</p>
+            </div>
+            <div class="card" th:onclick="goToPemesanan(2)">
+                <img th:src="@{images/images.jpeg}"  width="256" height="128" alt="">
+                <h3>Room Number: 2</h3>
+                <p>Tower Unit: A</p>
+                <p>Floor: 1</p>
+                <p>Room: 101</p>
+            </div>
+            <!-- Additional cards can be added here -->
+        </div>
     </div>
     <footer>
 

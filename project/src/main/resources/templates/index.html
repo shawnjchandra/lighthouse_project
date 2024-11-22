@@ -9,64 +9,8 @@
 </head>
 <body>
     
-    <div class="navbar-container">
-        <nav class="navbar">
-    
-            <a th:href="@{/}" class="logo">
-                <img th:src="@{images/LHlogoresized.png}" height="32" width="32" alt="">
-            </a>
+    <th:block th:replace="~{/layout/navbar :: navbar}"></th:block>
 
-            <!-- <h1 th:text="'tipe user : ' + ${tipeuser}"></h1> -->
-            <div th:if="${!default}">
-
-                <div class="navbar-pelanggan" th:if="${tipeuser} == P" >
-                    <ul class="navbar-links">
-                        <li id="link-pencarian"><a th:href="@{pencarian}">Pencarian</a></li>
-                        <li id="link-riwayat"><a href="#">Riwayat Transaksi</a></li>
-         
-                    </ul>
-    
-                </div>
-    
-                <div class="navbar-agen"  th:unless="${tipeuser} == P" >
-                    <ul class="navbar-links">
-                        <li id="link-editDataUnit"><a th:href="@{edit-data}">Data Unit</a></li>
-                        <li id="link-jadwalKetersediaan"><a th:href="@{kelola-jadwal}">Jadwal Ketersediaan</a></li>
-                    
-                        <li id="link-pemesananUnit"><a th:href="@{pemesanan}">Data Pemesanan</a></li>
-                    
-                    
-                        <li id="link-cico"><a th:href="@{pengawasan-cico}">Data CICO</a></li>
-                      
-                    
-                        <li id="link-utilitas"><a th:href="@{pelaporan-utilitas}">Laporan Utilitas</a></li>
-                    </ul>
-                </div>
-
-            </div>
-            <div class="auth-buttons">
-                <button class="auth-btn" th:if="${default}">Sign In</button>
-                <button class="auth-btn" th:if="${default}">Sign Up</button>
-                <button class="auth-btn" th:unless="${default}">Sign Out</button>
-    
-            </div>
-            <!-- <span th:if="${default}" th:text="${default} +' '+ ${tipeuser}"> </span>
-            <span th:unless="${default}" th:text="${default}+' '+ ${tipeuser}"> </span> -->
-        </nav>
-    
-    </div>
-
-    <!-- <h1>Welcome to Index Page</h1>
-    <p><a href="/page">Go to page</a></p>
-    <p>Text <span data-th-text="${name}"></span> Other Text</p>
-
-    <div th:if="${isAuth}">Hello, <span th:text="${name}">World</span></div>
-    <div th:if="${isAuth} == false">Please login</div>
-    <div th:class="${isAuth} ? yes : no">Test</div>
-
-    <ul>
-        <li th:each="item : ${arrAngka}"><span th:text="${item}"></span></li>
-    </ul> -->
     <header>
         <div class="container">
             <h1>Welcome to LightHouse Apartment</h1>

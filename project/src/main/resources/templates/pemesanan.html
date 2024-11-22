@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" th:href="@{css/pemesanan.css}">
         <script rel="text/javascript" th:src="@{js/pemesanan.js}"defer></script>
+        <script rel="text/javascript" th:src="@{js/pelanggan.js}"defer></script>
         <title>Pemesanan</title>
     </head>
     <body>
@@ -62,7 +63,7 @@
                 </div>
         
                 <!-- Booking Form -->
-                <form class="booking-form">
+                <form class="booking-form" >
                     <div class="form-group">
                         <label for="check-in">Check-in Date</label>
                         <input type="date" id="check-in" name="checkIn" readonly>
@@ -78,8 +79,8 @@
                     <div class="total-price-container">
                         <h2 id="total-price">Total Price: $0</h2>
                     </div>
-                    <button type="submit" class="submit-btn">Submit</button>
                 </form>
+                <button type="submit" class="submit-btn" th:onclick="goToPembayaran()">Submit</button>
             </div>
         </div>          
         

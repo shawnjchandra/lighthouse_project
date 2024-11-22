@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{css/editData.css}">
+    <script rel="text/javascript" th:src="@{js/agen.js}" defer></script>
+    <title>Riwayat Transaksi</title>
+</head>
+<body>
+    <div class="navbar-container">
+        <nav class="navbar">
+    
+            <a href="#" class="logo">
+                <img th:src="@{images/LHlogoresized.png}" height="32" width="32" alt="">
+            </a>
+            <ul class="navbar-links">
+                <li id="link-pencarian"><a href="#">Pencarian</a></li>
+                <!-- <li id="link-pemesanan"><a href="#">Pemesanan</a></li>
+                    <li id="link-Pembayaran"><a href="#">Pembayaran</a></li> -->
+                <li id="link-riwayat"><a href="#">Riwayat Transaksi</a></li>
+                <!-- <li id="link-review"><a href="#">Review</a></li> -->
+            </ul>
+            <div class="auth-buttons">
+                <button class="auth-btn">Sign In</button>
+                <button class="auth-btn">Sign Up</button>
+                <button class="auth-btn" hidden>Sign Out</button>
+    
+            </div>
+    
+        </nav>
+    
+    </div>
+    <div>
+        <h1>Riwayat Transaksi</h1>
+        <div class="container">
+            <div class="search-bar">
+                <div class="input-container">
+                    <input type="text" id="searchInput" placeholder="Search by price, date, or room type..">
+                    <button id="confirmButton">Confirm</button>
+                </div>
+                <select id="filterSelect">
+                    <option value="" disabled selected>Select filter</option>
+                    <option value="price">Price</option>
+                    <option value="checkin">Check-in Date</option>
+                    <option value="roomType">Room Type</option>
+                </select>
+            </div>
+        
+            <table id="transactionTable">
+                <thead>
+                    <tr>
+                        <th>Nomor</th>
+                        <th>Tower</th>
+                        <th>Ruangan</th>
+                        <th>Tanggal Check In</th>
+                        <th>Tanggal Check Out</th>
+                        <th>Tipe</th>
+                        <th>Harga</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td data-value="1">1</td>
+                        <td data-value="A">A</td>
+                        <td data-value="101">101</td>
+                        <td data-value="20231001">2023-10-01</td>
+                        <td data-value="20231005">2023-10-05</td>
+                        <td data-value="studio">Studio</td>
+                        <td data-value="500k">Rp 500.000</td>
+                        <td>
+                            <button class="checkin" onclick="checkIn(this)">Check In</button>
+                            <button class="checkout" onclick="checkOut(this)" disabled>Check Out</button>
+                            <button th:onclick="goToReview(1)">Review</button>
+                        </td>
+                    </tr>
+                    <!-- Add more rows as necessary -->
+                </tbody>
+            </table>
+        
+        </div>
+
+        
+    </div>
+
+</body>
+</html>

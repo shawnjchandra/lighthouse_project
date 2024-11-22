@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{css/pembayaran.css}">
     <script th:src="@{js/pembayaran.js}" defer></script>
+    <script th:src="@{js/pelanggan.js}" defer></script>
     <title>Pembayaran</title>
 </head>
 <body>
@@ -143,7 +144,7 @@
             </div>
         </div>
     
-        <button class="submit-btn" style="display: none;">Process Payment</button>
+        <button class="submit-btn" style="display: none;" th:onclick="goToRiwayat()">Process Payment</button>
     </div>
 
     <footer></footer>

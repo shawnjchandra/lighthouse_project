@@ -1,8 +1,8 @@
 --------------------------------------------
- INSERT INTO Tower (namaTower) VALUES('A')
-  INSERT INTO Tower (namaTower) VALUES('B')
-   INSERT INTO Tower (namaTower) VALUES('C')
-    INSERT INTO Tower (namaTower) VALUES('D')
+ INSERT INTO Tower (namaTower) VALUES('A');
+  INSERT INTO Tower (namaTower) VALUES('B');
+   INSERT INTO Tower (namaTower) VALUES('C');
+    INSERT INTO Tower (namaTower) VALUES('D');
 
 -- Insert Kecamatan
 INSERT INTO Kecamatan (namaKec) VALUES 
@@ -101,7 +101,7 @@ INSERT INTO Kelurahan (namaKel, idKec) VALUES
 ('Babakan Tarogong', (SELECT idKec FROM Kecamatan WHERE namaKec = 'Bojongloa Kaler')),
 ('Jamika', (SELECT idKec FROM Kecamatan WHERE namaKec = 'Bojongloa Kaler')),
 ('Kopo', (SELECT idKec FROM Kecamatan WHERE namaKec = 'Bojongloa Kaler')),
-('Suka Asih', (SELECT idKec FROM Kecamatan WHERE namaKec = 'Bojongloa Kaler')),
+('Suka Asih', (SELECT idKec FROM Kecamatan WHERE namaKec = 'Bojongloa Kaler'));
 
 -- Bojongloa Kidul (idKec 11)
 INSERT INTO Kelurahan (namaKel, idKec) VALUES 

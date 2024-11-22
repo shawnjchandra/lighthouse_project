@@ -13,13 +13,21 @@
             <a href="#" class="logo">
                 <img th:src="@{images/LHlogoresized.png}" height="32" width="32" alt="">
             </a>
-            <ul class="navbar-links">
-                <li id="link-pencarian"><a href="#">Pencarian</a></li>
-                <!-- <li id="link-pemesanan"><a href="#">Pemesanan</a></li>
-                <li id="link-Pembayaran"><a href="#">Pembayaran</a></li> -->
-                <li id="link-riwayat"><a href="#">Riwayat Transaksi</a></li>
-                <!-- <li id="link-review"><a href="#">Review</a></li> -->
-            </ul>
+            <div class="navbar-agen" th:unless="${tipeuser} == P">
+                <ul class="navbar-links">
+                    <li id="link-editDataUnit"><a th:href="@{edit-data}">Data Unit</a></li>
+                    <li id="link-jadwalKetersediaan"><a th:href="@{kelola-jadwal}">Jadwal Ketersediaan</a></li>
+            
+                    <li id="link-pengawasanUnit"><a th:href="@{pengawasan-unit}">Pengawasan Unit</a></li>
+            
+            
+                    <li id="link-cico"><a th:href="@{pengawasan-cico}">Data CICO</a></li>
+            
+            
+                    <li id="link-utilitas"><a th:href="@{pelaporan-utilitas}">Laporan Utilitas</a></li>
+                </ul>
+            </div>
+
             <div class="auth-buttons">
                 <button class="auth-btn">Sign In</button>
                 <button class="auth-btn">Sign Up</button>
