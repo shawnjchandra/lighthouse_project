@@ -22,14 +22,14 @@ public class MainController {
     private PenggunaRepo repo;
 
     @GetMapping("/")
-    public String index(@RequestParam(name = "tipeuser",defaultValue = "none",required = false) String tipe,Model model) {
+    public String index(@RequestParam(name = "tipeuser",defaultValue = "G",required = false) String tipe,Model model) {
 
-        if(tipe.equals("none")){
-            model.addAttribute("default", true);
-        }else {
-            model.addAttribute("default", false);
+        // if(tipe.equals("none")){
+        //     model.addAttribute("default", true);
+        // }else {
+        //     model.addAttribute("default", false);
 
-        }
+        // }
         model.addAttribute("tipeuser", tipe);
         return "index";
     }
@@ -48,9 +48,24 @@ public class MainController {
     }
 
     @PostMapping("/login-data")
-    public String log(Model model){
-        String output ="";
-        return output;
+    public String log(String username, String password, HttpSession httpSession,Model model){
+        boolean isSuccess = repo.login(username, password);
+        
+        
+        if(isSuccess){
+            String userType = repo.getUserType(username);
+            
+            userType = userType.equals("Agen") ? "atyp" : "ptyp" ;
+            
+            httpSession.setAttribute("tipeuser", userType);
+            httpSession.setAttribute("username", username);
+
+
+            return "redirect:/"+userType+"/";
+        }
+
+
+        return "login";
     }
 
     @PostMapping("/register-data")
@@ -59,10 +74,10 @@ public class MainController {
         
         if(isSuccess){
             String userType = "Pelanggan";
-            httpSession.setAttribute("tipeUser", userType );
+            httpSession.setAttribute("tipeuser", userType );
             httpSession.setAttribute("username", username);
             
-            return "redirect:/ptyp/";
+            return "redirect:/"+userType;
         }
 
         return "register";

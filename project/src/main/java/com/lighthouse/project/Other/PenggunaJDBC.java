@@ -42,22 +42,21 @@ public class PenggunaJDBC implements PenggunaRepo {
 
         List<PenggunaModel> users = jdbcTemplate.query(sql,this::mapRowToPengguna, username);
         boolean isAvailable = users.size() > 0 ? false : true;
-        System.out.println("pass " + pass);
-        System.out.println("pass Conf " + confPass);
+
 
         boolean isSuccess = false;
-        System.out.println(isAvailable);
+
         if(isAvailable){
             boolean samePass = validatePasswordRegist(pass, confPass);
-            System.out.println("password same" + samePass);
+
             if(samePass){
                 sql = "insert into pengguna (nik, nama, nohp, email,username,pass,tipe) VALUES (?,?,?,?,?,?,'Pelanggan') ";
                 int done = jdbcTemplate.update(sql, nik,nama,nohp,email,username,pass);    
-                System.out.println(done);
+
                 isSuccess = true;
             }
         }
-        System.out.println(isSuccess);
+
         
         return isSuccess;
     }
@@ -67,17 +66,30 @@ public class PenggunaJDBC implements PenggunaRepo {
     }
 
     @Override
-    public String getUserType(String nik) {
-        String sql = "select * from pengguna WHERE nik LIKE ? ";
-        List<PenggunaModel> user = jdbcTemplate.query(sql, this::mapRowToPengguna, nik);
+    public String getUserType(String username) {
+        String sql = "select * from pengguna WHERE username LIKE ? ";
+        List<PenggunaModel> user = jdbcTemplate.query(sql, this::mapRowToPengguna, username);
         String userType ="";
 
         if (!user.isEmpty()){
-            userType = user.get(0).getNik();
+            userType = user.get(0).getTipe();
+
+            System.out.println(userType);
         }
         
         return userType;
     }
+
+    @Override
+    public boolean login(String username, String password) {
+        String sql = "select * from pengguna WHERE username LIKE ? AND pass LIKE ? ";
+        List<PenggunaModel> user = jdbcTemplate.query(sql, this::mapRowToPengguna, username, password);
+     
+
+        return !user.isEmpty() ? true : false ;
+    }
+
+
  
     // NON-POLICY LOGIN AND REGISTER
 }

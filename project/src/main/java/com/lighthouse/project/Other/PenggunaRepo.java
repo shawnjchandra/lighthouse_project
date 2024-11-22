@@ -5,5 +5,6 @@ import java.util.Optional;
 public interface PenggunaRepo {
     Optional<PenggunaModel> validateUser(String username, String pass);
     boolean register(String nik, String nama, String nohp, String email, String username, String pass, String confPass);
-    String getUserType(String nik);
+    boolean login(String username, String password);
+    String getUserType(String username);
 }

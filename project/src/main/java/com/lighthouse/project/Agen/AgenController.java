@@ -13,6 +13,8 @@ public class AgenController {
     public String index(Model model) {
 
         model.addAttribute("tipeuser", "A");
+        model.addAttribute("default", false);
+
         return "index";
     }
 

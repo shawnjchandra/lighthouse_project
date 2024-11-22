@@ -9,6 +9,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/ptyp")
 public class PelangganController {
 
+    @GetMapping("/")
+    public String index(Model model) {
+
+        model.addAttribute("tipeuser", "P");
+        model.addAttribute("default", false);
+        return "index";
+    }
+
     @GetMapping("/riwayat")
     public String riwayat(Model model) {
 
