@@ -38,5 +38,17 @@ public class PelangganController {
 
         return "pencarian";
     }
+
+    
+    @GetMapping("/pemesanan")
+    public String pesan(Model model) {
+
+        return "pemesanan";
+    }
+    @GetMapping("/pembayaran")
+    public String pembayaran(Model model) {
+
+        return "pembayaran";
+    }
     
 }

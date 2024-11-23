@@ -22,10 +22,11 @@
                     <label for="check-out">Check-out Date</label>
                     <input type="date" id="check-out" name="checkOut">
                 </div>
-                <button id="searchButton" style="visibility: hidden;">Confirm</button>
+                <button id="searchButton" style="visibility: hidden;" onclick="fetchResponseToBE()">Confirm</button>
             </div>
 
-            <table id="dynamicTable" style="visibility: hidden;">
+            <table id="dynamicTable"  style="visibility: hidden;">
+            <table id="dynamicTable"  style="visibility: visible;">
                 <thead>
                     <tr>
                         <th>Unit Number</th>
@@ -35,15 +36,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>A02345</td>
-                        <td>John LBF</td>
-                        <td>dd/mm/yy - dd/mm/yy</td>
-                        <td>Occupied</td>
+                    <tr th:each="row : ${results}">
+                        <td th:text="${results.namatower}+${results.lantai}+${results.nomor}"></td>
+                        <td th:text="${results.nama}"></td>
+                        <td th:text="${results.tanggalmulai}+'-'+${tanggalselesai}"></td>
+                        <td th:text="${results.statustersedia}"></td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <footer></footer>
+        <footer>
+
+        </footer>
     </body>
 </html>

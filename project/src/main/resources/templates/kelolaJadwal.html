@@ -43,40 +43,12 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>APT001</td>
-                    <td>2023-10-01</td>
-                    <td>2023-10-02</td>
-                    <td>Tersedia</td>
-                    <td>Rp 500.000</td>
-                </tr>
-                <tr>
-                    <td>APT002</td>
-                    <td>2023-10-01</td>
-                    <td>2023-10-01</td>
-                    <td>Tidak Tersedia</td>
-                    <td>Rp 600.000</td>
-                </tr>
-                <tr>
-                    <td>APT003</td>
-                    <td>2023-10-02</td>
-                    <td>2023-10-03</td>
-                    <td>Tersedia</td>
-                    <td>Rp 450.000</td>
-                </tr>
-                <tr>
-                    <td>APT004</td>
-                    <td>2023-10-03</td>
-                    <td>2023-10-04</td>
-                    <td>Tersedia</td>
-                    <td>Rp 550.000</td>
-                </tr>
-                <tr>
-                    <td>APT001</td>
-                    <td>2023-10-04</td>
-                    <td>2023-10-05</td>
-                    <td>Tidak Tersedia</td>
-                    <td>Rp 500.000</td>
+                <tr th:each="row :${results}">
+                    <td th:text="${row.namatower}+${row.lantai} + ${row.nomor}"></td>
+                    <td th:text="${row.tanggalmulai}"></td>
+                    <td th:text="${row.tanggalselesai}"></td>
+                    <td th:text="${row.statustersedia}"></td>
+                    <td th:text="${row.tarifsewa}" style="max-width: 300px;"></td>
                 </tr>
             </tbody>
         </table>

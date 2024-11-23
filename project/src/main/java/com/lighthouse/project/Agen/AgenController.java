@@ -10,20 +10,33 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.lighthouse.project.KetersediaanUnit.TransaksiKetersediaanModel;
+import com.lighthouse.project.KetersediaanUnit.KetersediaanRepo;
+import com.lighthouse.project.KetersediaanUnit.KetersediaanService;
 import com.lighthouse.project.Tower.TowerModel;
 import com.lighthouse.project.Tower.TowerUnitModel;
 import com.lighthouse.project.Tower.TowerUnitRepo;
 import com.lighthouse.project.Tower.UnitModel;
+import com.lighthouse.project.Transaksi.TransaksiModel;
+import com.lighthouse.project.Transaksi.TransaksiRepo;
+
+import jakarta.servlet.http.HttpSession;
 
 @RequestMapping("/atyp")
 @Controller
 public class AgenController {
 
     @Autowired
-    private TowerUnitRepo repo;
+    private TowerUnitRepo towerRepo;
+    
+    @Autowired
+    private KetersediaanRepo ketRepo;
+
+    @Autowired
+    private KetersediaanService ketService;
 
     @GetMapping("/")
-    public String index(Model model) {
+    public String index(Model model, HttpSession httpSession) {
 
         model.addAttribute("tipeuser", "A");
         model.addAttribute("default", false);
@@ -32,9 +45,9 @@ public class AgenController {
     }
 
     @GetMapping("/edit-data")
-    public String editData(Model model) {
-        List<TowerUnitModel> units = repo.findAllUnitJoinTowers();
-        List<TowerModel> towers = repo.findAllTowers();
+    public String editData(Model model, HttpSession httpSession) {
+        List<TowerUnitModel> units = towerRepo.findAllUnitJoinTowers();
+        List<TowerModel> towers = towerRepo.findAllTowers();
 
         if(units.size()>0 && towers.size()>0){
             model.addAttribute("results", units);
@@ -46,6 +59,12 @@ public class AgenController {
     
     @GetMapping("/kelola-jadwal")
     public String kelolaJadwal(Model model) {
+        List<TransaksiKetersediaanModel> results = ketRepo.findAll();
+
+        if(results.size()>0){
+            model.addAttribute("results", results);
+        }
+
 
         return "kelolaJadwal";
     }
@@ -56,18 +75,17 @@ public class AgenController {
         return "pengawasanCICO";
     }
     
-    @GetMapping("/pemesanan")
-    public String pesan(Model model) {
-
-        return "pemesanan";
-    }
-    @GetMapping("/pembayaran")
-    public String pembayaran(Model model) {
-
-        return "pembayaran";
-    }
     @GetMapping("/pengawasan-unit")
-    public String pengawasanUnit(Model model) {
+    public String pengawasanUnit(Model model, HttpSession httpSession) {
+
+
+        List<TransaksiKetersediaanModel> list = (List<TransaksiKetersediaanModel>) httpSession.getAttribute("recentTransaction");             
+        System.out.println("Service list size after storing: " + list.size());
+
+        if(list.size()>0){
+            model.addAttribute("results", list);
+            // model.addAttribute("updated", true);
+        }
 
         return "pengawasanUnit";
     }

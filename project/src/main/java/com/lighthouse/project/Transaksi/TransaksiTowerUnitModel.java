@@ -14,11 +14,7 @@ import lombok.experimental.FieldDefaults;
 @Setter
 @FieldDefaults(makeFinal = false, level = AccessLevel.PRIVATE)
 @AllArgsConstructor
-public class TransaksiModel {
-    String tgglcheckin;
-    String tgglcheckout;
-    String statuspembayaran;
-    int rating;
-    String review;
+public class TransaksiTowerUnitModel{
+    TransaksiModel transaksi;
+    TowerUnitModel towerunit; 
 }
-

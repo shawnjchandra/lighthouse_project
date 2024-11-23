@@ -1,3 +1,5 @@
+// const { response } = require("express");
+
 document.addEventListener("DOMContentLoaded", () => {
     const checkIn = document.getElementById("check-in");
     const checkOut = document.getElementById("check-out");
@@ -15,7 +17,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // Ensure valid Check-in and Check-out dates
     checkIn.addEventListener("change", () => {
         validateDayModeDates();
-        updateCheckOut();
+        
+        // updateCheckOut();
     });
     
     // Ensure valid Check-in and Check-out dates
@@ -48,23 +51,59 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
     
-    // Update Check-out Date for Month/Year Modes
-    function updateCheckOut() {
-        if (!checkIn.value || mode === "day") return;
+    // // Update Check-out Date for Month/Year Modes
+    // function updateCheckOut() {
+    //     if (!checkIn.value || mode === "day") return;
     
-        const duration = parseInt(durationSelect.value, 10);
-        const checkInDate = new Date(checkIn.value);
-        let checkOutDate;
+    //     const duration = parseInt(durationSelect.value, 10);
+    //     const checkInDate = new Date(checkIn.value);
+    //     let checkOutDate;
     
-        if (mode === "month") {
-            checkOutDate = new Date(checkInDate);
-            checkOutDate.setMonth(checkOutDate.getMonth() + duration);
-        } else if (mode === "year") {
-            checkOutDate = new Date(checkInDate);
-            checkOutDate.setFullYear(checkOutDate.getFullYear() + duration);
-        }
+    //     // if (mode === "month") {
+    //     //     checkOutDate = new Date(checkInDate);
+    //     //     checkOutDate.setMonth(checkOutDate.getMonth() + duration);
+    //     // } else if (mode === "year") {
+    //     //     checkOutDate = new Date(checkInDate);
+    //     //     checkOutDate.setFullYear(checkOutDate.getFullYear() + duration);
+    //     // }
     
-        checkOut.value = checkOutDate.toISOString().split("T")[0];
-    }
+    //     checkOut.value = checkOutDate.toISOString().split("T")[0];
+    // }
 
 });
+
+function fetchResponseToBE(event){
+    let checkIn = document.getElementById("check-in").value;
+    let checkOut = document.getElementById("check-out").value;
+
+    if(checkIn== null || checkOut == null){
+        alert('Ada yang belum diisi');
+        return;
+    }
+    
+    let data = {checkIn, checkOut};
+     
+    fetch('/atyp/search-between-dates',{
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(result => {
+        console.log(result);
+        // window.location.href ='/atyp/pengawasan-unit';
+        
+        if (result.success) {
+            // On success, refresh the page or update the table
+            // alert("Unit added successfully!");
+            
+            // location.reload(); // Reload the page to show updated data
+        } else {
+            alert("Error adding unit.");
+        }
+    })
+    .catch(errpr =>{
+        console.error("Error:", error);
+        alert("An error occurred.");
+    });
+}

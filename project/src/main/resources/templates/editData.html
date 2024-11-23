@@ -37,44 +37,47 @@
                 </select>
 
                 <label for="unitPrice">Unit Price:</label>
-                <input type="number" id="unitPrice" required min="0" step="1000" placeholder="Enter price">
+                <input type="number" id="unitPrice" required min="0" step="10000" placeholder="Enter price">
     
                 <button type="button" onclick="addToDataForm(this)">Add Unit</button>
             </form>
         </div>
     
-        <table class="utilitas-table">
-            <thead>
-                <tr>
-                    <td>No</td>
-                    <td>Tower</td>
-                    <td>Lantai</td>
-                    <td>Nomor Unit</td>
-                    <td>Jenis</td>
-                    <td>Tarif Sewa</td>
-                    <td>Edit Data</td>
+        <div style="max-height: 400px; overflow-y: scroll;">
 
-                </tr>
-            </thead>
-            
-            <tbody>
-                <tr th:each="row, stat : ${results}">
-                    <td th:text="${stat.index + 1}"></td>
-                    <td th:text="${row.namatower}"></td>
-                    <td th:text="${row.lantai}"></td>
-                    <td th:text="${row.nomor}"></td>
-                    <td th:text="${row.jenis}"></td>
-                    <td th:text="${row.tarifsewa}"></td>
-                    <!-- "edit data" button area here -->
-                     <td>
-
-                         <button type="button" th:data-tower="${row.namatower}" th:data-lantai="${row.lantai}" th:data-nomor="${row.nomor}" th:data-jenis="${row.jenis}" th:data-tarif="${row.tarifsewa}" onclick="openEditModal(this)">Edit</button>
-                     </td>
-
-                </tr>
-            
-            </tbody>
-        </table>
+            <table class="utilitas-table" >
+                <thead>
+                    <tr>
+                        <td>No</td>
+                        <td>Tower</td>
+                        <td>Lantai</td>
+                        <td>Nomor Unit</td>
+                        <td>Jenis</td>
+                        <td>Tarif Sewa</td>
+                        <td>Edit Data</td>
+    
+                    </tr>
+                </thead>
+                
+                <tbody>
+                    <tr th:each="row, stat : ${results}">
+                        <td th:text="${stat.index + 1}"></td>
+                        <td th:text="${row.namatower}"></td>
+                        <td th:text="${row.lantai}"></td>
+                        <td th:text="${row.nomor}"></td>
+                        <td th:text="${row.jenis}"></td>
+                        <td th:text="${row.tarifsewa}"></td>
+                        <!-- "edit data" button area here -->
+                         <td>
+    
+                             <button type="button" th:data-tower="${row.namatower}" th:data-lantai="${row.lantai}" th:data-nomor="${row.nomor}" th:data-jenis="${row.jenis}" th:data-tarif="${row.tarifsewa}" onclick="openEditModal(this)">Edit</button>
+                         </td>
+    
+                    </tr>
+                
+                </tbody>
+            </table>
+        </div>
 
     </div>
 
@@ -110,7 +113,7 @@
                 </select>
             
                 <label for="editPrice">Price:</label>
-                <input type="number" id="editPrice" name="editPrice" required min="0" step="1000" placeholder="Enter price">
+                <input type="number" id="editPrice" name="editPrice" required min="0" step="10000" placeholder="Enter price">
             
                 <button type="button" onclick="saveChanges()">Save</button>
             </form>
