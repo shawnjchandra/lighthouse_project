@@ -79,15 +79,19 @@ public class AgenController {
     public String pengawasanUnit(Model model, HttpSession httpSession) {
 
 
-        List<TransaksiKetersediaanModel> list = (List<TransaksiKetersediaanModel>) httpSession.getAttribute("recentTransaction");             
-        System.out.println("Service list size after storing: " + list.size());
+        // List<TransaksiKetersediaanModel> list = (List<TransaksiKetersediaanModel>) httpSession.getAttribute("recentTransaction");             
+
+        List<TransaksiKetersediaanModel> list = ketRepo.findAll();
 
         if(list.size()>0){
             model.addAttribute("results", list);
             // model.addAttribute("updated", true);
+        }else {
+            model.addAttribute("results", list);
         }
 
-        return "pengawasanUnit";
+        System.out.println(list);
+          return "pengawasanUnit";
     }
     @GetMapping("/pelaporan-utilitas")
     public String pelaporanUtilitas(Model model) {

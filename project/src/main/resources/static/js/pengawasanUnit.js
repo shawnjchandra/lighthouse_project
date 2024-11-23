@@ -90,8 +90,8 @@ function fetchResponseToBE(event){
     })
     .then(response => response.json())
     .then(result => {
-        console.log(result);
-        // window.location.href ='/atyp/pengawasan-unit';
+        // console.log(result);
+        window.location.href ='/atyp/pengawasan-unit';
         
         if (result.success) {
             // On success, refresh the page or update the table

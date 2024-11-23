@@ -36,7 +36,7 @@ CREATE TYPE TIPE_P AS ENUM ('Agen','Pelanggan');
 
 CREATE TABLE Pengguna (
   NIK char(16) PRIMARY KEY CHECK (NIK ~ ('^[0-9]+$')),
-  nama varchar(10) not null,
+  nama varchar(255) not null,
   noHP varchar(12) UNIQUE,
   tipe TIPE_P not null,
   -- tipe 0 pelanggan, 1 agen
@@ -54,7 +54,7 @@ CREATE TABLE KelolaUnit (
  --NIK KHUSUS AGEN
 );
 
--- Active, Not Active, Maintenance
+-- Available, Not Available, Maintenance
 CREATE TYPE STATS AS ENUM ('A','NA','M');
 
 CREATE TABLE JadwalKetersediaan(
