@@ -35,14 +35,11 @@
                 <!-- <button class="auth-btn">Sign Up</button> -->
                  <!-- Agen ga perlu sign up, asumsi sudah di daftarkan sejak awal bekerja -->
                 <button class="auth-btn" hidden>Sign Out</button>
-    
             </div>
-    
         </nav>
-    
     </div>
     <div class="jadwal-container">
-        <h2>Jadwal Ketersediaan Unit Apartemen</h2>
+        <h1>Jadwal Ketersediaan Unit Apartemen</h1>
 
         <div class="filter-buttons">
             <button onclick="filterByApartment('APT')">Semua</button>
@@ -56,6 +53,12 @@
         <input type="date" id="start-date" onchange="applyFilters()">
         <label for="end-date">Tanggal Akhir:</label>
         <input type="date" id="end-date" onchange="applyFilters()">
+        <label for="status-filter">Status Ketersediaan:</label>
+        <select name="status-filter" id="status-filter">
+            <option value="occupied">Occupied</option>
+            <option value="reserved">Reserved</option>
+            <option value="checkout">Check-out</option>
+        </select>
 
         <table id="availability-table">
             <thead>

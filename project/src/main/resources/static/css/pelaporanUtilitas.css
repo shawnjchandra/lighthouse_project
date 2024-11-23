@@ -2,10 +2,12 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: var(--primary-font);
 }
 :root{
     --primary-color : #4098fd;
     --secondary-color : #e5533d;
+    --primary-font: Arial, sans-serif;
 }
 button{
     transition: 0.3s;
@@ -24,8 +26,9 @@ button{
     width: 100%;
     position: fixed;
     top: 0; /* Aligns it at the top of the page */
-  left: 0;
-  right: 0;
+    left: 0;
+    right: 0;
+    font-family: var(--primary-font);
 }
 
 .navbar-links{
@@ -143,7 +146,8 @@ button{
 
 .container h1 {
     margin-bottom: 20px;
-    color: var(--primary-color);
+    color: black;
+    font-family: var(--primary-font);
 }
 
 .period-picker {
@@ -183,7 +187,7 @@ button{
     background-color: #ddd;
 }
 
-.utilitas-table td[colspan="6"] {
+.utilitas-table td[colspan="7"] {
     font-weight: bold;
     text-align: right;
 }
