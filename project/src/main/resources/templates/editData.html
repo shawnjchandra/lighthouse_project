@@ -3,133 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{css/editData.css}">
-    <script rel="text/javascript" th:src="@{js/agen.js}" defer></script>
+    <link rel="stylesheet" th:href="@{/css/editData.css}">
+    <script rel="text/javascript" th:src="@{/js/agen.js}" defer></script>
     <title>Edit Data</title>
 </head>
 <body>
-    <div class="navbar-container">
-        <nav class="navbar">
-    
-            <a href="#" class="logo">
-                <img th:src="@{images/LHlogoresized.png}" height="32" width="32" alt="">
-            </a>
-            <div class="navbar-agen"  th:unless="${tipeuser} == P" >
-                    <ul class="navbar-links">
-                        <li id="link-editDataUnit"><a th:href="@{edit-data}">Data Unit</a></li>
-                        <li id="link-jadwalKetersediaan"><a th:href="@{kelola-jadwal}">Jadwal Ketersediaan</a></li>
-                    
-                        <li id="link-pengawasanUnit"><a th:href="@{pengawasan-unit}">Pengawasan Unit</a></li>
-                    
-                    
-                        <li id="link-cico"><a th:href="@{pengawasan-cico}">Data CICO</a></li>
-                      
-                    
-                        <li id="link-utilitas"><a th:href="@{pelaporan-utilitas}">Laporan Utilitas</a></li>
-                    </ul>
-                </div>
+    <th:block th:replace="~{/layout/navbar :: navbar}"></th:block>
 
-            <div class="auth-buttons">
-                <button class="auth-btn">Sign In</button>
-
-                <!-- <button class="auth-btn">Sign Up</button> -->
-                 <!-- Agen ga perlu sign up, asumsi sudah di daftarkan sejak awal bekerja -->
-                <button class="auth-btn" hidden>Sign Out</button>
-    
-            </div>
-    
-        </nav>
-    
-    </div>
     <div class="main-container">
         <div class="form-container">
             <h1>Manage Apartment Units</h1>
-            <form id="unitForm">
+
+            <form id="unitForm" action="/add-unit-to-form" method="post">
                 <label for="tower">Tower:</label>
                 <!-- <input type="text" id="tower" placeholder="Enter Tower Code" required> -->
                  <select name="tower-select" id="tower-select">
                     <option value="" disabled selected>Select Tower</option>
 
                     <!-- nanti ubah pakai th:each -->
-                    <option value="A" >A</option>
-                    <option value="B">B</option>
-                    <option value="C">C</option>
-                    <option value="D">D</option>
+                    <option th:each="row : ${towers}" th:value="${row.namatower}" th:text="${row.namatower}"></option>
                  </select>
     
                 <label for="floor">Floor:</label>
                 <input type="number" id="floor" placeholder="Enter Floor Number" required min="0">
     
                 <label for="unitNumber">Unit Number:</label>
-                <input type="number" id="unitNumber" placeholder="Enter Unit Number" required>
+                <input type="number" id="unitNumber" placeholder="Enter Unit Number" required min="0">
     
                 <label for="unitType">Unit Type:</label>
                 <select id="unitType" required>
-                    <option value="'studio'">Studio</option>
-                    <option value="'2BR'">2 Bedroom</option>
+                    <option value="Studio">Studio</option>
+                    <option value="2BR">2 Bedroom</option>
                 </select>
 
                 <label for="unitPrice">Unit Price:</label>
-                <input type="number" id="unitPrice" placeholder="Enter Unit Price" required>
+                <input type="number" id="unitPrice" required min="0" step="1000" placeholder="Enter price">
     
-                <button type="submit">Add Unit</button>
+                <button type="button" onclick="addToDataForm(this)">Add Unit</button>
             </form>
         </div>
     
         <table class="utilitas-table">
             <thead>
                 <tr>
-                    <th>Floor</th>
-                    <th>Unit Number</th>
-                    <th>Unit Type</th>
-                    <th>Unit Price</th>
-                    <th>Action</th>
+                    <td>No</td>
+                    <td>Tower</td>
+                    <td>Lantai</td>
+                    <td>Nomor Unit</td>
+                    <td>Jenis</td>
+                    <td>Tarif Sewa</td>
+                    <td>Edit Data</td>
+
                 </tr>
             </thead>
+            
             <tbody>
-                <tr>
-                    <td>Row 1</td>
-                    <td>Data</td>
-                    <td>Data</td>
-                    <td>Data</td>
-                    <td>
-                        <button class="edit-btn" onclick="openEditModal(this)">Edit</button>
-                    </td>
+                <tr th:each="row, stat : ${results}">
+                    <td th:text="${stat.index + 1}"></td>
+                    <td th:text="${row.namatower}"></td>
+                    <td th:text="${row.lantai}"></td>
+                    <td th:text="${row.nomor}"></td>
+                    <td th:text="${row.jenis}"></td>
+                    <td th:text="${row.tarifsewa}"></td>
+                    <!-- "edit data" button area here -->
+                     <td>
+
+                         <button type="button" th:data-tower="${row.namatower}" th:data-lantai="${row.lantai}" th:data-nomor="${row.nomor}" th:data-jenis="${row.jenis}" th:data-tarif="${row.tarifsewa}" onclick="openEditModal(this)">Edit</button>
+                     </td>
+
                 </tr>
+            
             </tbody>
         </table>
 
     </div>
+
     <div id="editModal" class="modal" style="display:none;">
         <div class="modal-content">
             <span class="close" onclick="closeEditModal()">&times;</span>
+            <br>
             <h2>Edit Unit Details</h2>
-            <form id="editForm">
-                <label for="editTower">Tower:</label>
-                <!-- <input type="text" id="editTower" name="editTower" required> -->
-                <select name="tower-select" id="editTower">
-                    <!-- <option value="" disabled selected>Select Tower</option> -->
+            
+            
+            <form id="editForm" action="/save-unit" method="post">
+                <input type="hidden" id="originalFloor" name="originalFloor">
+                <input type="hidden" id="originalUnitNumber" name="originalUnitNumber">
+                <input type="hidden" id="originalUnitType" name="originalUnitType">
+                <input type="hidden" id="originalPrice" name="originalPrice">
                 
-                    <!-- nanti ubah pakai th:each -->
-                    <option value="A">A</option>
-                    <option value="B">B</option>
-                    <option value="C">C</option>
-                    <option value="D">D</option>
-                </select>
-    
+                <!-- Tower field (non-editable) -->
+                <label for="editTower">Tower:</label>
+                <input type="text" id="editTower" name="editTower" readonly>
+            
+                <!-- Floor field (non-editable) -->
                 <label for="editFloor">Floor:</label>
-                <input type="number" id="editFloor" name="editFloor" required>
-    
+                <input type="number" id="editFloor" name="editFloor" readonly>
+            
+                <!-- Editable fields -->
                 <label for="editUnitNumber">Unit Number:</label>
                 <input type="number" id="editUnitNumber" name="editUnitNumber" required>
-    
+            
                 <label for="editUnitType">Unit Type:</label>
-                <!-- <input type="text" id="editUnitType" name="editUnitType" required> -->
-                <select id="editUnitType" required>
-                    <option value="'studio'">Studio</option>
-                    <option value="'2BR'">2 Bedroom</option>
+                <select id="editUnitType" name="editUnitType" required>
+                    <option value="Studio">Studio</option>
+                    <option value="2BR">2 Bedroom</option>
                 </select>
-    
+            
+                <label for="editPrice">Price:</label>
+                <input type="number" id="editPrice" name="editPrice" required min="0" step="1000" placeholder="Enter price">
+            
                 <button type="button" onclick="saveChanges()">Save</button>
             </form>
         </div>

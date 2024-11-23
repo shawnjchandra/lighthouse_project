@@ -3,42 +3,12 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" th:href="@{css/pengawasanUnit.css}">
-        <script rel="text/javascript" th:src="@{js/pengawasanUnit.js}"defer></script>
+        <link rel="stylesheet" th:href="@{/css/pengawasanUnit.css}">
+        <script rel="text/javascript" th:src="@{/js/pengawasanUnit.js}"defer></script>
         <title>Pengawasan Unit</title>
     </head>
     <body>
-        <div class="navbar-container">
-            <nav class = "navbar">
-            
-                <a href="#" class="logo">
-                    <img th:src="@{images/LHlogoresized.png}" height="32" width="32" alt="">
-                </a>
-                <div class="navbar-agen" th:unless="${tipeuser} == P">
-                    <ul class="navbar-links">
-                        <li id="link-editDataUnit"><a th:href="@{edit-data}">Data Unit</a></li>
-                        <li id="link-jadwalKetersediaan"><a th:href="@{kelola-jadwal}">Jadwal Ketersediaan</a></li>
-                
-                        <li id="link-pengawasanUnit"><a th:href="@{pengawasan-unit}">Pengawasan Unit</a></li>
-                
-                
-                        <li id="link-cico"><a th:href="@{pengawasan-cico}">Data CICO</a></li>
-                
-                
-                        <li id="link-utilitas"><a th:href="@{pelaporan-utilitas}">Laporan Utilitas</a></li>
-                    </ul>
-                </div>
-
-                <div class="auth-buttons">
-                    <button class="auth-btn">Sign In</button>
-                    <button class="auth-btn">Sign Up</button>
-                    <button class="auth-btn" hidden>Sign Out</button>
-        
-                </div>
-                
-            </nav>
-
-        </div>
+        <th:block th:replace="~{/layout/navbar :: navbar}"></th:block>
         <div class="container">
             <h1>Pengawasan Unit</h1>
 

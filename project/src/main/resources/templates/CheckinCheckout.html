@@ -8,26 +8,7 @@
 </head>
 <body>
   <!-- navbar -->
-  <div class="navbar-container">
-    <nav class = "navbar">
-       
-        <a href="#" class="logo">
-            <img th:src="@{images/LHlogoresized.png}" height="32" width="32" alt="">
-        </a>
-        <ul class="navbar-links">
-            <li id="link-pencarian"><a href="#">Pencarian</a></li>
-
-            <li id="link-riwayat"><a href="#">Riwayat Transaksi</a></li>
-
-        </ul>
-        <div class="auth-buttons">
-            <button class="auth-btn">Sign In</button>
-            <button class="auth-btn">Sign Up</button>
-            <button class="auth-btn" hidden>Sign Out</button>
-
-        </div>
-        
-    </nav>
+  <th:block th:replace="~{/layout/navbar :: navbar}"></th:block>
 
 </div>
   <div class="container">
