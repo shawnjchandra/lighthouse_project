@@ -22,7 +22,8 @@
 
                     <!-- nanti ubah pakai th:each -->
                     <option th:each="row : ${towers}" th:value="${row.namatower}" th:text="${row.namatower}"></option>
-                 </select>
+                    
+                </select>
     
                 <label for="floor">Floor:</label>
                 <input type="number" id="floor" placeholder="Enter Floor Number" required min="0">

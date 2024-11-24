@@ -22,17 +22,49 @@
         <!-- list costumer -->
         <div class="customer-list">
             <h2>Daftar Check-in:</h2>
-            <ul id="check-in-list" th:if="${!default}" th:each="row: ${ci}">
-                <!-- Customer items will be added here -->
-                <li th:text="${row.tgglcheckin}+' - '+ ${row.namatower} +''+${row.lantai}+''+${row.nomor }+' - '+${row.nama}+' - '+ ${row.statuspembayaran} "></li>
-            </ul>
+             <table class="checkin-table">
+                <thead>
+                    <tr>
+                        <th>Waktu Check In</th>
+                        <th>Nama Penyewa</th>
+                        <th>Unit</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="row : ${ci}">
+                        
+                        <td th:text="${row.tgglcheckin}"></td>
+                        <td th:text="${row.nama}"></td>
+                        <td th:text="${row.namatower} +''+${row.lantai}+''+${row.nomor}"></td>
+                        <td th:text="${row.statuspembayaran}"></td>
+                        
+                    </tr>
+                </tbody>
+            </table>
             <br>
             <h2>Daftar Check-out:</h2>
-            <ul id="check-out-list" th:if="${!default}" th:each="row: ${co}">
-                <!-- Customer items will be added here -->
-                <li th:text="${row.tgglcheckin}+' - '+ ${row.namatower} +''+${row.lantai}+''+${row.nomor }+' - '+${row.nama}+' - '+ ${row.statuspembayaran} "></li>
+            <table class="checkout-table">
+                <thead>
+                    <tr>
+                        <th>Waktu Check Out</th>
+                        <th>Nama Penyewa</th>
+                        <th>Unit</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="row : ${co}">
 
-            </ul>
+                        <td th:text="${row.tgglcheckout}"></td>
+                        <td th:text="${row.nama}"></td>
+                        <td th:text="${row.namatower} +''+${row.lantai}+''+${row.nomor}"></td>
+                        <td th:text="${row.statuspembayaran}"></td>
+       
+                    </tr>
+                </tbody>
+            </table>
+
         </div>
     </div>
     

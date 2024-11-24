@@ -113,6 +113,10 @@ public class TowerUnitJDBC implements TowerUnitRepo {
         return isSuccess >0 ? true : false;
     }
 
+    // TODO:
+    // MAKE ONE-MONTH SCRIPT GENERATOR
+
+
     @Override
     public Optional<TowerModel> findTowerById(String id) {
         String sql = "SELECT * FROM tower WHERE namatower LIKE ?";

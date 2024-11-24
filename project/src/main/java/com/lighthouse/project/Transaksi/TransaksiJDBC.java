@@ -150,4 +150,7 @@ public class TransaksiJDBC implements TransaksiRepo {
         return jdbcTemplate.query(sql, this::mapRowToTTU,checkIn, checkOut);       
     }
     
+
+    // TODO:
+    // MAKE A DIVIDER SCRIPT FOR JADWALKETERSEDIAAN WHEN PROCESSING ORDER
 }
