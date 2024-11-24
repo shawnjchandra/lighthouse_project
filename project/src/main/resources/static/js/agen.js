@@ -145,42 +145,120 @@ function saveChanges(event) {
 // Fitur Kelola Jadwal
 
 
-function filterByApartment(apartmentCode) {
+function updateFilter(filterName, filter) {
 
-    currentApartmentFilter = apartmentCode;
-    applyFilters();
+    document.getElementById(filterName + '-filter').value = filter;
+    console.log(filter);
+    document.getElementById('filter-form').submit();
+}
+
+
+function validateDates() {
+    const startDate = document.getElementById('start-date').value;
+    const endDate = document.getElementById('end-date').value;
+    console.log(startDate)
+    console.log(endDate)
+    // Only submit the form if both dates are filled
+    if (startDate && endDate) {
+        document.getElementById('filter-form').submit();
+    }
+}
+
+function applyFilter(key, value) {
+    // Get the current query string
+    const urlParams = new URLSearchParams(window.location.search);
+
+    // Set or update the filter
+    if (value) {
+        urlParams.set(key, value);
+    } else {
+        urlParams.delete(key);
+    }
+
+    // Redirect with the updated filters
+    window.location.search = urlParams.toString();
 }
 
 function applyFilters() {
-    let startDate = document.getElementById("start-date").value;
-    let endDate = document.getElementById("end-date").value;
-    let table = document.getElementById("availability-table");
-    let rows = table.getElementsByTagName("tr");
+    const urlParams = new URLSearchParams(window.location.search);
 
-    for (let i = 1; i < rows.length; i++) {
-        let codeCell = rows[i].getElementsByTagName("td")[0];
-        let startDateCell = rows[i].getElementsByTagName("td")[1];
-        let endDateCell = rows[i].getElementsByTagName("td")[2];
-        let statusCell = rows[i].getElementsByTagName("td")[3];
-        
-        if (codeCell && startDateCell && endDateCell && statusCell) {
-            let rowCode = codeCell.textContent || codeCell.innerText;
-            let rowStartDate = startDateCell.textContent || startDateCell.innerText;
-            let rowEndDate = endDateCell.textContent || endDateCell.innerText;
-            let rowStatus = statusCell.textContent || statusCell.innerText;
+    // Update filters based on form inputs
+    const startDate = document.getElementById('start-date').value;
+    const endDate = document.getElementById('end-date').value;
+    const status = document.getElementById('status-filter').value;
 
-            let isWithinDateRange = (!startDate || rowStartDate >= startDate) && (!endDate || rowEndDate <= endDate);
-            let isApartmentMatch = currentApartmentFilter === 'APT' || rowCode === currentApartmentFilter;
-
-            // Check if the row is within the date range and if it is available
-            if (isApartmentMatch && isWithinDateRange) {
-                rows[i].style.display = rowStatus === "Tersedia" ? "" : "none";
-            } else {
-                rows[i].style.display = "none";
-            }
-        }
+    if (startDate && endDate) {
+        urlParams.set('startDate', startDate);
+        urlParams.set('endDate', endDate);
+    } else {
+        urlParams.delete('startDate');
+        urlParams.delete('endDate');
     }
+
+    if (status) {
+        urlParams.set('status', status);
+    } else {
+        urlParams.delete('status');
+    }
+
+    // Redirect with the updated filters
+    window.location.search = urlParams.toString();
 }
+
+
+// function applyFilters() {
+//     let startDate = document.getElementById("start-date").value;
+//     let endDate = document.getElementById("end-date").value;
+//     let table = document.getElementById("availability-table");
+//     let rows = table.getElementsByTagName("tr");
+
+//     for (let i = 1; i < rows.length; i++) {
+//         let codeCell = rows[i].getElementsByTagName("td")[0];
+//         let startDateCell = rows[i].getElementsByTagName("td")[1];
+//         let endDateCell = rows[i].getElementsByTagName("td")[2];
+//         let statusCell = rows[i].getElementsByTagName("td")[3];
+        
+//         if (codeCell && startDateCell && endDateCell && statusCell) {
+//             let rowCode = codeCell.textContent || codeCell.innerText;
+//             let rowStartDate = startDateCell.textContent || startDateCell.innerText;
+//             let rowEndDate = endDateCell.textContent || endDateCell.innerText;
+//             let rowStatus = statusCell.textContent || statusCell.innerText;
+
+//             let isWithinDateRange = (!startDate || rowStartDate >= startDate) && (!endDate || rowEndDate <= endDate);
+//             let isApartmentMatch = currentApartmentFilter === 'APT' || rowCode === currentApartmentFilter;
+
+//             // Check if the row is within the date range and if it is available
+//             if (isApartmentMatch && isWithinDateRange) {
+//                 rows[i].style.display = rowStatus === "Tersedia" ? "" : "none";
+//             } else {
+//                 rows[i].style.display = "none";
+//             }
+//         }
+//     }
+
+//     fetch('/atyp/filter-ketersediaan', {
+//         method: 'POST',
+//         headers: { 'Content-Type': 'application/json' },
+//         body: JSON.stringify(data)
+//     })
+//     .then(response => response.json())
+//     .then(result => {
+//         console.log(result)
+
+//         location.reload();
+//         // if (result.success) {
+//         //     alert("Unit updated successfully!");
+//         //     location.reload(); // Reload page to reflect changes
+//         // } else {
+//         //     alert("Error saving changes.");
+//         // }
+//     })
+//     .catch(error => {
+//         console.error("Error:", error);
+//         alert("An error occurred while saving.");
+//     });
+
+// }
 
 function checkIn(button) {
             button.disabled = true; // Disable checkin button

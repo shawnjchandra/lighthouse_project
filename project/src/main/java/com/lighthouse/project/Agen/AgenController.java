@@ -72,11 +72,60 @@ public class AgenController {
         List<TransaksiKetersediaanModel> results = ketRepo.findAll();
 
         if(results.size()>0){
+
             model.addAttribute("results", results);
         }
 
 
         return "kelolaJadwal";
+    }
+
+    @PostMapping("/filter-apartments")
+    public String filteKetersediaan(
+        @RequestParam(name="apt", required = false) String apt,
+        @RequestParam(name="start-date", required = false) String startDate,
+        @RequestParam(name="end-date",required = false) String endDate,
+        @RequestParam(name="status",required = true, defaultValue = "") String status,
+        Model model, HttpSession httpSession
+        ){
+
+            
+            Map<String,Object> filters = new HashMap<>();
+            System.out.println("APARTMENT : "+apt);
+            System.out.println();
+            if (apt != null) {
+                filters.put("apt", apt.trim());
+                // httpSession.setAttribute("apt", apt);
+            }
+            if (status != null) {
+                status = status.replaceAll(",", "");
+                // System.out.println("STATUS"+);;
+                // System.out.println("FILTER "+String.valueOf(filters.get("status")).replaceAll("\\s", "").replaceAll(",", ""));
+                
+                filters.put("status",status); 
+                // httpSession.setAttribute("status", status);
+                
+            }
+
+            if (startDate != null && endDate != null) {
+                filters.put("startDate", startDate.trim());
+                filters.put("endDate", endDate.trim());
+                // httpSession.setAttribute("startDate", startDate);
+                // httpSession.setAttribute("status", status);
+            }
+
+            
+            List<TransaksiKetersediaanModel> list = ketRepo.findWithFilters(filters);
+
+
+            if(list.size()>0){
+                model.addAttribute("results", list);
+                model.addAttribute("filters", filters);
+                httpSession.setAttribute("filters", filters);
+            }
+
+
+            return "kelolaJadwal";
     }
 
     @GetMapping("/pengawasan-cico")

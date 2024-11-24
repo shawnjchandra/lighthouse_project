@@ -13,25 +13,46 @@
     <div class="jadwal-container">
         <h1>Jadwal Ketersediaan Unit Apartemen</h1>
 
-        <div class="filter-buttons">
-            <button onclick="filterByApartment('APT')">Semua</button>
-            <button onclick="filterByApartment('APT001')">Apartemen A</button>
-            <button onclick="filterByApartment('APT002')">Apartemen B</button>
-            <button onclick="filterByApartment('APT003')">Apartemen C</button>
-            <button onclick="filterByApartment('APT004')">Apartemen D</button>
-        </div>
+        <form id="filter-form" action="/atyp/filter-apartments" method="post">
+            <!-- Hidden inputs to store filter state -->
+            <input type="hidden" id="apt-filter" name="apt" value="">
+            <input type="hidden" id="status-filter-hidden" name="status" value="">
+        
+            <!-- Filter Buttons -->
+            <div class="filter-buttons">
+                <button type="button" onclick="updateFilter('apt', null)">Semua</button>
+                <button type="button" onclick="updateFilter('apt', 'A')"
+                    th:classappend="${session.filters['apt']} == 'A' ">Apartemen A</button>
+                <button type="button" onclick="updateFilter('apt', 'B')"
+                    th:classappend="${session.filters['apt']} == 'B' ">Apartemen B</button>
+                <button type="button" onclick="updateFilter('apt', 'C')"
+                    th:classappend="${session.filters['apt']} == 'C' ">Apartemen C</button>
+                <button type="button" onclick="updateFilter('apt', 'D')"
+                    th:classappend="${session.filters['apt']} == 'D' ">Apartemen D</button>
+            </div>
 
-        <label for="start-date">Tanggal Awal:</label>
-        <input type="date" id="start-date" onchange="applyFilters()">
-        <label for="end-date">Tanggal Akhir:</label>
-        <input type="date" id="end-date" onchange="applyFilters()">
-        <label for="status-filter">Status Ketersediaan:</label>
-        <select name="status-filter" id="status-filter">
-            <option value="occupied">Occupied</option>
-            <option value="reserved">Reserved</option>
-            <option value="checkout">Check-out</option>
-        </select>
+            <!-- <span th:text="${session.filters['startDate']}"></span> -->
+            <!-- <span th:text="${session.filters['status']}"></span> -->
+        
+            <!-- Start and End Date Filters -->
+            <label for="start-date">Tanggal Awal:</label>
+            <input type="date" id="start-date" name="start-date" onchange="validateDates()"
+            th:value="${session.filters['startDate']}">
+            <label for="end-date">Tanggal Akhir:</label>
+            <input type="date" id="end-date" name="end-date" onchange="validateDates()"
+            th:value="${session.filters['endDate']}">
+        
+            <!-- Status Filter -->
+            <label for="status-filter">Status Ketersediaan:</label>
+            <select id="status-filter" name="status" onchange="updateFilter('status', this.value)">
+                <option value="" th:selected="${session.filters['status']} == '' ">All</option>
+                <option value="NA" th:selected="${session.filters['status']} == 'NA' ">NotAvailable</option>
+                <option value="A" th:selected="${session.filters['status']} == 'A' ">Available</option>
+                <option value="M" th:selected="${session.filters['status']} == 'M' ">Maintenance</option>
+            </select>
+        </form>
 
+        
         <table id="availability-table">
             <thead>
                 <tr>
