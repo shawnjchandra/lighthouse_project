@@ -34,11 +34,11 @@ CREATE TABLE Pengguna (
   noHP varchar(12) UNIQUE,
   tipe bit not null,
   -- tipe 0 pelanggan, 1 agen
-  idAgen int null,
-  idPel int null,
+  idAgen int DEFAULT null,
+  idPel int DEFAULT null,
   email varchar(20) not null,
-  username varchar(10) UNIQUE not null,
-  pass varchar(12) not null
+  username varchar(255) UNIQUE not null,
+  pass varchar(255) not null
 
 );
 

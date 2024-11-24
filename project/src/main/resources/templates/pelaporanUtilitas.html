@@ -3,40 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{css/pelaporanUtilitas.css}">
+    <link rel="stylesheet" th:href="@{/css/pelaporanUtilitas.css}">
+    <script rel="text/javascript" th:src="@{/js/agen.js}" defer></script>
+
     <title>Pelaporan Utilitas</title>
 </head>
 <body>
-    <div class="navbar-container">
-        <nav class = "navbar">
-           
-            <a href="#" class="logo">
-                <img th:src="@{images/LHlogoresized.png}" height="32" width="32" alt="">
-            </a>
-            <ul class="navbar-links">
-                <li id="link-pencarian"><a href="#">Pencarian</a></li>
-                <!-- <li id="link-pemesanan"><a href="#">Pemesanan</a></li>
-                <li id="link-Pembayaran"><a href="#">Pembayaran</a></li> -->
-                <li id="link-riwayat"><a href="#">Riwayat Transaksi</a></li>
-                <!-- <li id="link-review"><a href="#">Review</a></li> -->
-            </ul>
-            <div class="auth-buttons">
-                <button class="auth-btn">Sign In</button>
-                <button class="auth-btn">Sign Up</button>
-                <button class="auth-btn" hidden>Sign Out</button>
-    
-            </div>            
-        </nav>
-    </div>
+    <th:block th:replace="~{/layout/navbar :: navbar}"></th:block>
 
     <!-- container -->
     <div class="container">
         <h1>Laporan Utilitas</h1>
         <div class="period-picker">
-            <label for="start-date">Start Date:</label>
-            <input type="date" id="start-date">
-            <label for="end-date">End Date:</label>
-            <input type="date" id="end-date">
+            <form id="filter-form" action="/atyp/util-filtered" method="post">
+                <input type="date" id="start-date" name="start-date" onchange="validateDates()"
+                th:value="${session.startDate}">
+                <label for="end-date">Tanggal Akhir:</label>
+                <input type="date" id="end-date" name="end-date" onchange="validateDates()"
+                th:value="${session.endDate}">
+
+            </form>
+        
         </div>
         <table class="utilitas-table">
             <thead>
@@ -52,13 +39,21 @@
                 </tr>
             </thead>
             <tbody>
-         
-                <tr><td>Row 1</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Rp.</td><td>Rp.</td></tr>
-                <tr><td>Row 2</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Rp.</td><td>Rp.</td></tr>
-     
+                <tr th:each="row,stat : ${results}">
+                    <td th:text="${stat.index + 1}"></td>
+                    <td th:text="${row.ttu.namatower}"></td>
+                    <td th:text="${row.ttu.lantai}"></td>
+                    <td th:text="${row.ttu.nomor}"></td>
+                    <td th:text="${row.ttu.jenis}"></td>
+                    <td th:text="${row.frekuensi}"></td>
+                    <td th:text="${row.ttu.tarifsewa}"></td>
+                    <td th:text="${row.total}"></td>
+                </tr>
+                
+
                 <tr>
                     <td colspan="7">Total pendapatan</td>
-                    <td>Total Amount</td>
+                    <td th:text="${total}"></td>
                 </tr>
             </tbody>
         </table>

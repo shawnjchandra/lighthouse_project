@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register Page</title>
     <link rel="stylesheet" th:href="@{css/register.css}"> 
+    <script th:src="@{js/fiturUmum.js}" defer></script>
 </head>
 <body>
     <div class="login-container">
@@ -13,27 +14,45 @@
         </div>``
         <div class="form-section">
             <div class="logo-container">
-                <img th:src="@{images/LHlogoresized.png}" height="64" width="64" alt="Logo" class="logo">
+                <img th:src="@{images/LHlogoresized.png}"  alt="Logo" class="logo">
             </div>
             <h2>Register</h2>
-            <form action="#" method="POST">
-                <label for="emailAdress">Email address</label>
-                <input type="text" id="emailAddress" name="emailAddress" placeholder="Email address" required>
+            <form id="registrationForm" th:action="@{/register-data}" method="POST">
+                <!-- First Part -->
+                <div id="firstPart">
+                    <label for="nik">NIK</label>
+                    <input type="text" id="nik" name="nik" placeholder="NIK (16 Digit)"  maxlength="16" required>
+                    
+                    <label for="nama">Nama</label>
+                    <input type="text" id="nama" name="nama" placeholder="Nama" maxlength="20"  required>
+                    
+                    <label for="nohp">Nomor HP</label>
+                    <input type="text" id="nohp" name="nohp" placeholder="08** **** ****" maxlength="12" required>
+                    
+                    <label for="emailAddress">Email address</label>
+                    <input type="email" id="emailAddress" name="emailAddress" placeholder="example@gmail.com" required>
 
-                <label for="username">Username</label>
-                <input type="text" id="username" name="username" placeholder="Username" required>
+                    <button type="button" class="sign-in-button" th:onclick="showSecondPart()">Next</button>
+                </div>
                 
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Password" required>
+                <!-- Second Part -->
+                <div id="secondPart" class="hidden">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Username" maxlength="30" required>
+                    
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Password" required>
 
-                <label for="confirmPassword">Confirm password</label>
-                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm password" required>
-                
-                <button type="submit" class="sign-in-button">Sign Up</button>
-                
-            
+                    <label for="confirmPassword">Confirm password</label> 
+                    <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm password" required>
+                    
+                    <button type="submit" class="sign-in-button">Sign Up</button>
+                </div>
             </form>
         </div>
     </div>
+
+
+ 
 </body>
 </html>

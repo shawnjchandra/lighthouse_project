@@ -3,27 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{css/pembayaran.css}">
-    <script th:src="@{js/pembayaran.js}" defer></script>
+    <link rel="stylesheet" th:href="@{/css/pembayaran.css}">
+    <script th:src="@{/js/pembayaran.js}" defer></script>
+    <script th:src="@{/js/pelanggan.js}" defer></script>
     <title>Pembayaran</title>
 </head>
 <body>
-    <div class="navbar-container">
-        <nav class="navbar">
-            <a href="#" class="logo">
-                <img th:src="@{images/LHlogoresized.png}" height="32" width="32" alt="">
-            </a>
-            <ul class="navbar-links">
-                <li id="link-pencarian"><a href="#">Pencarian</a></li>
-                <li id="link-riwayat"><a href="#">Riwayat Transaksi</a></li>
-            </ul>
-            <div class="auth-buttons">
-                <button class="auth-btn">Sign In</button>
-                <button class="auth-btn">Sign Up</button>
-                <button class="auth-btn" hidden>Sign Out</button>
-            </div>
-        </nav>
-    </div>
+    <th:block th:replace="~{/layout/navbar :: navbar}"></th:block>
 
     <div class="container">
         <h1>Payment</h1>
@@ -143,7 +129,7 @@
             </div>
         </div>
     
-        <button class="submit-btn" style="display: none;">Process Payment</button>
+        <button class="submit-btn" style="display: none;" th:onclick="goToRiwayat()">Process Payment</button>
     </div>
 
     <footer></footer>

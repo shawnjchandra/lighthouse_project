@@ -3,60 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{css/pengawasanCICO.css}">
+    <link rel="stylesheet" th:href="@{/css/pengawasanCICO.css}">
     <title>Laporan CICO</title>
 </head>
 <body>
-    <div class="navbar-container">
-        <nav class = "navbar">
-           
-            <a href="#" class="logo">
-                <img th:src="@{images/LHlogoresized.png}" height="32" width="32" alt="">
-            </a>
-            <ul class="navbar-links">
-                <li id="link-pencarian"><a href="#">Pencarian</a></li>
-                <!-- <li id="link-pemesanan"><a href="#">Pemesanan</a></li>
-                <li id="link-Pembayaran"><a href="#">Pembayaran</a></li> -->
-                <li id="link-riwayat"><a href="#">Riwayat Transaksi</a></li>
-                <!-- <li id="link-review"><a href="#">Review</a></li> -->
-            </ul>
-            <div class="auth-buttons">
-                <button class="auth-btn">Sign In</button>
-                <button class="auth-btn">Sign Up</button>
-                <button class="auth-btn" hidden>Sign Out</button>
-    
-            </div>            
-        </nav>
-    </div>
+    <th:block th:replace="~{/layout/navbar :: navbar}"></th:block>
 
     <!-- container -->
     <div class="container">
         <div class="header">
             <h1 class="title">Daftar Check-in / Check-out</h1>
-            <form action="">
+            <form action="/atyp/search-date" method="post">
                 <label for="input-tanggal">Pilih tanggal: </label>
-                <input type="date" id="input-tanggal" name="input-tanggal">
+                <input type="date" id="input-tanggal" name="date">
                 <button type="submit" class="submit-button">Submit</button> 
             </form>
         </div>
         <!-- list costumer -->
         <div class="customer-list">
             <h2>Daftar Check-in:</h2>
-            <table class="checkin-table">
+             <table class="checkin-table">
                 <thead>
                     <tr>
-                        <th>Waktu</th>
+                        <th>Waktu Check In</th>
                         <th>Nama Penyewa</th>
                         <th>Unit</th>
                         <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>hh:mm</td>
-                        <td>John</td>
-                        <td>A03543</td>
-                        <td>Selesai</td>
+                    <tr th:each="row : ${ci}">
+                        
+                        <td th:text="${row.tgglcheckin}"></td>
+                        <td th:text="${row.nama}"></td>
+                        <td th:text="${row.namatower} +''+${row.lantai}+''+${row.nomor}"></td>
+                        <td th:text="${row.statuspembayaran}"></td>
+                        
                     </tr>
                 </tbody>
             </table>
@@ -65,21 +47,24 @@
             <table class="checkout-table">
                 <thead>
                     <tr>
-                        <th>Waktu</th>
+                        <th>Waktu Check Out</th>
                         <th>Nama Penyewa</th>
                         <th>Unit</th>
                         <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>hh:mm</td>
-                        <td>John</td>
-                        <td>A03543</td>
-                        <td>Selesai</td>
+                    <tr th:each="row : ${co}">
+
+                        <td th:text="${row.tgglcheckout}"></td>
+                        <td th:text="${row.nama}"></td>
+                        <td th:text="${row.namatower} +''+${row.lantai}+''+${row.nomor}"></td>
+                        <td th:text="${row.statuspembayaran}"></td>
+       
                     </tr>
                 </tbody>
             </table>
+
         </div>
     </div>
     

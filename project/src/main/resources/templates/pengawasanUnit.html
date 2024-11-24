@@ -3,51 +3,31 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" th:href="@{css/pengawasanUnit.css}">
-        <script rel="text/javascript" th:src="@{js/pengawasanUnit.js}"defer></script>
+        <link rel="stylesheet" th:href="@{/css/pengawasanUnit.css}">
+        <script rel="text/javascript" th:src="@{/js/pengawasanUnit.js}"defer></script>
         <title>Pengawasan Unit</title>
     </head>
     <body>
-        <div class="navbar-container">
-            <nav class = "navbar">
-            
-                <a href="#" class="logo">
-                    <img th:src="@{images/LHlogoresized.png}" height="32" width="32" alt="">
-                </a>
-                <ul class="navbar-links">
-                    <li id="link-pencarian"><a href="#">Pencarian</a></li>
-                    <!-- <li id="link-pemesanan"><a href="#">Pemesanan</a></li>
-                    <li id="link-Pembayaran"><a href="#">Pembayaran</a></li> -->
-                    <li id="link-riwayat"><a href="#">Riwayat Transaksi</a></li>
-                    <!-- <li id="link-review"><a href="#">Review</a></li> -->
-                </ul>
-                <div class="auth-buttons">
-                    <button class="auth-btn">Sign In</button>
-                    <button class="auth-btn">Sign Up</button>
-                    <button class="auth-btn" hidden>Sign Out</button>
-        
-                </div>
-                
-            </nav>
-
-        </div>
+        <th:block th:replace="~{/layout/navbar :: navbar}"></th:block>
         <div class="container">
             <h1>Pengawasan Unit</h1>
 
-            <div class="search-bar">
+            <form action="/atyp/between-dates" method="post" class="search-bar">
                 <div class="form-group" id="check-in-group">
                     <label for="check-in">Check-in Date</label>
-                    <input type="date" id="check-in" name="checkIn">
+                    <input type="date" id="check-in" name="checkIn" required>
                 </div>
-
+            
                 <div class="form-group" id="check-out-group">
                     <label for="check-out">Check-out Date</label>
-                    <input type="date" id="check-out" name="checkOut">
+                    <input type="date" id="check-out" name="checkOut" required>
                 </div>
-                <button id="searchButton" style="visibility: hidden;">Confirm</button>
-            </div>
+            
+                <button type="submit" id="searchButton">Search</button>
+            </form>
 
-            <table id="dynamicTable" style="visibility: hidden;">
+            <table id="dynamicTable" >
+            <!-- <table id="dynamicTable"  th:unless="${default}" style="visibility: visible;"> -->
                 <thead>
                     <tr>
                         <th>Unit Number</th>
@@ -57,15 +37,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>A02345</td>
-                        <td>John LBF</td>
-                        <td>dd/mm/yy - dd/mm/yy</td>
-                        <td>Occupied</td>
+                    <tr th:each="row : ${results}">
+                        <td th:text="${row.namatower} + '-' + ${row.lantai} + '-' + ${row.nomor}"></td>
+                        <td th:text="${row.nama}"></td>
+                        <td th:text="${row.tanggalmulai} + ' - ' + ${row.tanggalselesai}"></td>
+                        <td th:text="${row.statustersedia}"></td>
                     </tr>
+                    
                 </tbody>
             </table>
         </div>
-        <footer></footer>
+        <footer>
+
+        </footer>
     </body>
 </html>
