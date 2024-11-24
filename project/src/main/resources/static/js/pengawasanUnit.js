@@ -72,38 +72,38 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
-function fetchResponseToBE(event){
-    let checkIn = document.getElementById("check-in").value;
-    let checkOut = document.getElementById("check-out").value;
+// function fetchResponseToBE(event){
+//     let checkIn = document.getElementById("check-in").value;
+//     let checkOut = document.getElementById("check-out").value;
 
-    if(checkIn== null || checkOut == null){
-        alert('Ada yang belum diisi');
-        return;
-    }
+//     if(checkIn== null || checkOut == null){
+//         alert('Ada yang belum diisi');
+//         return;
+//     }
     
-    let data = {checkIn, checkOut};
+//     let data = {checkIn, checkOut};
      
-    fetch('/atyp/search-between-dates',{
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(result => {
-        // console.log(result);
-        window.location.href ='/atyp/pengawasan-unit';
+//     fetch('/atyp/search-between-dates',{
+//         method: 'POST',
+//         headers: {'Content-Type': 'application/json'},
+//         body: JSON.stringify(data)
+//     })
+//     .then(response => response.json())
+//     .then(result => {
+//         // console.log(result);
+//         window.location.href ='/atyp/pengawasan-unit';
         
-        if (result.success) {
-            // On success, refresh the page or update the table
-            // alert("Unit added successfully!");
+//         if (result.success) {
+//             // On success, refresh the page or update the table
+//             // alert("Unit added successfully!");
             
-            // location.reload(); // Reload the page to show updated data
-        } else {
-            alert("Error adding unit.");
-        }
-    })
-    .catch(errpr =>{
-        console.error("Error:", error);
-        alert("An error occurred.");
-    });
-}
+//             // location.reload(); // Reload the page to show updated data
+//         } else {
+//             alert("Error adding unit.");
+//         }
+//     })
+//     .catch(errpr =>{
+//         console.error("Error:", error);
+//         alert("An error occurred.");
+//     });
+// }

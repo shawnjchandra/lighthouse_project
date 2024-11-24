@@ -32,13 +32,21 @@
                 </tr>
             </thead>
             <tbody>
-         
-                <tr><td>Row 1</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Rp.</td><td>Rp.</td></tr>
-                <tr><td>Row 2</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Data</td><td>Rp.</td><td>Rp.</td></tr>
-     
+                <tr th:each="row,stat : ${results}">
+                    <td th:text="${stat.index + 1}"></td>
+                    <td th:text="${row.ttu.namatower}"></td>
+                    <td th:text="${row.ttu.lantai}"></td>
+                    <td th:text="${row.ttu.nomor}"></td>
+                    <td th:text="${row.ttu.jenis}"></td>
+                    <td th:text="${row.frekuensi}"></td>
+                    <td th:text="${row.ttu.tarifsewa}"></td>
+                    <td th:text="${row.total}"></td>
+                </tr>
+                
+
                 <tr>
                     <td colspan="7">Total pendapatan</td>
-                    <td>Total Amount</td>
+                    <td th:text="${total}"></td>
                 </tr>
             </tbody>
         </table>

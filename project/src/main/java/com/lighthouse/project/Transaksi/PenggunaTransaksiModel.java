@@ -1,6 +1,6 @@
 package com.lighthouse.project.Transaksi;
 
-import com.lighthouse.project.Tower.TowerUnitModel;
+
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -14,12 +14,12 @@ import lombok.experimental.FieldDefaults;
 @Setter
 @FieldDefaults(makeFinal = false, level = AccessLevel.PRIVATE)
 @AllArgsConstructor
-public class TransaksiModel {
+public class PenggunaTransaksiModel{
+    String nama;
+    String namatower;
+    int lantai;
+    int nomor;
     String tgglcheckin;
     String tgglcheckout;
     String statuspembayaran;
-    int rating;
-    String review;
 }
-
-

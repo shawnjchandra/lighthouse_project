@@ -13,22 +13,25 @@
     <div class="container">
         <div class="header">
             <h1 class="title">Daftar Check-in / Check-out</h1>
-            <form action="">
+            <form action="/atyp/search-date" method="post">
                 <label for="input-tanggal">Pilih tanggal: </label>
-                <input type="date" id="input-tanggal" name="input-tanggal">
+                <input type="date" id="input-tanggal" name="date">
                 <button type="submit" class="submit-button">Submit</button> 
             </form>
         </div>
         <!-- list costumer -->
         <div class="customer-list">
             <h2>Daftar Check-in:</h2>
-            <ul id="check-in-list">
+            <ul id="check-in-list" th:if="${!default}" th:each="row: ${ci}">
                 <!-- Customer items will be added here -->
+                <li th:text="${row.tgglcheckin}+' - '+ ${row.namatower} +''+${row.lantai}+''+${row.nomor }+' - '+${row.nama}+' - '+ ${row.statuspembayaran} "></li>
             </ul>
             <br>
             <h2>Daftar Check-out:</h2>
-            <ul id="check-out-list">
+            <ul id="check-out-list" th:if="${!default}" th:each="row: ${co}">
                 <!-- Customer items will be added here -->
+                <li th:text="${row.tgglcheckin}+' - '+ ${row.namatower} +''+${row.lantai}+''+${row.nomor }+' - '+${row.nama}+' - '+ ${row.statuspembayaran} "></li>
+
             </ul>
         </div>
     </div>

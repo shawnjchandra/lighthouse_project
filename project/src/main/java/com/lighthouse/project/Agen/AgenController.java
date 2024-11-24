@@ -1,6 +1,10 @@
 package com.lighthouse.project.Agen;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,8 +21,11 @@ import com.lighthouse.project.Tower.TowerModel;
 import com.lighthouse.project.Tower.TowerUnitModel;
 import com.lighthouse.project.Tower.TowerUnitRepo;
 import com.lighthouse.project.Tower.UnitModel;
+import com.lighthouse.project.Transaksi.PenggunaTransaksiModel;
 import com.lighthouse.project.Transaksi.TransaksiModel;
 import com.lighthouse.project.Transaksi.TransaksiRepo;
+import com.lighthouse.project.Transaksi.TransaksiTowerUnitModel;
+import com.lighthouse.project.Transaksi.UtilitasModel;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -31,6 +38,9 @@ public class AgenController {
     
     @Autowired
     private KetersediaanRepo ketRepo;
+
+    @Autowired
+    private TransaksiRepo trRepo;
 
     @Autowired
     private KetersediaanService ketService;
@@ -71,6 +81,28 @@ public class AgenController {
 
     @GetMapping("/pengawasan-cico")
     public String pengawsanCICO(Model model) {
+        List<PenggunaTransaksiModel> list = trRepo.findAllUserTransaction();
+
+        if(list.size()>0){
+            model.addAttribute("default", true);
+        }
+        
+        return "pengawasanCICO";
+    }
+    
+    @PostMapping("/search-date")
+    public String cicoDate(@RequestParam String date, Model model){
+        List<PenggunaTransaksiModel> ci = trRepo.findUTByCheckIn(date);
+        List<PenggunaTransaksiModel> co = trRepo.findUTByCheckOut(date);
+        
+        model.addAttribute("default", false);
+        if(ci.size()>0){
+            model.addAttribute("ci", ci);
+        }
+        if(co.size()>0){
+            model.addAttribute("co", co);
+
+        }
         
         return "pengawasanCICO";
     }
@@ -83,19 +115,73 @@ public class AgenController {
 
         List<TransaksiKetersediaanModel> list = ketRepo.findAll();
 
+        System.out.println("pengawasanUnit "+ list);
         if(list.size()>0){
             model.addAttribute("results", list);
-            // model.addAttribute("updated", true);
-        }else {
-            model.addAttribute("results", list);
+            model.addAttribute("default", true);
+            
         }
-
-        System.out.println(list);
-          return "pengawasanUnit";
+        return "pengawasanUnit";
     }
+    
+    @PostMapping("/between-dates")
+    public String betweenDates(@RequestParam String checkIn, @RequestParam String checkOut, Model model){
+        List<TransaksiKetersediaanModel> list = ketRepo.findUsedBetweenDates(checkIn, checkOut);
+        
+        System.out.println("between "+ list);
+        if(list.size()>0){
+
+            model.addAttribute("results", list);
+            model.addAttribute("default", false);
+        }
+        
+        
+        return "pengawasanUnit";
+    }
+
+
+
     @GetMapping("/pelaporan-utilitas")
     public String pelaporanUtilitas(Model model) {
+        // Get all TransaksiTowerUnitModel records
+    List<TransaksiTowerUnitModel> list = trRepo.findAllTTU();
 
+    // Initialize maps to track frequencies, unit pricing, and mapping
+    Map<String, Integer> frekuensi = new HashMap<>();
+    Map<String, Integer> hargaSatuan = new HashMap<>();
+    Map<String, TransaksiTowerUnitModel> ttuMapping = new HashMap<>();
+
+    // Populate the maps
+    for (TransaksiTowerUnitModel ttu : list) {
+        String unit = ttu.getNamatower() + "-" + ttu.getLantai() + "-" + ttu.getNomor();
+        if (!frekuensi.containsKey(unit)) {
+            frekuensi.put(unit, 1);
+            hargaSatuan.put(unit, ttu.getTarifsewa());
+            ttuMapping.put(unit, ttu);
+        } else {
+            frekuensi.put(unit, frekuensi.get(unit) + 1);
+        }
+    }
+
+    // Create the results list
+    List<UtilitasModel> results = new ArrayList<>();
+    for (String key : frekuensi.keySet()) {
+        int count = frekuensi.get(key);
+        int tarif = hargaSatuan.get(key);
+        int total = count * tarif;
+
+        // Add new UtilitasModel to the results list
+        results.add(new UtilitasModel(ttuMapping.get(key), count, total));
+    }
+
+    int totalSum = results.stream().mapToInt(UtilitasModel::getTotal).sum();
+    // Add results to the model for Thymeleaf rendering
+    if (!results.isEmpty()) {
+        System.out.println(totalSum);
+        model.addAttribute("results", results);
+        model.addAttribute("total", totalSum);
+    }
+        
         return "pelaporanUtilitas";
     }
 

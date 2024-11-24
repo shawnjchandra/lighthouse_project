@@ -12,21 +12,22 @@
         <div class="container">
             <h1>Pengawasan Unit</h1>
 
-            <div class="search-bar">
+            <form action="/atyp/between-dates" method="post" class="search-bar">
                 <div class="form-group" id="check-in-group">
                     <label for="check-in">Check-in Date</label>
-                    <input type="date" id="check-in" name="checkIn">
+                    <input type="date" id="check-in" name="checkIn" required>
                 </div>
-
+            
                 <div class="form-group" id="check-out-group">
                     <label for="check-out">Check-out Date</label>
-                    <input type="date" id="check-out" name="checkOut">
+                    <input type="date" id="check-out" name="checkOut" required>
                 </div>
-                <button id="searchButton" style="visibility: hidden;" onclick="fetchResponseToBE()">Confirm</button>
-            </div>
+            
+                <button type="submit" id="searchButton">Search</button>
+            </form>
 
-            <table id="dynamicTable"  style="visibility: hidden;">
-            <table id="dynamicTable"  style="visibility: visible;">
+            <table id="dynamicTable" >
+            <!-- <table id="dynamicTable"  th:unless="${default}" style="visibility: visible;"> -->
                 <thead>
                     <tr>
                         <th>Unit Number</th>
@@ -37,11 +38,12 @@
                 </thead>
                 <tbody>
                     <tr th:each="row : ${results}">
-                        <td th:text="${results.namatower}+${results.lantai}+${results.nomor}"></td>
-                        <td th:text="${results.nama}"></td>
-                        <td th:text="${results.tanggalmulai}+'-'+${tanggalselesai}"></td>
-                        <td th:text="${results.statustersedia}"></td>
+                        <td th:text="${row.namatower} + '-' + ${row.lantai} + '-' + ${row.nomor}"></td>
+                        <td th:text="${row.nama}"></td>
+                        <td th:text="${row.tanggalmulai} + ' - ' + ${row.tanggalselesai}"></td>
+                        <td th:text="${row.statustersedia}"></td>
                     </tr>
+                    
                 </tbody>
             </table>
         </div>

@@ -25,6 +25,7 @@ import lombok.experimental.FieldDefaults;
 @AllArgsConstructor
 public class TransaksiKetersediaanModel{
     String namatower;
+    String nama;
     int lantai;
     int nomor;
     String tanggalmulai;
