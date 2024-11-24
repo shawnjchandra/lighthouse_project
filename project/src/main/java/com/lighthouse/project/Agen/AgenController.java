@@ -1,5 +1,7 @@
 package com.lighthouse.project.Agen;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -233,5 +235,76 @@ public class AgenController {
         
         return "pelaporanUtilitas";
     }
+
+    @PostMapping("/util-filtered")
+    public String filterUtil (
+        @RequestParam(name="start-date", required = false) String startDate,
+        @RequestParam(name="end-date",required = false) String endDate,
+        Model model,
+        HttpSession httpSession){
+            
+            Map<String, Object> filter = new HashMap<>();
+
+            if(startDate != null && endDate != null){
+                filter.put("startDate", startDate);
+                filter.put("endDate", endDate);
+                httpSession.setAttribute("startDate", startDate);
+                httpSession.setAttribute("endDate", endDate);
+            }
+
+            List<TransaksiTowerUnitModel> list = trRepo.findAllTTUBetweenDates(filter);
+            
+            
+            Map<String, Integer> frekuensi = new HashMap<>();
+            Map<String, Integer> hargaSatuan = new HashMap<>();
+            Map<String, TransaksiTowerUnitModel> ttuMapping = new HashMap<>();
+            
+            long duration;
+
+            // Populate the maps
+            for (TransaksiTowerUnitModel ttu : list) {
+                String unit = ttu.getNamatower() + "-" + ttu.getLantai() + "-" + ttu.getNomor();
+                
+                LocalDate checkinDate = LocalDate.parse(ttu.getTgglcheckin()) ;
+                LocalDate checkoutDate = LocalDate.parse(ttu.getTgglcheckout());
+                
+                if(checkinDate!= null && checkoutDate != null){
+                    duration = ChronoUnit.DAYS.between(checkinDate, checkoutDate); 
+                    
+                    if (!frekuensi.containsKey(unit)) {
+    
+    
+                        frekuensi.put(unit, (int)duration);
+                        hargaSatuan.put(unit, ttu.getTarifsewa());
+                        ttuMapping.put(unit, ttu);
+                    } else {
+                        frekuensi.put(unit, frekuensi.get(unit) + (int) duration);
+                    }
+                }
+            }
+        
+            // Create the results list
+            List<UtilitasModel> results = new ArrayList<>();
+            for (String key : frekuensi.keySet()) {
+                int count = frekuensi.get(key);
+                int tarif = hargaSatuan.get(key);
+                int total = count * tarif;
+        
+                // Add new UtilitasModel to the results list
+                results.add(new UtilitasModel(ttuMapping.get(key), count, total));
+            }
+        
+            int totalSum = results.stream().mapToInt(UtilitasModel::getTotal).sum();
+            // Add results to the model for Thymeleaf rendering
+            if (!results.isEmpty()) {
+                System.out.println(totalSum);
+                model.addAttribute("results", results);
+                model.addAttribute("total", totalSum);
+            }
+                
+                return "pelaporanUtilitas";
+            
+
+        }
 
 }

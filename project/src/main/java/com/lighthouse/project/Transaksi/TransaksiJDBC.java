@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -133,6 +134,20 @@ public class TransaksiJDBC implements TransaksiRepo {
         "WHERE tgglcheckout = ?::date;";
 
         return jdbcTemplate.query(sql, this::mapRowToUT,date);    
+    }
+
+    @Override
+    public List<TransaksiTowerUnitModel> findAllTTUBetweenDates(Map<String, Object> filter) {
+        String sql = "select *\n" + //
+                        "from transaksi tr\n" + //
+                        "join unit u on tr.idunit = u.idunit\n" + //
+                        "join tower t on u.idtower = t.idtower\n"+
+                        "WHERE tr.tgglcheckin >= ?::date AND tr.tgglcheckout <= ?::date";
+        
+        String checkIn = String.valueOf(filter.get("startDate"));
+        String checkOut = String.valueOf(filter.get("endDate"));
+        System.out.println(checkIn +" "+checkOut);
+        return jdbcTemplate.query(sql, this::mapRowToTTU,checkIn, checkOut);       
     }
     
 }

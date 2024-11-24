@@ -16,8 +16,6 @@ public class UtilitasModel {
     TransaksiTowerUnitModel ttu;
     int frekuensi;
     int total;
-    public Object getTransaksiTowerUnitModel() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getTransaksiTowerUnitModel'");
-    }
+    
+
 }
