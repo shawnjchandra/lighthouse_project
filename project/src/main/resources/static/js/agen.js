@@ -144,6 +144,10 @@ function saveChanges(event) {
 
 // Fitur Kelola Jadwal
 
+function updateStatus(rowId){
+    console.log(rowId);
+    document.getElementById('changeStatus-'+rowId).submit();
+}
 
 function updateFilter(filterName, filter) {
 

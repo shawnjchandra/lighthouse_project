@@ -8,4 +8,5 @@ public interface KetersediaanRepo {
     List<TransaksiKetersediaanModel> findUsedBetweenDates(String tanggalmulai, String tanggalselesai);
 
     List<TransaksiKetersediaanModel> findWithFilters(Map<String,Object> filters);
+    int findByKode(Map<String,String> filters);
 }

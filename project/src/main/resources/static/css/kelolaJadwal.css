@@ -147,7 +147,7 @@ tr:hover {
     margin-bottom: 15px;
 }
 
-.filter-buttons button {
+ button {
     padding: 10px 15px;
     margin-right: 10px;
     background-color: var(--primary-color);
@@ -158,4 +158,33 @@ tr:hover {
 
 .filter-buttons button:hover {
     background-color: var(--secondary-color);
+}
+
+.filter-buttons .active {
+    background-color: var(--secondary-color);
+    color: #fff;
+    border-color: #0056b3;
+}
+
+td{
+    position: relative; /* Makes the <td> a reference for absolute positioning */
+        padding: 5px 10px;
+        /* display: flex;
+        flex-direction: row; */
+}
+
+
+
+td> span{
+    margin-right: 10px;
+}
+td > select{
+    position: absolute;
+    right: 0px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+}
+input[type="hidden"] {
+    display: none;
 }

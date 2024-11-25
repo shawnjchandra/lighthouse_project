@@ -10,7 +10,9 @@
     <body>
         <th:block th:replace="~{/layout/navbar :: navbar}"></th:block>
         <div class="container">
-            <h1>Pengawasan Unit</h1>
+            <h1>Daftar unit yang sedang disewa</h1>
+            <span>Catatan : (Not Available)</span>
+            <br>
 
             <form action="/atyp/between-dates" method="post" class="search-bar">
                 <div class="form-group" id="check-in-group">
@@ -33,7 +35,7 @@
                         <th>Unit Number</th>
                         <th>Nama Penyewa</th>
                         <th>Periode Sewa</th>
-                        <th>Status</th>
+                        <!-- <th>Status</th> -->
                     </tr>
                 </thead>
                 <tbody>
@@ -41,7 +43,7 @@
                         <td th:text="${row.namatower} + '-' + ${row.lantai} + '-' + ${row.nomor}"></td>
                         <td th:text="${row.nama}"></td>
                         <td th:text="${row.tanggalmulai} + ' - ' + ${row.tanggalselesai}"></td>
-                        <td th:text="${row.statustersedia}"></td>
+                        <!-- <td th:text="${row.statustersedia}"></td> -->
                     </tr>
                     
                 </tbody>

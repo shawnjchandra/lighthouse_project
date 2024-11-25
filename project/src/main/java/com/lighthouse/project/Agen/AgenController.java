@@ -70,11 +70,19 @@ public class AgenController {
     }
     
     @GetMapping("/kelola-jadwal")
-    public String kelolaJadwal(Model model) {
+    public String kelolaJadwal(Model model, HttpSession httpSession) {
         List<TransaksiKetersediaanModel> results = ketRepo.findAll();
 
-        if(results.size()>0){
+        Map<String,Object> filters = new HashMap<>();
+        filters.put("apt", "");
+        filters.put("startDate", "");
+        filters.put("endDate", "");
+        filters.put("status", "");
 
+        if(results.size()>0){
+        
+            httpSession.setAttribute("filters", filters);
+            
             model.addAttribute("results", results);
         }
 
@@ -93,8 +101,7 @@ public class AgenController {
 
             
             Map<String,Object> filters = new HashMap<>();
-            System.out.println("APARTMENT : "+apt);
-            System.out.println();
+           
             if (apt != null) {
                 filters.put("apt", apt.trim());
                 // httpSession.setAttribute("apt", apt);
@@ -129,6 +136,51 @@ public class AgenController {
 
             return "kelolaJadwal";
     }
+
+    @PostMapping("/change-status")
+    public String changeStatus(
+        @RequestParam(name = "data", required = false) String data,
+        @RequestParam(name = "startDate", required = false) String startDate,
+        @RequestParam(name = "endDate", required = false) String endDate,
+        @RequestParam(name= "status", required = false) String status,
+        Model model){
+        
+        Map<String,String> map = new HashMap<>();
+        
+        System.out.println(data);
+        System.out.println(startDate);
+        System.out.println(endDate);
+        System.out.println(status);
+
+        if(data != null){
+            String[] split = data.split("-");
+            String tower = split[0];
+            String lantai = split[1];
+            String nomor = split[2];
+            
+            map.put("tower", tower);
+            map.put("lantai", lantai);
+            map.put("nomor", nomor);
+        }
+        if(startDate != null){
+            map.put("startDate", startDate);
+        }
+        if(endDate != null){
+            map.put("endDate", endDate);
+            
+        }
+        if(status != null){
+            map.put("status", status);
+
+        }
+        
+      
+        boolean results = ketRepo.findByKode(map)>0 ? true : false;
+        
+        System.out.println(results);
+
+        return "kelolaJadwal";
+    } 
 
     @GetMapping("/pengawasan-cico")
     public String pengawsanCICO(Model model) {

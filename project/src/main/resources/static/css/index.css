@@ -17,6 +17,15 @@ body {
     flex-direction: column;
     margin: 0;
     padding: 0;
+    height: 100vh;
+
+    /* background image */
+    background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 2), rgba(255, 255, 255, 0.3)), 
+        url("../images/singapore-green-apartment.jpg");
+    background-size: cover;
+    background-position: center; 
+    background-repeat: no-repeat;
 }
 
 button {
@@ -102,13 +111,16 @@ button {
     
 }
 
-header {
-    background: #147ef6;
+header .container{
+    /* background: white; */
     /* Green background */
-    margin-top: 54px;
-    color: white;
+    margin-top: 80px;
+    margin-left: 70px;
+    color: black;
     text-align: center;
     padding: 20px 0;
+    display: flex;
+    align-items: flex-start;
 }
 
 header h1 {
@@ -116,7 +128,7 @@ header h1 {
 }
 
 .cta-button {
-    background: #FF5722;
+    background: #1E88E5;
     /* Orange background */
     width: 200px;
     color: white;
@@ -127,21 +139,44 @@ header h1 {
 }
 
 main {
-    padding: 20px 0;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
 }
 
 #features {
-    background: #f4f4f4;
+    /* background: #f4f4f4; */
     /* Light grey background */
     padding: 20px 0;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
 }
 
 .feature {
     margin: 20px 0;
 }
 
+#features .container{
+    display: flex;
+    align-items: flex-start;
+    height: 50%;
+    margin-left: 66px;
+}
+
+#features > .container:nth-child(2){
+    position: relative;
+    top: -40px;
+}
+
+#cta{
+    width: 50%;
+    height: 100%;
+}
+
 footer {
-    background: #333;
+    background: #333333;
     /* Dark background */
     position: fixed;
     bottom :0;
@@ -157,5 +192,10 @@ footer {
 
 .footer-links li {
     display: inline;
-    margin: 0 15px;
+    margin: 0 15px;;
+}
+
+.footer-links a{
+    color: white;
+    text-decoration: none;
 }

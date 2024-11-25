@@ -134,4 +134,54 @@ public class KetersediaanJDBC implements KetersediaanRepo {
        
         
     }
+
+    @Override
+    public int findByKode(Map<String, String> filters) {
+        String sql = "UPDATE jadwalketersediaan\n" + //
+                        "SET statustersedia = ?::stats\n" + //
+                        "WHERE\n" + //
+                        "\tidunit = (\n" + //
+                        "\tSELECT tr.idunit\n" + //
+                        "\tFROM transaksi tr\n" + //
+                        "\tJOIN Unit u on u.idunit = tr.idunit\n" + //
+                        "\tJOIN tower t on t.idtower = u.idtower\n" + //
+                        "\tJOIN JadwalKetersediaan j ON j.idUnit = u.idUnit\n"+
+                        "\tWHERE t.namatower LIKE ?\n"+ 
+                        "\tAND u.lantai = ?\n"+ 
+                        "AND u.nomor =?\n" + //
+                        "\tAND j.tanggalmulai = ?::date AND j.tanggalselesai = ?::date) \n" +
+                        "\tAND (statustersedia ='A' OR statustersedia = 'M')\n" ;
+        /*
+            TODO :
+            DATE START - DATE END SPESIFIK UNTUK YANG DIUBAH
+        */ 
+        String tower="",startDate="",endDate="",status="";
+        int lantai=0,nomor=0;
+
+        if(filters.containsKey("tower")){
+            tower = String.valueOf(filters.get("tower"));
+        }
+        if(filters.containsKey("lantai")){
+            lantai = Integer.valueOf(filters.get("lantai"));
+            
+        }
+        if(filters.containsKey("nomor")){
+            nomor = Integer.valueOf(filters.get("nomor"));
+            
+        }
+        if(filters.containsKey("startDate")){
+            startDate = String.valueOf(filters.get("startDate"));
+            
+        }
+        if(filters.containsKey("endDate")){
+            endDate = String.valueOf(filters.get("endDate"));
+            
+        }
+        if(filters.containsKey("status")){
+            status = String.valueOf(filters.get("status"));
+        }
+        
+
+        return jdbcTemplate.update(sql, status, tower, lantai, nomor, startDate, endDate);
+    }
 }

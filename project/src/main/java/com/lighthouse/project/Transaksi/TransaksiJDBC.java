@@ -111,7 +111,7 @@ public class TransaksiJDBC implements TransaksiRepo {
         "JOIN tower t on t.idtower = u.idtower\n" + //
         "JOIN JadwalKetersediaan j ON j.idUnit = u.idUnit\n" + //
         "JOIN Pengguna p ON tr.NIK = p.NIK\n"+
-        "WHERE tgglcheckin = ?::date;";
+        "WHERE tgglcheckin = ?::date AND tr.tgglcheckin = j.tanggalmulai;";
 
         return jdbcTemplate.query(sql, this::mapRowToUT,date);
     }
@@ -131,7 +131,7 @@ public class TransaksiJDBC implements TransaksiRepo {
         "JOIN tower t on t.idtower = u.idtower\n" + //
         "JOIN JadwalKetersediaan j ON j.idUnit = u.idUnit\n" + //
         "JOIN Pengguna p ON tr.NIK = p.NIK\n"+
-        "WHERE tgglcheckout = ?::date;";
+        "WHERE tgglcheckout = ?::date AND tr.tgglcheckout = j.tanggalselesai;";
 
         return jdbcTemplate.query(sql, this::mapRowToUT,date);    
     }

@@ -57,8 +57,11 @@ public class MainController {
             
             userType = userType.equals("Agen") ? "atyp" : "ptyp" ;
             
-            httpSession.setAttribute("tipeuser", userType);
-            httpSession.setAttribute("username", username);
+            if(userType == "atyp"){
+                httpSession.setAttribute("tipeuser", userType);
+                httpSession.setAttribute("username", username);
+
+            }
 
 
             return "redirect:/"+userType+"/";
@@ -74,7 +77,9 @@ public class MainController {
         
         if(isSuccess){
             String userType = "Pelanggan";
-            httpSession.setAttribute("tipeuser", userType );
+            // httpSession.invalidate();
+
+            httpSession.setAttribute("tipeuser", userType);
             httpSession.setAttribute("username", username);
             
             return "redirect:/"+userType;

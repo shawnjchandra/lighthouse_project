@@ -20,18 +20,19 @@
         
             <!-- Filter Buttons -->
             <div class="filter-buttons">
-                <button type="button" onclick="updateFilter('apt', null)">Semua</button>
+                <button type="button" onclick="updateFilter('apt', null)"
+                th:classappend="${session.filters['apt']} == 'null' ? 'active' : '' ">Semua</button>
                 <button type="button" onclick="updateFilter('apt', 'A')"
-                    th:classappend="${session.filters['apt']} == 'A' ">Apartemen A</button>
+                    th:classappend="${session.filters['apt']} == 'A'? 'active' : '' ">Apartemen A</button>
                 <button type="button" onclick="updateFilter('apt', 'B')"
-                    th:classappend="${session.filters['apt']} == 'B' ">Apartemen B</button>
+                    th:classappend="${session.filters['apt']} == 'B' ? 'active' : '' ">Apartemen B</button>
                 <button type="button" onclick="updateFilter('apt', 'C')"
-                    th:classappend="${session.filters['apt']} == 'C' ">Apartemen C</button>
+                    th:classappend="${session.filters['apt']} == 'C' ? 'active' : ''">Apartemen C</button>
                 <button type="button" onclick="updateFilter('apt', 'D')"
-                    th:classappend="${session.filters['apt']} == 'D' ">Apartemen D</button>
+                    th:classappend="${session.filters['apt']} == 'D' ? 'active' : ''">Apartemen D</button>
             </div>
 
-            <!-- <span th:text="${session.filters['startDate']}"></span> -->
+            <!-- <span th:text="${session.filters['apt']} == 'A'? 'active' : '' "></span> -->
             <!-- <span th:text="${session.filters['status']}"></span> -->
         
             <!-- Start and End Date Filters -->
@@ -49,9 +50,18 @@
                 <option value="NA" th:selected="${session.filters['status']} == 'NA' ">NotAvailable</option>
                 <option value="A" th:selected="${session.filters['status']} == 'A' ">Available</option>
                 <option value="M" th:selected="${session.filters['status']} == 'M' ">Maintenance</option>
+                
             </select>
         </form>
-
+        <legend>
+            <form action="/atyp/filter-apartments" method="post" id="reset-filter">
+                <span value="" name="apt"></span>
+                <span value="" type="date" id="start-date" name="start-date"></span>
+                <span value=""  type="date" id="end-date" name="end-date"></span>
+                <span value=""  name="status"></span>
+                <button type="submit">Reset Filter</button>
+            </form>
+        </legend>
         
         <table id="availability-table">
             <thead>
@@ -64,12 +74,27 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="row :${results}">
-                    <td th:text="${row.namatower}+${row.lantai} + ${row.nomor}"></td>
-                    <td th:text="${row.tanggalmulai}"></td>
-                    <td th:text="${row.tanggalselesai}"></td>
-                    <td th:text="${row.statustersedia}"></td>
-                    <td th:text="${row.tarifsewa}" style="max-width: 300px;"></td>
+                <tr th:each="row,stat :${results}">
+                    <td th:name="data" th:text="${row.namatower}+'-'+${row.lantai}+'-'+${row.nomor}" ></td>
+                    <td th:name="startDate" th:value="${row.tanggalmulai}" th:text="${row.tanggalmulai}"></td>
+                    <td th:name="endDate" th:value="${row.tanggalselesai}" th:text="${row.tanggalselesai}"></td>
+                    <td>
+                        <span th:text="${row.statustersedia}"></span>
+                        <form action="/atyp/change-status" th:id="'changeStatus-'+${stat.index+1} " method="post">
+                            <input type="hidden" th:value="${row.namatower}+'-'+${row.lantai}+'-'+${row.nomor}" name="data" ></input>
+                            <input type="hidden" th:value="${row.tanggalmulai}"  id="startDate" name="startDate" ></input>
+                            <input type="hidden" th:value="${row.tanggalselesai}"   id="end-date" name="endDate" ></input>
+                            <select th:name="status" th:if="${row.statustersedia} != 'NA' " th:onchange="'updateStatus('+ ${stat.index+1}+')'">
+                                <option value="" th:selected="${row.statustersedia} == ''">Select Status</option>
+                                <!-- <option value="NA" th:selected="${row.statustersedia} == 'NA'">Not Available</option> -->
+                                <option value="A" th:selected="${row.statustersedia} == 'A'">Available</option>
+                                <option value="M" th:selected="${row.statustersedia} == 'M'">Maintenance</option>
+                            </select>
+                           
+                        </form>
+
+                        </td>
+                        <td th:text="${row.tarifsewa}" style="max-width: 300px;"></td>
                 </tr>
             </tbody>
         </table>
