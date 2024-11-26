@@ -13,10 +13,10 @@
         </div>
         <div class="form-section">
             <div class="logo-container">
-                <img th:src="@{images/LHlogoresized.png}" height="64" width="64" alt="Logo" class="logo">
+                <img th:src="@{images/LHlogoresized.png}"  alt="Logo" class="logo">
             </div>
             <h2>Login</h2>
-            <form action="#" method="POST">
+            <form th:action="@{/login-data}" method="POST">
                 <label for="username">Username</label>
                 <input type="text" id="username" name="username" placeholder="Username" required>
                 
@@ -25,7 +25,7 @@
                 
                 <button type="submit" class="sign-in-button">Sign In</button>
                 
-                <p class="signup-link">Not a member? <a href="#">Sign Up</a></p>
+                <p class="signup-link">Not a member? <a th:href="@{/register}">Sign Up</a></p>
             </form>
         </div>
     </div>

@@ -3,39 +3,17 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" th:href="@{css/pemesanan.css}">
-        <script rel="text/javascript" th:src="@{js/pemesanan.js}"defer></script>
+        <link rel="stylesheet" th:href="@{/css/pemesanan.css}">
+        <script rel="text/javascript" th:src="@{/js/pemesanan.js}"defer></script>
+        <script rel="text/javascript" th:src="@{/js/pelanggan.js}"defer></script>
         <title>Pemesanan</title>
     </head>
     <body>
-        <div class="navbar-container">
-            <nav class = "navbar">
-            
-                <a href="#" class="logo">
-                    <img th:src="@{images/LHlogoresized.png}" height="32" width="32" alt="">
-                </a>
-                <ul class="navbar-links">
-                    <li id="link-pencarian"><a href="#">Pencarian</a></li>
-                    <!-- <li id="link-pemesanan"><a href="#">Pemesanan</a></li>
-                    <li id="link-Pembayaran"><a href="#">Pembayaran</a></li> -->
-                    <li id="link-riwayat"><a href="#">Riwayat Transaksi</a></li>
-                    <!-- <li id="link-review"><a href="#">Review</a></li> -->
-                </ul>
-                <div class="auth-buttons">
-                    <button class="auth-btn">Sign In</button>
-                    <button class="auth-btn">Sign Up</button>
-                    <button class="auth-btn" hidden>Sign Out</button>
-        
-                </div>
-                
-            </nav>
-
-        </div>
+        <th:block th:replace="~{/layout/navbar :: navbar}"></th:block>
         
         <div class="container">
             <div class="details-container">
-                <div  style="display: flex; flex-direction: row; justify-content: center; margin-bottom: 20px;">
-
+                <div  style="display: flex; margin-bottom: 20px;">
                     <img th:src="@{images/images.jpeg}" style="border-radius: 15px;" width="256" height="256" alt="">
                 </div>
                 <h2>Apartment Name</h2>
@@ -56,13 +34,10 @@
 
                 <!-- Toggle Buttons -->
                 <div class="toggle-buttons">
-                    <button type="button" id="day-btn" class="toggle-btn">Day</button>
-                    <button type="button" id="month-btn" class="toggle-btn">Month</button>
-                    <button type="button" id="year-btn" class="toggle-btn">Year</button>
                 </div>
         
                 <!-- Booking Form -->
-                <form class="booking-form">
+                <form class="booking-form" >
                     <div class="form-group">
                         <label for="check-in">Check-in Date</label>
                         <input type="date" id="check-in" name="checkIn" readonly>
@@ -78,8 +53,8 @@
                     <div class="total-price-container">
                         <h2 id="total-price">Total Price: $0</h2>
                     </div>
-                    <button type="submit" class="submit-btn">Submit</button>
                 </form>
+                <button type="submit" class="submit-btn" th:onclick="goToPembayaran()">Submit</button>
             </div>
         </div>          
         

@@ -3,73 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{css/index.css}">
+    <link rel="stylesheet" th:href="@{/css/index.css}">
     <title>Homepage</title>
 
 </head>
 <body>
     
-    <div class="navbar-container">
-        <nav class="navbar">
-    
-            <a th:href="@{/}" class="logo">
-                <img th:src="@{images/LHlogoresized.png}" height="32" width="32" alt="">
-            </a>
+    <th:block th:replace="~{/layout/navbar :: navbar}"></th:block>
 
-            <!-- <h1 th:text="'tipe user : ' + ${tipeuser}"></h1> -->
-            <div th:if="${!default}">
-
-                <div class="navbar-pelanggan" th:if="${tipeuser} == P" >
-                    <ul class="navbar-links">
-                        <li id="link-pencarian"><a th:href="@{pencarian}">Pencarian</a></li>
-                        <li id="link-riwayat"><a href="#">Riwayat Transaksi</a></li>
-         
-                    </ul>
-    
-                </div>
-    
-                <div class="navbar-agen"  th:unless="${tipeuser} == P" >
-                    <ul class="navbar-links">
-                        <li id="link-editDataUnit"><a th:href="@{edit-data}">Data Unit</a></li>
-                        <li id="link-jadwalKetersediaan"><a th:href="@{kelola-jadwal}">Jadwal Ketersediaan</a></li>
-                    
-                        <li id="link-pemesananUnit"><a th:href="@{pemesanan}">Data Pemesanan</a></li>
-                    
-                    
-                        <li id="link-cico"><a th:href="@{pengawasan-cico}">Data CICO</a></li>
-                      
-                    
-                        <li id="link-utilitas"><a th:href="@{pelaporan-utilitas}">Laporan Utilitas</a></li>
-                    </ul>
-                </div>
-
-            </div>
-            <div class="auth-buttons">
-                <button class="auth-btn" th:if="${default}">Sign In</button>
-                <button class="auth-btn" th:if="${default}">Sign Up</button>
-                <button class="auth-btn" th:unless="${default}">Sign Out</button>
-    
-            </div>
-            <!-- <span th:if="${default}" th:text="${default} +' '+ ${tipeuser}"> </span>
-            <span th:unless="${default}" th:text="${default}+' '+ ${tipeuser}"> </span> -->
-        </nav>
-    
-    </div>
-
-    <!-- <h1>Welcome to Index Page</h1>
-    <p><a href="/page">Go to page</a></p>
-    <p>Text <span data-th-text="${name}"></span> Other Text</p>
-
-    <div th:if="${isAuth}">Hello, <span th:text="${name}">World</span></div>
-    <div th:if="${isAuth} == false">Please login</div>
-    <div th:class="${isAuth} ? yes : no">Test</div>
-
-    <ul>
-        <li th:each="item : ${arrAngka}"><span th:text="${item}"></span></li>
-    </ul> -->
     <header>
         <div class="container">
-            <h1>Welcome to LightHouse Apartment</h1>
+            <h1>LightHouse Apartment</h1>
             <p>Your ideal home awaits. Discover our apartment units for rent.</p>
             <a href="#cta" class="cta-button">Explore Now</a>
         </div>
@@ -77,6 +21,7 @@
     
     <main>
         <section id="features">
+
             <div class="container">
                 <h2>Why Choose Us?</h2>
                 <div class="feature">
@@ -93,25 +38,26 @@
                     <p>Enjoy access to modern amenities including swimming pools, gyms, and community spaces.</p>
                 </div>
             </div>
-        </section>
-    
-        <section id="cta">
+
             <div class="container">
                 <h2>Ready to Find Your New Home?</h2>
                 <p>Join us today and start exploring our available apartment units!</p>
                 <a href="#" class="cta-button">View Available Units</a>
             </div>
         </section>
+    
+        <section id="cta">
+        </section>
     </main>
     
     <footer>
         <div class="container">
-            <p>&copy; 2024 LightHouse Apartment. All rights reserved.</p>
             <ul class="footer-links">
                 <li><a href="#">Privacy Policy</a></li>
                 <li><a href="#">Terms of Service</a></li>
                 <li><a href="#">Contact Us</a></li>
             </ul>
+            <p>&copy; 2024 LightHouse Apartment. All rights reserved.</p>
         </div>
     </footer>
 
