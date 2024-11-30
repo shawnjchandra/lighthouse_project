@@ -7,4 +7,5 @@ public interface PenggunaRepo {
     boolean register(String nik, String nama, String nohp, String email, String username, String pass, String confPass);
     boolean login(String username, String password);
     String getUserType(String username);
+    String getUserNik(String username);
 }

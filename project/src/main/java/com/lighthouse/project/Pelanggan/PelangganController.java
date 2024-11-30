@@ -1,13 +1,30 @@
 package com.lighthouse.project.Pelanggan;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.lighthouse.project.Transaksi.TransaksiTowerUnitModel;
+
+import jakarta.servlet.http.HttpSession;
+
+import com.lighthouse.project.Other.PenggunaRepo;
+import com.lighthouse.project.Transaksi.TransaksiModel;
+import com.lighthouse.project.Transaksi.TransaksiRepo;
+
 @Controller
 @RequestMapping("/ptyp")
 public class PelangganController {
+
+    @Autowired
+    private TransaksiRepo trRepo;
+
+    @Autowired
+    private PenggunaRepo penggunaRepo;
 
     @GetMapping("/")
     public String index(Model model) {
@@ -18,7 +35,20 @@ public class PelangganController {
     }
 
     @GetMapping("/riwayat")
-    public String riwayat(Model model) {
+    public String riwayat(HttpSession httpSession, Model model) {
+
+        String nik = (String) httpSession.getAttribute("nik");
+
+        if (nik == null) {
+            String username = (String) httpSession.getAttribute("username");
+            if (username != null) {
+                nik = penggunaRepo.getUserNik(username);
+                httpSession.setAttribute("nik", nik); // Cache nik
+            }
+        }
+
+        List<TransaksiTowerUnitModel> list = trRepo.findRiwayatTransaksi(nik);
+        model.addAttribute("results", list);
 
         return "riwayatTransaksi";
     }

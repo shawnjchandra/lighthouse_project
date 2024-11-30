@@ -32,10 +32,10 @@ public class TransaksiJDBC implements TransaksiRepo {
         return new TransaksiModel(
             rSet.getString("tgglcheckin"),
             rSet.getString("tgglcheckout"),
-            rSet.getString("status"),
+            rSet.getString("statuspembayaran"),
             rSet.getInt("rating"),
-            rSet.getString("review")
-
+            rSet.getString("review"),
+            rSet.getString("nik")
         );
         
     }
@@ -149,6 +149,12 @@ public class TransaksiJDBC implements TransaksiRepo {
         System.out.println(checkIn +" "+checkOut);
         return jdbcTemplate.query(sql, this::mapRowToTTU,checkIn, checkOut);       
     }
+
+    public List<TransaksiTowerUnitModel> findRiwayatTransaksi(String nik) {
+        String sql = "select * from transaksi tr join unit u on tr.idunit = u.idunit join tower t on u.idtower = t.idtower WHERE tr.nik = ?";
+        return jdbcTemplate.query(sql, this::mapRowToTTU, nik);
+    }
+
     
 
     // TODO:

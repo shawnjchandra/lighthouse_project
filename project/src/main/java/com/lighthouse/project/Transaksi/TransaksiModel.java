@@ -20,6 +20,7 @@ public class TransaksiModel {
     String statuspembayaran;
     int rating;
     String review;
+    String nik;
 }
 
 

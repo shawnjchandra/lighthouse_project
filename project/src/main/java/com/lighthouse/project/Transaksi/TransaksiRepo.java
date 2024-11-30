@@ -12,5 +12,6 @@ public interface TransaksiRepo {
     List<PenggunaTransaksiModel> findUTByCheckIn(String date);
     List<PenggunaTransaksiModel> findUTByCheckOut(String date);
     
+    List<TransaksiTowerUnitModel> findRiwayatTransaksi(String nik);
     
 }
