@@ -36,7 +36,7 @@
         <div class="auth-buttons">
             <a class="auth-btn" th:if="${tipeuser} == G" th:href="@{/login}">Sign In</a>
             <a class="auth-btn" th:if="${tipeuser} == G" th:href="@{/register}">Sign Up</a>
-            <a class="auth-btn" th:unless="${tipeuser} == G">Sign Out</a>
+            <a class="auth-btn" th:unless="${tipeuser} == G" th:href="@{/signout}">Sign Out</a>
 
         </div>
      
