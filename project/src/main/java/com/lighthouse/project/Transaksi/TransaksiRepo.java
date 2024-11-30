@@ -13,5 +13,6 @@ public interface TransaksiRepo {
     List<PenggunaTransaksiModel> findUTByCheckOut(String date);
     
     List<TransaksiTowerUnitModel> findRiwayatTransaksi(String nik);
+    void saveReview(int idtrsk, int rating, String review);
     
 }

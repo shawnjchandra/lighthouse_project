@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/riwayatTransaksi.css}">
-    <script rel="text/javascript" th:src="@{/js/agen.js}" defer></script>
+    <script rel="text/javascript" th:src="@{/js/review.js}" defer></script>
     <title>Riwayat Transaksi</title>
 </head>
 <body>
@@ -29,7 +29,6 @@
                 <thead>
                     <tr>
                         <th>Nomor</th>
-                        <!-- <th>Tower</th> -->
                         <th>Ruangan</th>
                         <th>Tanggal Check In</th>
                         <th>Tanggal Check Out</th>
@@ -47,9 +46,11 @@
                         <td th:text="${row.jenis}"></td>
                         <td th:text="${row.tarifsewa}"></td>
                         <td>
-                            <button class="checkin" onclick="checkIn(this)">Check In</button>
-                            <button class="checkout" onclick="checkOut(this)" disabled>Check Out</button>
-                            <button th:onclick="goToReview(1)">Review</button>
+                            <button class="checkin">Check In</button>
+                            <button class="checkout" disabled>Check Out</button>
+                            <button class="review-button" onclick="openReviewPopup(this)">
+                                Review
+                            </button>
                         </td>
                     </tr>
                 </tbody>
@@ -58,6 +59,33 @@
         </div>
 
         
+    </div>
+
+    <!-- body -->
+    <div class="review-body hidden">
+
+        <div class="top">
+            <div class="unit-name"></div>
+        </div>
+            
+            <!-- form -->
+            <form action="/submit-review" method="POST" class="review-form">
+                
+                <!-- radio button for rating -->
+                <div class="rating-label">Berikan nilai untuk unit ini:</div>
+                <div class="rating">
+                    <label><input type="radio" name="rating" value="1"> 1</label>
+                    <label><input type="radio" name="rating" value="2"> 2</label>
+                    <label><input type="radio" name="rating" value="3"> 3</label>
+                    <label><input type="radio" name="rating" value="4"> 4</label>
+                    <label><input type="radio" name="rating" value="5"> 5</label>
+                </div>
+
+                <!-- text area -->
+                <div class="text-area-label">Berikan ulasan untuk unit ini</div>
+                <textarea name="review" placeholder="Berikan ulasan untuk unit ini..." class="text-area"></textarea>
+            </form>
+            <button type="submit" class="submit-button">Submit</button>
     </div>
 
 </body>

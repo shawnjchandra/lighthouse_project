@@ -54,6 +54,7 @@ public class TransaksiJDBC implements TransaksiRepo {
 
     private TransaksiTowerUnitModel mapRowToTTU(ResultSet rSet, int rowNum) throws SQLException{
         return new TransaksiTowerUnitModel( 
+            rSet.getInt("idtrsk"),
             rSet.getString("namatower"), 
             rSet.getInt("lantai"),
             rSet.getInt("nomor"), 
@@ -153,6 +154,14 @@ public class TransaksiJDBC implements TransaksiRepo {
     public List<TransaksiTowerUnitModel> findRiwayatTransaksi(String nik) {
         String sql = "select * from transaksi tr join unit u on tr.idunit = u.idunit join tower t on u.idtower = t.idtower WHERE tr.nik = ?";
         return jdbcTemplate.query(sql, this::mapRowToTTU, nik);
+    }
+
+    @Override
+    public void saveReview(int idtrsk, int rating, String review) {
+        String sql = "UPDATE transaksi \n" + //
+                        "SET rating = ?, review = ? \n" + //
+                        "WHERE idtrsk = ?";
+        jdbcTemplate.update(sql, rating, review, idtrsk);
     }
 
     

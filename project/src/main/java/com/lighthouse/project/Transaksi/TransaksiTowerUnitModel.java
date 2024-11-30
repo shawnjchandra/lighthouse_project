@@ -15,6 +15,7 @@ import lombok.experimental.FieldDefaults;
 @FieldDefaults(makeFinal = false, level = AccessLevel.PRIVATE)
 @AllArgsConstructor
 public class TransaksiTowerUnitModel{
+    int idtrsk;
     String namatower;
     int lantai;
     int nomor;
