@@ -1,3 +1,6 @@
+//TODO
+//Rombak total buat bikin jadi perhari aja, hapus bagian perbulan dan pertahun
+
 document.addEventListener("DOMContentLoaded", () => {
     const dayBtn = document.getElementById("day-btn");
     const monthBtn = document.getElementById("month-btn");

@@ -62,6 +62,18 @@ public class PelangganController {
 
         return "pemesanan";
     }
+
+
+    //TODO
+    //Rencananya ini buat bikin pemesanan lanjutan dari pencarian. Jadi di pencarian pas cardnya di click, 
+    //nanti data di pemesanan ngikutin data yang di card.
+    // @GetMapping("/pemesanan")
+    // public String pesan(@RequestParam int roomId, Model model) {
+    //     List<TowerUnitModel> room = towerUnitJDBC.findUnitJoinTowersByUnitId(roomId);
+    //     model.addAttribute("roomData", room);
+    //     return "pemesanan";
+    // }
+
     @GetMapping("/pembayaran")
     public String pembayaran(Model model) {
 
