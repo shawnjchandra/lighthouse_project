@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: Arial, sans-serif;
 }
 :root{
     --primary-color : #4098fd;
@@ -11,8 +12,15 @@ button{
     transition: 0.3s;
 }
 
+.hidden{
+    visibility: hidden;
+}
+
+.show{
+    visibility: visible;
+}
+
 .navbar{
-    border-bottom: 1px dashed black;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -89,6 +97,7 @@ button{
 
 .search-bar {
     display: flex;
+    align-items: center;
     margin-bottom: 20px;
     width: 100%;
     max-width: 600px;
@@ -109,24 +118,34 @@ button{
     border: 1px solid #ccc;
     border-radius: 5px;
     margin-left: 10px;
+    height: 40px;
 }
 
 table {
-    width: 100%;
-    border-collapse: collapse;
+    margin: auto;
     margin-top: 20px;
-    /* Space above the table */
+    width: 70%;
+    border-collapse: collapse;
 }
 
 th,
 td {
-    padding: 10px;
     border: 1px solid #ddd;
+    padding: 8px;
     text-align: left;
 }
 
 th {
-    background-color: var(--table-header-color);
+    background-color: var(--primary-color);
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #ddd;
 }
 
 #confirmButton {
@@ -148,6 +167,12 @@ button.checkin {
     background-color: #4CAF50;
     /* Green */
     color: white;
+    padding: 10px 15px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    margin: 10px;
 }
 
 button.checkin:hover {
@@ -159,9 +184,159 @@ button.checkout {
     background-color: #f44336;
     /* Red */
     color: white;
+    padding: 10px 15px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    margin: 10px;
 }
 
 button.checkout:hover {
     background-color: #e53935;
     /* Darker red */
+}
+
+.review-button{
+    padding: 10px 15px;
+    margin: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    color: white;
+    cursor: pointer;
+}
+
+.review-button:hover{
+    background-color: var(--secondary-color);
+}
+
+/* Review Pop-up */
+
+/* Main container */
+.review-body {
+    z-index: 1;
+    position: absolute;
+    top: 15%;
+    left: 25%;
+    margin: auto;
+    width: 50%;
+    height: 55%;
+    background: white;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 50px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    /* background-color: rgba(0, 0, 0, 0.5); */
+}
+
+.top{
+    display: flex;
+    width: 100%;
+    gap: 20px; /* Space between UnitPict and NounitTower */
+}
+
+/* Unit picture */
+.unit-picture {
+    width: 184px;
+    height: 183px;
+    background: #B4B4B4;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    align-self: flex-start;
+}
+
+/* Title text */
+.unit-name {
+    color: black;
+    font-size: 32px;
+    font-weight: 400;
+    margin-bottom: 30px;
+}
+
+/* Form styling */
+.review-form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    gap: 16px;
+}
+
+.text-area-label {
+    color: #1E1E1E;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+.text-area {
+    width: 100%;
+    height: 150px;
+    padding: 12px;
+    background: white;
+    border: 1px solid #D9D9D9;
+    border-radius: 8px;
+    font-size: 16px;
+    color: #333;
+    line-height: 1.4;
+    resize: none;
+}
+
+.text-area:focus {
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+/* Rating section */
+.rating {
+    display: flex;
+    gap: 12px;
+    font-size: 16px;
+}
+
+.rating label {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+}
+
+.rating input {
+    width: 16px;
+    height: 16px;
+    accent-color: #1D72B8;
+}
+
+/* Submit button */
+.submit-button {
+    align-self: flex-end;
+    background: #1D72B8;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 400;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.submit-button:hover {
+    background: #155a8c;
+}
+
+.rating-label{
+    color: #1E1E1E;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+.blur {
+    filter: blur(5px); /* Amount of blur */
+    pointer-events: none; /* Prevent interaction while blurred */
 }

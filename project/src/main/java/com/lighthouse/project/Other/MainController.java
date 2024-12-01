@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.fasterxml.jackson.annotation.JsonCreator.Mode;
 import com.lighthouse.project.Other.PenggunaRepo;
 
-import groovyjarjarantlr4.v4.parse.ANTLRParser.parserRule_return;
+// import groovyjarjarantlr4.v4.parse.ANTLRParser.parserRule_return;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -64,13 +64,23 @@ public class MainController {
         
         if(isSuccess){
             String userType = repo.getUserType(username);
+            String nik = repo.getUserNik(username); // Fetch nik
             
             userType = userType.equals("Agen") ? "atyp" : "ptyp" ;
             
+            // httpSession.setAttribute("tipeuser", userType);
+            // httpSession.setAttribute("username", username);
+
+
             if(userType == "atyp"){
                 httpSession.setAttribute("tipeuser", userType);
                 httpSession.setAttribute("username", username);
+                httpSession.setAttribute("nik", nik);
 
+            }else if(userType == "ptyp"){
+                httpSession.setAttribute("tipeuser", userType);
+                httpSession.setAttribute("username", username);
+                httpSession.setAttribute("nik", nik);
             }
             else if(userType == "ptyp"){
                 httpSession.setAttribute("tipeuser", userType);

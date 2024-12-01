@@ -264,21 +264,16 @@ function applyFilters() {
 
 // }
 
-function checkIn(button) {
-            button.disabled = true; // Disable checkin button
-            const checkoutButton = button.parentElement.querySelector('.checkout');
-            checkoutButton.disabled = false; // Enable checkout button
-        }
+// function checkIn(button) {
+//             button.disabled = true; // Disable checkin button
+//             const checkoutButton = button.parentElement.querySelector('.checkout');
+//             checkoutButton.disabled = false; // Enable checkout button
+//         }
 
-function checkOut(button) {
-            button.disabled = true; // Disable checkout button
-            const checkinButton = button.parentElement.querySelector('.checkin');
-            checkinButton.disabled = true; // Disable checkin button as well
-        }
+// function checkOut(button) {
+//             button.disabled = true; // Disable checkout button
+//             const checkinButton = button.parentElement.querySelector('.checkin');
+//             checkinButton.disabled = true; // Disable checkin button as well
+//         }
 
-function goToReview(transactionId) {
-            // Redirect to the review page with the transaction ID
-            // You may change the URL as per your application's routing
-            window.location.href = `review?transactionId=${transactionId}`;
-        }
-
+        

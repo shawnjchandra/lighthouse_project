@@ -89,7 +89,21 @@ public class PenggunaJDBC implements PenggunaRepo {
         return !user.isEmpty() ? true : false ;
     }
 
+    @Override
+    public String getUserNik(String username){
+        // System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAA" + username);
+        String sql = "select * from pengguna WHERE username LIKE ? ";
+        List<PenggunaModel> user = jdbcTemplate.query(sql, this::mapRowToPengguna, username);
+        String userNik ="";
 
+        if (!user.isEmpty()){
+            userNik = user.get(0).getNik();
+
+            System.out.println(userNik);
+        }
+        
+        return userNik;
+    }
  
     // NON-POLICY LOGIN AND REGISTER
 }
