@@ -39,6 +39,13 @@
                 <p>Room: 101</p>
             </div>
             <!-- Additional cards can be added here -->
+            <div class="card" th:each="unit : ${units}" th:onclick="'goToPemesanan(' + ${unit.nomor} + ')'">
+                <img th:src="@{images/images.jpeg}" width="256" height="128" alt="">
+                <h3 th:text="'Room Number: ' + ${unit.nomor}"></h3>
+                <p th:text="'Tower Unit: ' + ${unit.namatower}"></p>
+                <p th:text="'Floor: ' + ${unit.lantai}"></p>
+                <p th:text="'Room Type: ' + ${unit.jenis}"></p>
+            </div>
         </div>
     </div>
     <footer>

@@ -16,35 +16,31 @@
                 <div  style="display: flex; margin-bottom: 20px;">
                     <img th:src="@{images/images.jpeg}" style="border-radius: 15px;" width="256" height="256" alt="">
                 </div>
-                <h2>Apartment Name</h2>
-                <p><strong>Address:</strong> 123 Main Street, City, Country</p>
-                <p><strong>Description:</strong> A beautiful, modern apartment located in the heart of the city. Perfect for a short or long-term stay.</p>
-                <p><strong>Room Size:</strong> 80 m²</p>
-                <p><strong>Facilities:</strong> Free Wi-Fi, Air Conditioning, Kitchen, Washing Machine, TV</p>
-                <p><strong>Check-in Time:</strong> 2:00 PM</p>
-                <p><strong>Check-out Time:</strong> 11:00 AM</p>
-                <p><strong>Building Rules:</strong> No pets, No smoking, Quiet hours from 10 PM to 7 AM</p>
+
+                <!-- Perubahan ngikutin alasan pada PelangganController -->
+                <h2 id="apartment-number" th:text="'Room Number: ' + ${roomData.nomor}"></h2>
+                <p id="tower-name" th:text="'Tower Unit: ' + ${roomData.namatower}"></p>
+                <p id="floor-number" th:text="'Floor: ' + ${roomData.lantai}"></strong> </p>
+                <p id="room-type" th:text="'Room Type: ' + ${roomData.jenis}"></p>
             </div>
         
             <div class="booking-container">
 
                 <div class="price-container">
-                    <h2 id="base-price"></h2>
-                </div>
-
-                <!-- Toggle Buttons -->
-                <div class="toggle-buttons">
+                    <h2 id="base-price">Base Price: $0/day</h2>
                 </div>
         
                 <!-- Booking Form -->
                 <form class="booking-form" >
                     <div class="form-group">
                         <label for="check-in">Check-in Date</label>
+
                         <input type="date" id="check-in" name="checkIn" required>
                     </div>
                     <div class="form-group" id="check-out-group">
                         <label for="check-out">Check-out Date</label>
                         <input type="date" id="check-out" name="checkOut" required>
+
                     </div>
                     <div class="form-group" id="duration-group" style="display: none;">
                         <label for="duration">Duration</label>
