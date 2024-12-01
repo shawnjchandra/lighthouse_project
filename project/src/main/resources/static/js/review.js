@@ -4,19 +4,35 @@ document.addEventListener("DOMContentLoaded", function () {
     const form = document.querySelector(".review-form");
     const submitButton = document.querySelector(".submit-button");
     const container = document.querySelector(".container");
-    const navbar = document.querySelector("navbar");
+    const navbar = document.querySelector(".navbar");
+
+    // Function to enable/disable buttons and update their styles
+    const updateButtonState = (button, isDisabled) => {
+        button.disabled = isDisabled;
+        if (isDisabled) {
+            button.style.backgroundColor = "grey";
+            button.style.cursor = "not-allowed";
+        } else {
+            button.style.backgroundColor = ""; // Reset to default
+            button.style.cursor = "pointer";
+        }
+    };
+
+    // Disable all Check-out and Review buttons on page load
+    document.querySelectorAll(".checkout, .review-button").forEach((button) => {
+        updateButtonState(button, true); // Ensure disabled state and styling
+    });
 
     // Function to handle enabling/disabling buttons
     const handleButtons = (rowElement, buttonType) => {
         const checkInButton = rowElement.querySelector(".checkin");
         const checkOutButton = rowElement.querySelector(".checkout");
-        // checkOutButton.style.backgroundcolor = grey;
         const reviewButton = rowElement.querySelector(".review-button");
 
         if (buttonType === "checkin") {
-            checkOutButton.disabled = false; // Enable "Check-out" when "Check-in" is clicked
+            updateButtonState(checkOutButton, false); // Enable "Check-out"
         } else if (buttonType === "checkout") {
-            reviewButton.disabled = false; // Enable "Review" when "Check-out" is clicked
+            updateButtonState(reviewButton, false); // Enable "Review"
         }
     };
 
@@ -26,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const row = button.closest("tr"); // Get the current row
             alert("Checked in!"); // Optional: Confirm action
             handleButtons(row, "checkin"); // Enable "Check-out"
-            button.disabled = true; // Disable "Check-in"
+            updateButtonState(button, true); // Disable "Check-in"
         });
     });
 
@@ -36,19 +52,34 @@ document.addEventListener("DOMContentLoaded", function () {
             const row = button.closest("tr"); // Get the current row
             alert("Checked out!"); // Optional: Confirm action
             handleButtons(row, "checkout"); // Enable "Review"
-            button.disabled = true; // Disable "Check-out"
+            updateButtonState(button, true); // Disable "Check-out"
         });
     });
 
+    // Attach event listeners to review buttons
+    // document.querySelectorAll(".review").forEach((button) => {
+    //     button.addEventListener("click", function () {
+    //         const row = button.closest("tr"); // Get the current row
+    //         // alert("Checked out!"); // Optional: Confirm action
+    //         // handleButtons(row, "checkout"); // Enable "Review"
+    //         updateButtonState(button, true); // Disable "Check-out"
+    //     });
+    // });     
+
     // Function to open the review pop-up
     window.openReviewPopup = function (button) {
-        const row = button.closest("tr"); // Get the current row
-        const tower = row.querySelector("td:nth-child(2)").textContent.split(" - ")[0];
-        const floor = row.querySelector("td:nth-child(2)").textContent.split(" - ")[1];
-        const number = row.querySelector("td:nth-child(2)").textContent.split(" - ")[2];
-
+        const tower = button.getAttribute("data-tower");
+        const floor = button.getAttribute("data-lantai");
+        const unitNumber = button.getAttribute("data-nomor");
+        const unitType = button.getAttribute("data-jenis");
+        const idtrsk = button.getAttribute("data-trsk");
+        
         // Update the unit name in the pop-up
-        unitNameElement.textContent = `${tower} - Floor ${floor} - Unit ${number}`;
+        unitNameElement.textContent = `${tower}-${floor}-${unitNumber} (${unitType})`;
+
+        //update the trsk value
+        const hiddenInput = document.querySelector(".trsk");
+        hiddenInput.value = idtrsk;
 
         // Show the review pop-up
         reviewBody.classList.remove("hidden");
@@ -68,39 +99,11 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
+        // Reset and close the review pop-up
         reviewBody.classList.add("hidden");
         container.classList.remove("blur");
         navbar.classList.remove("blur");
-
-        const [tower, floor, unit] = unitNameElement.textContent.split(" - ");
-        const floorNumber = floor.replace("Floor ", "");
-        const unitNumber = unit.replace("Unit ", "");
-        
-        // fetch("/submit-review", {
-        //     method: "POST",
-        //     headers: {
-        //         "Content-Type": "application/json",
-        //     },
-        //     body: JSON.stringify({
-        //         tower: tower.trim(),
-        //         floor: floorNumber.trim(),
-        //         number: unitNumber.trim(),
-        //         rating: rating,
-        //         review: reviewText.trim(),
-        //     }),
-        // })
-        //     .then((response) => {
-        //         if (response.ok) {
-        //             alert("Review submitted successfully!");
-        //             reviewBody.classList.add("hidden"); // Hide pop-up
-        //             form.reset();
-        //         } else {
-        //             alert("Error submitting review. Please try again.");
-        //         }
-        //     })
-        //     .catch((error) => {
-        //         console.error("Error:", error);
-        //         alert("An error occurred. Please try again.");
-        //     });
+        form.reset();
+        alert("Review submitted successfully!");
     });
 });

@@ -89,29 +89,15 @@ public class PelangganController {
         return "pembayaran";
     }
     
-    @PostMapping("/submit-review")
-    @ResponseBody
+    @PostMapping("/submitReview")
     public String submitReview
     (@RequestParam (name="rating", required = false) int rating,
     @RequestParam (name="review", required = false) String review,
+    @RequestParam (name="trsk", required = false) int idtrsk,
     HttpSession httpSession) {
-        
-        String nik = (String) httpSession.getAttribute("nik");
-        
-        
-        // if (nik == null) {
-        //     String username = (String) httpSession.getAttribute("username");
-        //     if (username != null) {
-        //         nik = penggunaRepo.getUserNik(username);
-        //         httpSession.setAttribute("nik", nik); // Cache nik
-        //     }
-        // }
 
-        List<TransaksiTowerUnitModel> list = trRepo.findRiwayatTransaksi(nik);
-        TransaksiTowerUnitModel firstTransaksi = list.get(0);
-        int idtrsk = firstTransaksi.getIdtrsk();
-        
-        // Save the review data to the database
+        System.out.println("Rating: " + rating + ", Review: " + review + ", ID: " + idtrsk);
+
         trRepo.saveReview(idtrsk, rating, review);
 
         return "riwayatTransaksi";

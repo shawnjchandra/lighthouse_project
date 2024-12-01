@@ -40,6 +40,7 @@
                 <tbody>
                     <tr th:each="row, stat : ${results}">
                         <td th:text="${stat.index + 1}"></td>
+                        <!-- <td hidden th:text="${row.idtrsk}"></td> -->
                         <td th:text="${row.namatower} + '-' + ${row.lantai} + '-' + ${row.nomor}"></td>
                         <td th:text="${row.tgglcheckin}"></td>
                         <td th:text="${row.tgglcheckout}"></td>
@@ -48,10 +49,18 @@
                         <td>
                             <button class="checkin">Check In</button>
                             <button class="checkout" disabled>Check Out</button>
-                            <button class="review-button" onclick="openReviewPopup(this)">
+                            <button class="review-button" 
+                                th:data-tower="${row.namatower}" 
+                                th:data-lantai="${row.lantai}" 
+                                th:data-nomor="${row.nomor}" 
+                                th:data-jenis="${row.jenis}" 
+                                th:data-trsk="${row.idtrsk}" onclick="openReviewPopup(this)" >
                                 Review
                             </button>
                         </td>
+                    </tr>
+                    <tr th:if="${#lists.isEmpty(results)}">
+                        <td colspan="7">No transactions found.</td>
                     </tr>
                 </tbody>
             </table>
@@ -69,8 +78,8 @@
         </div>
             
             <!-- form -->
-            <form action="/submit-review" method="POST" class="review-form">
-                
+            <form action="@{/submitReview}" method="POST" class="review-form">
+                <input type="hidden" name="trsk" class="trsk"/>
                 <!-- radio button for rating -->
                 <div class="rating-label">Berikan nilai untuk unit ini:</div>
                 <div class="rating">
