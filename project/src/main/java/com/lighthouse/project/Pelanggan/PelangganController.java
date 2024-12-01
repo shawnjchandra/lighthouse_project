@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 
+// import com.lighthouse.project.Tower.TowerUnitJDBC;
 import com.lighthouse.project.Tower.TowerUnitJDBC;
 import com.lighthouse.project.Tower.TowerUnitModel;
 // import com.lighthouse.project.Tower.TowerUnitRepo;
@@ -42,6 +43,9 @@ public class PelangganController {
 
     @Autowired
     private PenggunaRepo penggunaRepo;
+
+    @Autowired
+    private TowerUnitJDBC JDBC;
 
 
     @GetMapping("/")
@@ -84,31 +88,18 @@ public class PelangganController {
     }
     @GetMapping("/pencarian")
     public String penc(Model model) {
-        // List<TowerUnitModel> units = towerRepo.findAllUnitJoinTowers();
         List<TowerUnitModel> units = 
-          JDBC.findAllUnitJoinTowers();
-        // List<UnitModel> units = towerRepo.findAllUnits();
+        JDBC.findAllUnitJoinTowers();
         model.addAttribute("units", units);
         return "pencarian";
     }
 
-    
     @GetMapping("/pemesanan")
-    public String pesan(Model model) {
-
+    public String pesan(@RequestParam int roomId, Model model) {
+        List<TowerUnitModel> room = JDBC.findUnitJoinTowersByUnitId(roomId);
+        model.addAttribute("roomData", room.get(0));
         return "pemesanan";
     }
-
-
-    //TODO
-    //Rencananya ini buat bikin pemesanan lanjutan dari pencarian. Jadi di pencarian pas cardnya di click, 
-    //nanti data di pemesanan ngikutin data yang di card.
-    // @GetMapping("/pemesanan")
-    // public String pesan(@RequestParam int roomId, Model model) {
-    //     List<TowerUnitModel> room = towerUnitJDBC.findUnitJoinTowersByUnitId(roomId);
-    //     model.addAttribute("roomData", room);
-    //     return "pemesanan";
-    // }
 
     @GetMapping("/pembayaran")
     public String pembayaran(Model model) {

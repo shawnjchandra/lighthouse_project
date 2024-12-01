@@ -1,60 +1,32 @@
-//TODO
-//Rombak total buat bikin jadi perhari aja, hapus bagian perbulan dan pertahun
-
 document.addEventListener("DOMContentLoaded", () => {
-    const dayBtn = document.getElementById("day-btn");
-    const monthBtn = document.getElementById("month-btn");
-    const yearBtn = document.getElementById("year-btn");
     const checkIn = document.getElementById("check-in");
     const checkOut = document.getElementById("check-out");
-    const durationGroup = document.getElementById("duration-group");
-    const durationSelect = document.getElementById("duration");
-    const form = document.getElementById("booking-form");
     const submitBtn = document.getElementById("submit-btn");
+    const basePrice = document.getElementById("base-price");
+    const totalPrice = document.getElementById("total-price");
 
-
-    // Initialize mode
-    let mode = null;
-
-    // // ini fitur Toggle between modes, kalo jadi boleh dipake, kalo nggak jadi yaudah
-    // const toggleButtons = [dayBtn, monthBtn, yearBtn];
-    // toggleButtons.forEach((btn) => {
-    //     btn.addEventListener("click", () => {
-    //         toggleButtons.forEach((b) => b.classList.remove("active"));
-    //         btn.classList.add("active");
-
-    //         mode = btn.id === "day-btn" ? "day" : btn.id === "month-btn" ? "month" : "year";
-
-    //         if (mode === "day") {
-    //             checkIn.removeAttribute("readonly");
-    //             checkOut.removeAttribute("readonly");
-    //             durationGroup.style.display = "none";
-    //             checkOut.value = "";
-    //         } else {
-    //             checkOut.setAttribute("readonly", true);
-    //             durationGroup.style.display = "block";
-    //             updateDuration(mode === "month" ? 12 : 3);
-    //         }
-    //     });
-    // });
-
-    // Ensure valid Check-in and Check-out dates (NOTE: berhubungan dengan togle modes)
+    // Ensure valid Check-in and Check-out dates
     checkIn.addEventListener("change", () => {
-        if (mode === "day") {
-            validateDayModeDates();
-        } else {
-            updateCheckOut();
+        validateDayModeDates();
+        validatePriceChange();
+    });
+
+    checkOut.addEventListener("change", () => {
+        validateDayModeDates();
+        validatePriceChange();
+    });
+
+    // Submit button click handler
+    submitBtn.addEventListener("click", () => {
+        if (validateForm()) {
+            goToPembayaran(); // Redirect function
         }
     });
 
-    checkOut.addEventListener("change", validateDayModeDates);
-
-    durationSelect.addEventListener("change", updateCheckOut);
-
-    // Validate Day Mode Dates (NOTE: berhubungan dengan togle modes)
+    // Validate Day Mode Dates
     function validateDayModeDates() {
-        const checkInDate = new Date(checkIn.value);
-        const checkOutDate = new Date(checkOut.value);
+        let checkInDate = new Date(checkIn.value);
+        let checkOutDate = new Date(checkOut.value);
 
         if (checkOut.value && checkOutDate < checkInDate) {
             checkOut.value = checkIn.value;
@@ -67,50 +39,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Update Check-out Date for Month/Year Modes (NOTE: berhubungan dengan togle modes)
-    function updateCheckOut() {
-        if (!checkIn.value || mode === "day") return;
-
-        const duration = parseInt(durationSelect.value, 10);
-        const checkInDate = new Date(checkIn.value);
-        let checkOutDate;
-
-        if (mode === "month") {
-            checkOutDate = new Date(checkInDate);
-            checkOutDate.setMonth(checkOutDate.getMonth() + duration);
-        } else if (mode === "year") {
-            checkOutDate = new Date(checkInDate);
-            checkOutDate.setFullYear(checkOutDate.getFullYear() + duration);
-        }
-
-        checkOut.value = checkOutDate.toISOString().split("T")[0];
-    }
-
-    // Update duration options for Month/Year Modes (NOTE: berhubungan dengan togle modes)
-    function updateDuration(max) {
-        durationSelect.innerHTML = "";
-        for (let i = 1; i <= max; i++) {
-            const option = document.createElement("option");
-            option.value = i;
-            option.textContent = `${i} ${mode}${i > 1 ? "s" : ""}`;
-            durationSelect.appendChild(option);
-        }
-        durationSelect.value = 1; // Default duration
-        updateCheckOut();
-    }
-
-    
-
-        //METHOD YANG TIDAK MENGGUNAKAN TOGGLE MODES, DILENGKAPI DENGAN ERROR MITIGATION
-        // Helper function to display error messages
-    function showError(message) {
-        alert(message); // Use alert for simplicity. Replace with custom error display if needed.
-    }
-
     // Helper function to validate the form
     function validateForm() {
-        const checkInDate = new Date(checkIn.value);
-        const checkOutDate = new Date(checkOut.value);
+        let checkInDate = new Date(checkIn.value);
+        let checkOutDate = new Date(checkOut.value);
 
         if (!checkIn.value) {
             showError("Check-in date is required.");
@@ -123,27 +55,54 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         if (checkOutDate <= checkInDate) {
-            showError("Check-out date must be later than check-in date.");
+            showError("Check-out date must be later than the check-in date.");
             return false;
         }
 
         return true;
     }
 
-    // Submit button click handler
-    submitBtn.addEventListener("click", () => {
-        if (validateForm()) {
-            goToPembayaran(); // Redirect function
+    // Function to calculate the duration in days
+    function durationCalculation(checkInDate, checkOutDate) {
+        return (checkOutDate - checkInDate) / (24 * 60 * 60 * 1000);
+    }
+
+    // Function to validate price changes
+    function validatePriceChange() {
+        // Retrieve the base price from the HTML element
+        const basePrice = parseInt(document.getElementById("base-price").textContent.replace(/[^0-9]/g, ""), 10);
+
+        // Parse the check-in and check-out dates
+        let checkInDate = new Date(checkIn.value);
+        let checkOutDate = new Date(checkOut.value);
+
+        // Calculate duration using the separate function
+        let duration = durationCalculation(checkInDate, checkOutDate);
+
+        // Validate duration
+        if (isNaN(duration) || duration <= 0) {
+            totalPrice.textContent = "Total Price: Invalid duration";
+            return;
         }
-    });
 
+        // Calculate the total price
+        let calculatedPrice = basePrice * duration;
+
+        // Update the total price element
+        totalPrice.textContent = `Total Price: $${calculatedPrice}`;
+    }
+
+
+    // Helper function to display error messages
+    function showError(message) {
+        alert(message); // Use alert for simplicity. Replace with custom error display if needed.
+    }
+
+    //redirect
+    function goToPembayaran() {
+        // Redirect to the review page with the room ID
+        // You may change the URL as per your application's routing
+        window.location.href = `pembayaran?`;
+    }
 });
-
-//redirect
-function goToPembayaran() {
-    // Redirect to the review page with the room ID
-    // You may change the URL as per your application's routing
-    window.location.href = `pembayaran?`;
-}
-
 

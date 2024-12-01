@@ -22,8 +22,5 @@ public interface TowerUnitRepo {
 
     boolean addUnitData(UnitModel unit, String tower);
     Optional<TowerModel> findTowerById(String id);
-    
-    //TODO
-    //Tambahan buat page pemesanan, alasan ada di PelangganController
-    // List<TowerUnitModel> findUnitJoinTowersByUnitId(int id);
+    List<TowerUnitModel> findUnitJoinTowersByUnitId(int id);
 }
