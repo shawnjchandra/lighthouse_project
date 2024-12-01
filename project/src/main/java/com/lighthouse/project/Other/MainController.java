@@ -62,7 +62,10 @@ public class MainController {
                 httpSession.setAttribute("username", username);
 
             }
-
+            else if(userType == "ptyp"){
+                httpSession.setAttribute("tipeuser", userType);
+                httpSession.setAttribute("username", username);
+            }
 
             return "redirect:/"+userType+"/";
         }
