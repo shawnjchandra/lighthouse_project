@@ -1,11 +1,21 @@
 package com.lighthouse.project.Pelanggan;
 
 import java.util.List;
+
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
+
+import com.lighthouse.project.Tower.TowerUnitJDBC;
+import com.lighthouse.project.Tower.TowerUnitModel;
+// import com.lighthouse.project.Tower.TowerUnitRepo;
+// import com.lighthouse.project.Tower.UnitModel;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +42,7 @@ public class PelangganController {
 
     @Autowired
     private PenggunaRepo penggunaRepo;
+
 
     @GetMapping("/")
     public String index(Model model) {
@@ -73,7 +84,11 @@ public class PelangganController {
     }
     @GetMapping("/pencarian")
     public String penc(Model model) {
-
+        // List<TowerUnitModel> units = towerRepo.findAllUnitJoinTowers();
+        List<TowerUnitModel> units = 
+          JDBC.findAllUnitJoinTowers();
+        // List<UnitModel> units = towerRepo.findAllUnits();
+        model.addAttribute("units", units);
         return "pencarian";
     }
 
@@ -83,11 +98,24 @@ public class PelangganController {
 
         return "pemesanan";
     }
+
+
+    //TODO
+    //Rencananya ini buat bikin pemesanan lanjutan dari pencarian. Jadi di pencarian pas cardnya di click, 
+    //nanti data di pemesanan ngikutin data yang di card.
+    // @GetMapping("/pemesanan")
+    // public String pesan(@RequestParam int roomId, Model model) {
+    //     List<TowerUnitModel> room = towerUnitJDBC.findUnitJoinTowersByUnitId(roomId);
+    //     model.addAttribute("roomData", room);
+    //     return "pemesanan";
+    // }
+
     @GetMapping("/pembayaran")
     public String pembayaran(Model model) {
 
         return "pembayaran";
     }
+
     
     @PostMapping("/submitReview")
     public String submitReview
@@ -102,4 +130,5 @@ public class PelangganController {
 
         return "riwayatTransaksi";
     }
+
 }

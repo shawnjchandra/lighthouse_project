@@ -17,7 +17,7 @@
 
             </div>
 
-            <div class="navbar-agen"  th:unless="${tipeuser} == P" >
+            <div class="navbar-agen"  th:if="${tipeuser} == A" >
                 <ul class="navbar-links">
                     <li id="link-editDataUnit"><a th:href="@{'/' +${session.tipeuser}+'/'+'edit-data'}">Data Unit</a></li>
                     <li id="link-jadwalKetersediaan"><a th:href="@{'/' +${session.tipeuser}+'/'+'kelola-jadwal'}">Jadwal Ketersediaan</a></li>
@@ -36,7 +36,7 @@
         <div class="auth-buttons">
             <a class="auth-btn" th:if="${tipeuser} == G" th:href="@{/login}">Sign In</a>
             <a class="auth-btn" th:if="${tipeuser} == G" th:href="@{/register}">Sign Up</a>
-            <a class="auth-btn" th:unless="${tipeuser} == G">Sign Out</a>
+            <a class="auth-btn" th:unless="${tipeuser} == G" th:href="@{/signout}">Sign Out</a>
 
         </div>
      

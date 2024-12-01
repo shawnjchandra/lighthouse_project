@@ -47,6 +47,16 @@ public class MainController {
         return "register";
     }
 
+    @GetMapping("/signout")
+    public String signout(HttpSession session) {
+    // Invalidate the session to clear user data
+    session.invalidate();
+    
+
+        return "redirect:/";
+    }
+
+
     @PostMapping("/login-data")
     public String log(String username, String password, HttpSession httpSession,Model model){
         boolean isSuccess = repo.login(username, password);
@@ -72,7 +82,10 @@ public class MainController {
                 httpSession.setAttribute("username", username);
                 httpSession.setAttribute("nik", nik);
             }
-
+            else if(userType == "ptyp"){
+                httpSession.setAttribute("tipeuser", userType);
+                httpSession.setAttribute("username", username);
+            }
 
             return "redirect:/"+userType+"/";
         }
