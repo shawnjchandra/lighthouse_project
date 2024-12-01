@@ -34,11 +34,13 @@
                 <form class="booking-form" >
                     <div class="form-group">
                         <label for="check-in">Check-in Date</label>
-                        <input type="date" id="check-in" name="checkIn">
+
+                        <input type="date" id="check-in" name="checkIn" required>
                     </div>
                     <div class="form-group" id="check-out-group">
                         <label for="check-out">Check-out Date</label>
-                        <input type="date" id="check-out" name="checkOut">
+                        <input type="date" id="check-out" name="checkOut" required>
+
                     </div>
                     <div class="form-group" id="duration-group" style="display: none;">
                         <label for="duration">Duration</label>
@@ -48,7 +50,7 @@
                         <h2 id="total-price">Total Price: $0</h2>
                     </div>
                 </form>
-                <button type="submit" class="submit-btn" th:onclick="goToPembayaran()">Submit</button>
+                <button type="submit" class="submit-btn" id="submit-btn">Submit</button>
             </div>
         </div>          
         
