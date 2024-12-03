@@ -1,6 +1,8 @@
 INSERT INTO Tower (namaTower) VALUES
 ('A'),
-('B');
+('B')
+('C')
+('D');
 
 INSERT INTO Unit (nomor, lantai, jenis, tarifSewa, idTower) VALUES
 (101, 1, 'Studio', 2000000, 1),  -- Unit 101 di Tower A (Studio)
@@ -8,11 +10,12 @@ INSERT INTO Unit (nomor, lantai, jenis, tarifSewa, idTower) VALUES
 (201, 2, 'Studio', 2200000, 2),  -- Unit 201 di Tower B (Studio)
 (202, 2, '2BR', 3500000, 2);     -- Unit 202 di Tower B (2BR)
 
-INSERT INTO Pengguna (NIK, nama, noHP, tipe, email, username, pass) VALUES
-('1234567890123456', 'Agen A', '081234567890', 'Agen', 'agenA@mail.com', 'agenA', 'password'),
-('2345678901234567', 'Pelanggan A', '082345678901', 'Pelanggan', 'pelangganA@mail.com', 'pelangganA', 'password'),
-('3456789012345678', 'Agen B', '083456789012', 'Agen', 'agenB@mail.com', 'agenB', 'password'),
-('4567890123456789', 'Pelanggan B', '084567890123', 'Pelanggan', 'pelangganB@mail.com', 'pelangganB', 'password');
+-- Insert data into Pengguna table
+INSERT INTO Pengguna (NIK, nama, noHP, alamat, idKel, tipe,email, username, pass) VALUES
+('1234567890123456', 'Agen A', '081234567890', 'Jl. Mawar No. 1', 1, 'Agen',  'agenA@mail.com', 'agenA', 'password'),
+('2345678901234567', 'Pelanggan A', '082345678901', 'Jl. Melati No. 2', 2, 'Pelanggan', 'pelangganA@mail.com', 'pelangganA', 'password'),
+('3456789012345678', 'Agen B', '083456789012', 'Jl. Anggrek No. 3', 1, 'Agen',  'agenB@mail.com', 'agenB', 'password'),
+('4567890123456789', 'Pelanggan B', '084567890123', 'Jl. Kenanga No. 4', 2, 'Pelanggan',  'pelangganB@mail.com', 'pelangganB', 'password');
 
 INSERT INTO KelolaUnit (idUnit, NIK) VALUES
 (1, '1234567890123456'),  -- Agen A mengelola Unit 1

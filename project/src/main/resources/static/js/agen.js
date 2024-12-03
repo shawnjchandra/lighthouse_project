@@ -141,10 +141,17 @@ function saveChanges(event) {
     closeEditModal();
 }
 
+function closeReviewForm() {
+    const form = document.getElementById('reviewForm');
+    form.style.display = 'none';
+}
+
 
 // Fitur Kelola Jadwal
 
+
 function updateStatus(rowId){
+    
     console.log(rowId);
     document.getElementById('changeStatus-'+rowId).submit();
 }

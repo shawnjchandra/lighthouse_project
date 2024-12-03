@@ -15,8 +15,13 @@ public class PenggunaJDBC implements PenggunaRepo {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
+    @Autowired
+    private PenggunaService service;
+
     @Override
     public Optional<PenggunaModel> validateUser (String username, String pass) {
+        pass = service.getPasswordEncoder().encode(pass);
+
         String sql = "select * from pengguna WHERE username LIKE ? AND pass LIKE ? ";    
         List<PenggunaModel> users =  jdbcTemplate.query(sql, this::mapRowToPengguna ,username,pass); 
         
@@ -29,6 +34,10 @@ public class PenggunaJDBC implements PenggunaRepo {
             rSet.getString("nama"),
             rSet.getString("nohp"),
             rSet.getString("email"),
+
+            rSet.getString("alamat"),
+            rSet.getInt("idkel"),
+            
             rSet.getString("username"),
             rSet.getString("pass"),
             rSet.getString("tipe")
@@ -37,33 +46,46 @@ public class PenggunaJDBC implements PenggunaRepo {
     }
 
     @Override
-    public boolean register(String nik, String nama, String nohp, String email, String username, String pass, String confPass) {
+    public boolean register(String nik, String nama, String nohp, String email,String alamat, String kelurahan, String username, String pass, String confPass) {
         String sql = "select * from pengguna where username LIKE ? AND tipe = 'Pelanggan'";
 
         List<PenggunaModel> users = jdbcTemplate.query(sql,this::mapRowToPengguna, username);
         boolean isAvailable = users.size() > 0 ? false : true;
 
-
+        System.out.println("isAvailable "+isAvailable);
+        
         boolean isSuccess = false;
-
+        
         if(isAvailable){
-            boolean samePass = validatePasswordRegist(pass, confPass);
-
+            // pass = service.getPasswordEncoder().encode(pass);
+            // confPass = service.getPasswordEncoder().encode(confPass);
+            
+            System.out.println(pass+" "+confPass);
+            
+            boolean samePass = pass.equals(confPass);
+            System.out.println(samePass);
+            
             if(samePass){
-                sql = "insert into pengguna (nik, nama, nohp, email,username,pass,tipe) VALUES (?,?,?,?,?,?,'Pelanggan') ";
-                int done = jdbcTemplate.update(sql, nik,nama,nohp,email,username,pass);    
+                pass = service.getPasswordEncoder().encode(pass);
 
+                //TODO : Get idKelurahan by 
+                System.out.println("kelurahan"+kelurahan);
+                int idkel = service.getAlamatRepo().getIDKelByName(kelurahan);
+                
+                sql = "insert into pengguna (nik, nama, nohp, email,alamat, idkel, username,pass,tipe) VALUES (?,?,?,?,?,?,?,?,'Pelanggan') ";
+                
+                jdbcTemplate.update(sql, nik,nama,nohp,email,alamat, idkel ,username,pass);    
+                
                 isSuccess = true;
             }
         }
+        System.out.println("isSuccess "+isSuccess);
 
         
         return isSuccess;
     }
 
-    private boolean validatePasswordRegist(String pass, String confPass){
-        return pass.equals(confPass);
-    }
+   
 
     @Override
     public String getUserType(String username) {
@@ -82,11 +104,18 @@ public class PenggunaJDBC implements PenggunaRepo {
 
     @Override
     public boolean login(String username, String password) {
-        String sql = "select * from pengguna WHERE username LIKE ? AND pass LIKE ? ";
-        List<PenggunaModel> user = jdbcTemplate.query(sql, this::mapRowToPengguna, username, password);
+        String sql = "select * from pengguna WHERE username LIKE ?";
+        List<PenggunaModel> user = jdbcTemplate.query(sql, this::mapRowToPengguna, username);
      
+        if(!user.isEmpty()){
+            String passwordFromQ = user.get(0).getPass();
+        
+            if(service.getPasswordEncoder().matches(password, passwordFromQ)){
+                return true;
+            }
+        }
 
-        return !user.isEmpty() ? true : false ;
+        return  false ;
     }
 
     @Override
@@ -103,6 +132,14 @@ public class PenggunaJDBC implements PenggunaRepo {
         }
         
         return userNik;
+    }
+
+    @Override
+    public Optional<PenggunaModel> getUserByUsername(String username) {
+        String sql = "SELECT * FROM pengguna WHERE username LIKE ?";
+        List<PenggunaModel> res= jdbcTemplate.query(sql, this::mapRowToPengguna,username);
+        
+        return res.isEmpty() ? null : Optional.of(res.get(0)); 
     }
  
     // NON-POLICY LOGIN AND REGISTER

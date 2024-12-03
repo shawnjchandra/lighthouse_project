@@ -14,24 +14,24 @@
         <div class="container">
             <div class="details-container">
                 <div  style="display: flex; margin-bottom: 20px;">
-                    <img th:src="@{images/images.jpeg}" style="border-radius: 15px;" width="256" height="256" alt="">
+                    <img th:src="@{/images/images.jpeg}" style="border-radius: 15px;" width="256" height="256" alt="">
                 </div>
 
                 <!-- Perubahan ngikutin alasan pada PelangganController -->
-                <h2 id="apartment-number" th:text="'Room Number: ' + ${roomData.nomor}"></h2>
-                <p id="tower-name" th:text="'Tower Unit: ' + ${roomData.namatower}"></p>
-                <p id="floor-number" th:text="'Floor: ' + ${roomData.lantai}"></strong> </p>
-                <p id="room-type" th:text="'Room Type: ' + ${roomData.jenis}"></p>
+                <h2 id="apartment-number" th:text="'Room Number: ' + ${roomData['nomor']}"></h2>
+                <p id="tower-name" th:text="'Tower Unit: ' + ${roomData['namatower']}"></p>
+                <p id="floor-number" th:text="'Floor: ' + ${roomData['lantai']}"></strong> </p>
+                <p id="room-type" th:text="'Room Type: ' + ${roomData['jenis']}"></p>
             </div>
         
             <div class="booking-container">
 
                 <div class="price-container">
-                    <h2 id="base-price">Base Price: $0/day</h2>
+                    <h2 id="base-price">Base Price: Rp. <span th:text="${unit.tarifsewa}"></span>/day</h2>
                 </div>
         
                 <!-- Booking Form -->
-                <form class="booking-form" >
+                <form class="booking-form" action="/ptyp/booking" method="post" >
                     <div class="form-group">
                         <label for="check-in">Check-in Date</label>
 
@@ -47,10 +47,12 @@
                         <select id="duration" name="duration"></select>
                     </div>
                     <div class="total-price-container">
-                        <h2 id="total-price">Total Price: $0</h2>
+                        <h2 id="total-price">Total Price: Rp. 0</h2>
+                        <input type="hidden" id="save-price" name="savePrice" hidden />
                     </div>
+                    <input type="hidden" name="unit" th:value="${unit}">
+                    <button type="submit" class="submit-btn" id="submit-btn">Submit</button>
                 </form>
-                <button type="submit" class="submit-btn" id="submit-btn">Submit</button>
             </div>
         </div>          
         

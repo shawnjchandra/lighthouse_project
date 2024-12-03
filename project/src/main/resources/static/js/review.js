@@ -72,14 +72,16 @@ document.addEventListener("DOMContentLoaded", function () {
         const floor = button.getAttribute("data-lantai");
         const unitNumber = button.getAttribute("data-nomor");
         const unitType = button.getAttribute("data-jenis");
-        const idtrsk = button.getAttribute("data-trsk");
+        let idtrsk = button.getAttribute("data-trsk");
+
+        document.getElementById('idtrskHidden').value = idtrsk;
+
         
         // Update the unit name in the pop-up
         unitNameElement.textContent = `${tower}-${floor}-${unitNumber} (${unitType})`;
 
         //update the trsk value
-        const hiddenInput = document.querySelector(".trsk");
-        hiddenInput.value = idtrsk;
+
 
         // Show the review pop-up
         reviewBody.classList.remove("hidden");
@@ -88,22 +90,28 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     // Submit button functionality for the pop-up
-    submitButton.addEventListener("click", function (event) {
-        event.preventDefault();
+    // submitButton.addEventListener("click", function (event) {
+    //     event.preventDefault();
 
-        const rating = form.querySelector("input[name='rating']:checked")?.value || null;
-        const reviewText = form.querySelector("textarea[name='review']").value;
+    //     const rating = form.querySelector("input[name='rating']:checked")?.value || null;
+    //     const reviewText = form.querySelector("textarea[name='review']").value;
 
-        if (!rating) {
-            alert("Please select a rating!");
-            return;
-        }
+    //     if (!rating) {
+    //         alert("Please select a rating!");
+    //         return;
+    //     }
 
-        // Reset and close the review pop-up
+    //     // Reset and close the review pop-up
+    //     reviewBody.classList.add("hidden");
+    //     container.classList.remove("blur");
+    //     navbar.classList.remove("blur");
+    //     form.reset();
+    //     alert("Review submitted successfully!");
+    // });
+    window.closeReviewForm = function() {
         reviewBody.classList.add("hidden");
         container.classList.remove("blur");
         navbar.classList.remove("blur");
-        form.reset();
-        alert("Review submitted successfully!");
-    });
+    }
 });
+

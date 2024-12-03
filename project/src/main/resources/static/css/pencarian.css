@@ -91,9 +91,13 @@ body{
 
  .search-bar {
      display: flex;
+     flex-direction: column;
+     
      justify-content: center;
      /* Space between search input and select */
      margin-bottom: 20px;
+     max-width: max-content;
+     transform: translateX(25%);
  }
 
  .input-container {
@@ -102,15 +106,25 @@ body{
      justify-content: center;
      flex-direction: column;
      row-gap: 10px;
+     
      /* Align items vertically */
- }
+    }
+    
+    .input-container input {
+        width: 250px;
+    }
 
- #searchInput {
+#form-filter div input {
      padding: 10px;
      border: 1px solid #ccc;
      border-radius: 5px;
      margin-right: 10px;
      /* Space between input and button */
+ }
+
+ #form-filter {
+    display: flex;
+    flex-direction: row;
  }
 
  #confirmButton {
@@ -150,17 +164,17 @@ body{
      cursor: pointer;
  }
 
- .card h3 {
+ .card form h3 {
      margin: 0 0 10px 0;
      /* Margin below the title */
  }
 
- .card p {
+ .card form p {
      margin: 5px 0;
      /* Margin for text paragraphs */
  }
 
- .card img{
+ .card form img{
     display: flex;
     justify-content: center;
  }

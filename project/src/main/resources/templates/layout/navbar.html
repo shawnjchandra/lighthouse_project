@@ -8,7 +8,7 @@
         <!-- <h1 th:text="'tipe user : ' + ${tipeuser}"></h1> -->
         <div th:if="${tipeuser} != G">
 
-            <div class="navbar-pelanggan" th:if="${tipeuser} == P" >
+            <div class="navbar-pelanggan" th:if="${session.tipeuser} == 'ptyp'" >
                 <ul class="navbar-links">
                     <li id="link-pencarian"><a th:href="@{'/' +${session.tipeuser}+'/'+'pencarian'}">Pencarian</a></li>
                     <li id="link-riwayat"><a th:href="@{'/' +${session.tipeuser}+'/'+'riwayat'}">Riwayat Transaksi</a></li>
@@ -17,7 +17,7 @@
 
             </div>
 
-            <div class="navbar-agen"  th:if="${tipeuser} == A" >
+            <div class="navbar-agen"  th:if="${session.tipeuser} == 'atyp' " >
                 <ul class="navbar-links">
                     <li id="link-editDataUnit"><a th:href="@{'/' +${session.tipeuser}+'/'+'edit-data'}">Data Unit</a></li>
                     <li id="link-jadwalKetersediaan"><a th:href="@{'/' +${session.tipeuser}+'/'+'kelola-jadwal'}">Jadwal Ketersediaan</a></li>
@@ -34,9 +34,9 @@
 
         </div>
         <div class="auth-buttons">
-            <a class="auth-btn" th:if="${tipeuser} == G" th:href="@{/login}">Sign In</a>
-            <a class="auth-btn" th:if="${tipeuser} == G" th:href="@{/register}">Sign Up</a>
-            <a class="auth-btn" th:unless="${tipeuser} == G" th:href="@{/signout}">Sign Out</a>
+            <a class="auth-btn" th:if="${session.tipeuser} == null  " th:href="@{/login}">Sign In</a>
+            <a class="auth-btn" th:if="${session.tipeuser} == null  " th:href="@{/register}">Sign Up</a>
+            <a class="auth-btn" th:unless="${session.tipeuser} == null  " th:href="@{/signout}">Sign Out</a>
 
         </div>
      
