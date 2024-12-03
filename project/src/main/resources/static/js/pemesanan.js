@@ -2,51 +2,14 @@
 //Rombak total buat bikin jadi perhari aja, hapus bagian perbulan dan pertahun
 
 document.addEventListener("DOMContentLoaded", () => {
-    const dayBtn = document.getElementById("day-btn");
-    const monthBtn = document.getElementById("month-btn");
-    const yearBtn = document.getElementById("year-btn");
     const checkIn = document.getElementById("check-in");
     const checkOut = document.getElementById("check-out");
-    const durationGroup = document.getElementById("duration-group");
     const durationSelect = document.getElementById("duration");
     const form = document.getElementById("booking-form");
     const submitBtn = document.getElementById("submit-btn");
 
-
-    // Initialize mode
-    let mode = null;
-
-    // // ini fitur Toggle between modes, kalo jadi boleh dipake, kalo nggak jadi yaudah
-    // const toggleButtons = [dayBtn, monthBtn, yearBtn];
-    // toggleButtons.forEach((btn) => {
-    //     btn.addEventListener("click", () => {
-    //         toggleButtons.forEach((b) => b.classList.remove("active"));
-    //         btn.classList.add("active");
-
-    //         mode = btn.id === "day-btn" ? "day" : btn.id === "month-btn" ? "month" : "year";
-
-    //         if (mode === "day") {
-    //             checkIn.removeAttribute("readonly");
-    //             checkOut.removeAttribute("readonly");
-    //             durationGroup.style.display = "none";
-    //             checkOut.value = "";
-    //         } else {
-    //             checkOut.setAttribute("readonly", true);
-    //             durationGroup.style.display = "block";
-    //             updateDuration(mode === "month" ? 12 : 3);
-    //         }
-    //     });
-    // });
-
     // Ensure valid Check-in and Check-out dates (NOTE: berhubungan dengan togle modes)
-    checkIn.addEventListener("change", () => {
-        if (mode === "day") {
-            validateDayModeDates();
-        } else {
-            updateCheckOut();
-        }
-    });
-
+    checkIn.addEventListener("change", updateCheckOut);
     checkOut.addEventListener("change", validateDayModeDates);
 
     durationSelect.addEventListener("change", updateCheckOut);
@@ -66,6 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
             checkOut.value = checkIn.value;
         }
     }
+    const mode = null;
 
     // Update Check-out Date for Month/Year Modes (NOTE: berhubungan dengan togle modes)
     function updateCheckOut() {
@@ -86,27 +50,9 @@ document.addEventListener("DOMContentLoaded", () => {
         checkOut.value = checkOutDate.toISOString().split("T")[0];
     }
 
-    // Update duration options for Month/Year Modes (NOTE: berhubungan dengan togle modes)
-    function updateDuration(max) {
-        durationSelect.innerHTML = "";
-        for (let i = 1; i <= max; i++) {
-            const option = document.createElement("option");
-            option.value = i;
-            option.textContent = `${i} ${mode}${i > 1 ? "s" : ""}`;
-            durationSelect.appendChild(option);
-        }
-        durationSelect.value = 1; // Default duration
-        updateCheckOut();
-    }
-
-    
-
         //METHOD YANG TIDAK MENGGUNAKAN TOGGLE MODES, DILENGKAPI DENGAN ERROR MITIGATION
         // Helper function to display error messages
-    function showError(message) {
-        alert(message); // Use alert for simplicity. Replace with custom error display if needed.
-    }
-
+    
     // Helper function to validate the form
     function validateForm() {
         const checkInDate = new Date(checkIn.value);
@@ -136,6 +82,56 @@ document.addEventListener("DOMContentLoaded", () => {
             goToPembayaran(); // Redirect function
         }
     });
+
+    const totalPriceContainer = document.querySelector(".total-price-container");
+    const basePriceElement = document.getElementById("base-price");
+
+
+    const basePrice = parseFloat(basePriceElement.querySelector("span").textContent.replace('Rp.', '').replace(',', '').trim()); // Assuming base price is in "Rp."
+
+
+    checkIn.addEventListener("change", updatePrice);
+    checkOut.addEventListener("change", updatePrice);
+
+    // Function to calculate duration between check-in and check-out dates
+    function calculateDuration(checkInDate, checkOutDate) {
+        const timeDifference = checkOutDate - checkInDate;
+        return timeDifference / (1000 * 3600 * 24); // Convert time difference to days
+    }
+
+    // Function to update total price based on duration
+    function updatePrice() {
+        if (!checkIn.value || !checkOut.value) return;
+
+        const checkInDate = new Date(checkIn.value);
+        const checkOutDate = new Date(checkOut.value);
+
+        // Calculate the number of days
+        const duration = calculateDuration(checkInDate, checkOutDate);
+
+        // Validate that the check-out date is later than check-in
+        if (duration <= 0) {
+            showError("Check-out date must be later than check-in date.");
+            return;
+        }
+
+        // Calculate the total price based on duration
+        const totalPrice = duration * basePrice;
+
+        // Update the total price display
+        totalPriceContainer.querySelector("#total-price").textContent = `Total Price: Rp. ${totalPrice.toLocaleString()}`;
+        
+        const savePriceInput = document.getElementById("save-price");
+        savePriceInput.value = totalPrice;
+    }
+
+    // Helper function to display error messages
+    function showError(message) {
+        alert(message); // You can replace this with a custom error message display
+    }
+
+    // Initial price update in case of pre-filled check-in/check-out values
+    updatePrice();
 
 });
 

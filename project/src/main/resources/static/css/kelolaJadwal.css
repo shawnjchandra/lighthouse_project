@@ -125,6 +125,13 @@ table {
 
 th,
 td {
+    
+        position: sticky;
+        top: 0; /* Keeps the header at the top */
+        /* background-color: #f8f9fa; Adjust the color as needed */
+        z-index: 1;
+      
+
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
@@ -135,9 +142,23 @@ th {
     color: white;
 }
 
+tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed; /* Ensures consistent column width */
+  }
+
+  tbody {
+    display: block;
+    max-height: 60vh; /* Set the height limit */
+    overflow-y: auto; /* Enables scrolling */
+  }
+
 tr:nth-child(even) {
     background-color: #f2f2f2;
 }
+
+
 
 tr:hover {
     background-color: #ddd;
@@ -169,6 +190,7 @@ tr:hover {
 td{
     position: relative; /* Makes the <td> a reference for absolute positioning */
         padding: 5px 10px;
+        word-wrap: break-word; /* Prevents text overflow */
         /* display: flex;
         flex-direction: row; */
 }

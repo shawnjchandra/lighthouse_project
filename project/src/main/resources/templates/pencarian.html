@@ -9,42 +9,63 @@
 </head>
 <body>
     <th:block th:replace="~{/layout/navbar :: navbar}"></th:block>
+
     <div class="container">
         <div class="search-bar">
-            <div class="input-container">
-                <input type="text" id="searchInput" placeholder="Search..">
-                <select id="filterSelect">
-                    <option value="" disabled selected style="color: lightgray;">Select</option>
-                    <option value="number">Number</option>
-                    <option value="towerUnit">Tower</option>
-                    <option value="floor">Floor</option>
-                    <option value="room">Room</option>
-                </select>
-            </div>
-            <button id="confirmButton">Confirm</button>
+            <form id="form-filter" action="/ptyp/filter-pencarian" method="post">
+                
+                <!-- Search Input -->
+                <!-- <label for="searchInput">Search:</label>
+                <input type="text" id="searchInput" placeholder="Search..."> -->
+                
+                <!-- Filter by Availability Date -->
+                <div class="input-container">
+                    <label for="availabilityDateInput">Tanggal Ketersediaan:</label>
+                    <input type="date" name="tanggal" id="availabilityDateInput" placeholder="Select Availability Date">
+                </div>
+                
+                <div class="input-container">
+                    <!-- Filter by Price -->
+                    <label for="priceInput">Tarif Maksimal:</label>
+                    <input type="number" name="tarifsewa" id="priceInput" placeholder="Masukkan Tarif Maksimal" min="0" step="10000">
+                </div>
+                
+                <div class="input-container">
+                    <label for="ratingInput">Rating Minimal:</label>
+                    <input type="number" name="ratingMin" id="ratingInput" placeholder="Masukkan Rating Minimal" min="0" max="5" step="1">
+                </div>
+                    
+                <div class="input-container">
+                    <!-- Filter by Reviews -->
+                    <label for="reviewsInput">Komentar Pelanggan:</label>
+                    <input type="text" name="review" id="reviewsInput" placeholder="Cari Review">
+                    <!-- Filter by Rating -->
+                </div>
+    
+                <button id="confirmButton">Confirm</button>
+            </form>
+            <br>
         </div>
         <div class="card-container" id="cardContainer">
-            <div class="card" th:onclick="goToPemesanan(1)">
-                <img th:src="@{images/images.jpeg}"  width="256" height="128" alt="">
-                <h3>Room Number: 1</h3>
-                <p>Tower Unit: A</p>
-                <p>Floor: 1</p>
-                <p>Room: 101</p>
-            </div>
-            <div class="card" th:onclick="goToPemesanan(2)">
-                <img th:src="@{images/images.jpeg}"  width="256" height="128" alt="">
-                <h3>Room Number: 2</h3>
-                <p>Tower Unit: A</p>
-                <p>Floor: 1</p>
-                <p>Room: 101</p>
-            </div>
-            <!-- Additional cards can be added here -->
+  
             <div class="card" th:each="unit : ${units}" th:onclick="'goToPemesanan(' + ${unit.nomor} + ')'">
-                <img th:src="@{images/images.jpeg}" width="256" height="128" alt="">
-                <h3 th:text="'Room Number: ' + ${unit.nomor}"></h3>
-                <p th:text="'Tower Unit: ' + ${unit.namatower}"></p>
-                <p th:text="'Floor: ' + ${unit.lantai}"></p>
-                <p th:text="'Room Type: ' + ${unit.jenis}"></p>
+                <form action="/ptyp/select-room" th:id="'form-'+${unit.nomor}" method="post">
+                    <img th:src="@{/images/images.jpeg}" width="256" height="128" alt="">
+
+                    <h3 name="nomor" th:value="${unit.nomor}" th:text="'Nomor Ruangan: ' + ${unit.nomor}"></h3>
+                    <!-- <p name="namatower" th:value="${unit.namatower}" th:text="'Tower Unit: ' + ${unit.namatower}"></p> -->
+                    <!-- <p name="lantai" th:value="${unit.lantai}" th:text="'Floor: ' + ${unit.lantai}"></p> -->
+                    <p name="tarif" th:value="${unit.tarifsewa}" th:text="'Tarif Perhari: ' + ${unit.tarifsewa}"></p>
+                    <p name="jenis" th:value="${unit.jenis}" th:text="'Tipe Ruangan: ' + ${unit.jenis}"></p>
+                    <p name="rating" th:value="${unit.rating}" th:text="'Rating: ' + ${unit.rating}"></p>
+                    
+                    <input hidden name="nomor" th:value="${unit.nomor}"></input>
+                    <input hidden name="namatower" th:value="${unit.namatower}"></input>
+                    <input hidden name="lantai" th:value="${unit.lantai}" ></input>
+                    <input hidden name="jenis" th:value="${unit.jenis}"></input>
+                    <input hidden name="dataUnit" th:value="${unit}"></input>
+                    
+                </form>
             </div>
         </div>
     </div>

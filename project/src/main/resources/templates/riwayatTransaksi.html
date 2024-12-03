@@ -12,7 +12,7 @@
     <div>
         <h1>Riwayat Transaksi</h1>
         <div class="container">
-            <div class="search-bar">
+            <!-- <div class="search-bar">
                 <div class="input-container">
                     <input type="text" id="searchInput" placeholder="Search by price, date, or room type..">
                     <button id="confirmButton">Confirm</button>
@@ -23,7 +23,7 @@
                     <option value="checkin">Check-in Date</option>
                     <option value="roomType">Room Type</option>
                 </select>
-            </div>
+            </div> -->
         
             <table id="transactionTable">
                 <thead>
@@ -39,13 +39,14 @@
                 </thead>
                 <tbody>
                     <tr th:each="row, stat : ${results}">
-                        <td th:text="${stat.index + 1}"></td>
+                        <td th:value="${stat.index + 1}" th:text="${stat.index + 1}"></td>
                         <!-- <td hidden th:text="${row.idtrsk}"></td> -->
-                        <td th:text="${row.namatower} + '-' + ${row.lantai} + '-' + ${row.nomor}"></td>
-                        <td th:text="${row.tgglcheckin}"></td>
-                        <td th:text="${row.tgglcheckout}"></td>
-                        <td th:text="${row.jenis}"></td>
-                        <td th:text="${row.tarifsewa}"></td>
+                        <td th:value="${row.namatower} + '-' + ${row.lantai} + '-' + ${row.nomor}" th:text="${row.namatower} + '-' + ${row.lantai} + '-' + ${row.nomor}"></td>
+                        <td th:value="${row.tgglcheckin}" th:text="${row.tgglcheckin}"></td>
+                        <td th:value="${row.tgglcheckout}" th:text="${row.tgglcheckout}"></td>
+                        <td th:value="${row.jenis}" th:text="${row.jenis}"></td>
+                        <td th:value="${row.tarifsewa}" th:text="${row.tarifsewa}"></td>
+      
                         <td>
                             <button class="checkin">Check In</button>
                             <button class="checkout" disabled>Check Out</button>
@@ -53,8 +54,9 @@
                                 th:data-tower="${row.namatower}" 
                                 th:data-lantai="${row.lantai}" 
                                 th:data-nomor="${row.nomor}" 
-                                th:data-jenis="${row.jenis}" 
-                                th:data-trsk="${row.idtrsk}" onclick="openReviewPopup(this)" >
+                                th:data-jenis="${row.jenis}"
+                                th:data-trsk="${row.idtrsk}" 
+                                th:onclick="openReviewPopup(this)" >
                                 Review
                             </button>
                         </td>
@@ -78,8 +80,10 @@
         </div>
             
             <!-- form -->
-            <form action="@{/submitReview}" method="POST" class="review-form">
-                <input type="hidden" name="trsk" class="trsk"/>
+            <form action="/ptyp/submitReview" method="POST" class="review-form">
+                <input type="hidden" name="idtrsk"  id="idtrskHidden"/>
+
+                
                 <!-- radio button for rating -->
                 <div class="rating-label">Berikan nilai untuk unit ini:</div>
                 <div class="rating">
@@ -93,8 +97,14 @@
                 <!-- text area -->
                 <div class="text-area-label">Berikan ulasan untuk unit ini</div>
                 <textarea name="review" placeholder="Berikan ulasan untuk unit ini..." class="text-area"></textarea>
+                <br>
+                <br>
+                <div style="display: flex; flex-direction: row;gap: 10px;">
+
+                    <button type="button" class="submit-button" style="background-color: red;" onclick="closeReviewForm()">Close</button>
+                    <button type="submit" class="submit-button">Submit</button>
+                </div>
             </form>
-            <button type="submit" class="submit-button">Submit</button>
     </div>
 
 </body>

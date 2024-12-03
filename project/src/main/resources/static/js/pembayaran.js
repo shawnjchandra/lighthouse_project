@@ -148,12 +148,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     submitBtn.addEventListener("click", (e) => {
         e.preventDefault();
-        if (validateForm()) {
+        if (!validateForm()) {
             // Redirect to payment history
-            goToRiwayat();
-        } else {
+            // goToRiwayat();
             alert("Please complete all required fields.");
-        }
+        } 
     });
 
     // Initialize on load
@@ -161,8 +160,12 @@ document.addEventListener("DOMContentLoaded", () => {
     // togglePaymentDetails();
 });
 
-function goToRiwayat(roomId) {
-    // Redirect to the review page with the room ID
-    // You may change the URL as per your application's routing
-    window.location.href = `riwayat`;
+function submitForm(){
+    document.getElementById('paymentForm').submit();
 }
+
+// function goToRiwayat(roomId) {
+//     // Redirect to the review page with the room ID
+//     // You may change the URL as per your application's routing
+//     window.location.href = `riwayat`;
+// }

@@ -139,18 +139,19 @@ public class KetersediaanJDBC implements KetersediaanRepo {
     public int findByKode(Map<String, String> filters) {
         String sql = "UPDATE jadwalketersediaan\n" + //
                         "SET statustersedia = ?::stats\n" + //
-                        "WHERE\n" + //
-                        "\tidunit = (\n" + //
-                        "\tSELECT tr.idunit\n" + //
-                        "\tFROM transaksi tr\n" + //
-                        "\tJOIN Unit u on u.idunit = tr.idunit\n" + //
-                        "\tJOIN tower t on t.idtower = u.idtower\n" + //
-                        "\tJOIN JadwalKetersediaan j ON j.idUnit = u.idUnit\n"+
-                        "\tWHERE t.namatower LIKE ?\n"+ 
-                        "\tAND u.lantai = ?\n"+ 
-                        "AND u.nomor =?\n" + //
-                        "\tAND j.tanggalmulai = ?::date AND j.tanggalselesai = ?::date) \n" +
-                        "\tAND (statustersedia ='A' OR statustersedia = 'M')\n" ;
+                        "\t\tWHERE idjadwal = (      \n" + //
+                        "\t\tSELECT j.idjadwal\n" + //
+                        "\t\t\tFROM transaksi tr      \n" + //
+                        "\t\t\tJOIN Unit u on u.idunit = tr.idunit      \n" + //
+                        "\t\t\tJOIN tower t on t.idtower = u.idtower      \n" + //
+                        "\t\t\tJOIN JadwalKetersediaan j ON j.idUnit = u.idUnit \n" + //
+                        "\t\t\tWHERE t.namatower LIKE ? \n" + //
+                        "\t\t\tAND u.lantai = ?\n" + //
+                        "\t\t\tAND u.nomor = ?\n" + //
+                        "\t\t\tAND j.tanggalmulai = ?::date AND j.tanggalselesai = ?::date   \n" + //
+                        "\t\t\tAND (statustersedia ='A' OR statustersedia = 'M')\n" + //
+                        "\t\t\t\n" + //
+                        "\t\t\t);" ;
         /*
             TODO :
             DATE START - DATE END SPESIFIK UNTUK YANG DIUBAH
@@ -181,6 +182,12 @@ public class KetersediaanJDBC implements KetersediaanRepo {
             status = String.valueOf(filters.get("status"));
         }
         
+        System.out.println("tower " +tower);
+        System.out.println("lantai " +lantai);
+        System.out.println("nomor " +nomor);
+        System.out.println("startDate "+startDate);
+        System.out.println("endDate "+endDate);
+        System.out.println("status "+ status);
 
         return jdbcTemplate.update(sql, status, tower, lantai, nomor, startDate, endDate);
     }

@@ -73,6 +73,8 @@ public class AgenController {
     public String kelolaJadwal(Model model, HttpSession httpSession) {
         List<TransaksiKetersediaanModel> results = ketRepo.findAll();
 
+        //////System.out.println(results);
+
         Map<String,Object> filters = new HashMap<>();
         filters.put("apt", "");
         filters.put("startDate", "");
@@ -108,19 +110,13 @@ public class AgenController {
             }
             if (status != null) {
                 status = status.replaceAll(",", "");
-                // System.out.println("STATUS"+);;
-                // System.out.println("FILTER "+String.valueOf(filters.get("status")).replaceAll("\\s", "").replaceAll(",", ""));
-                
                 filters.put("status",status); 
-                // httpSession.setAttribute("status", status);
                 
             }
 
             if (startDate != null && endDate != null) {
                 filters.put("startDate", startDate.trim());
                 filters.put("endDate", endDate.trim());
-                // httpSession.setAttribute("startDate", startDate);
-                // httpSession.setAttribute("status", status);
             }
 
             
@@ -147,10 +143,7 @@ public class AgenController {
         
         Map<String,String> map = new HashMap<>();
         
-        System.out.println(data);
-        System.out.println(startDate);
-        System.out.println(endDate);
-        System.out.println(status);
+       
 
         if(data != null){
             String[] split = data.split("-");
@@ -177,7 +170,7 @@ public class AgenController {
       
         boolean results = ketRepo.findByKode(map)>0 ? true : false;
         
-        System.out.println(results);
+        //////System.out.println(results);
 
         return "kelolaJadwal";
     } 
@@ -218,7 +211,7 @@ public class AgenController {
 
         List<TransaksiKetersediaanModel> list = ketRepo.findAll();
 
-        System.out.println("pengawasanUnit "+ list);
+        //////System.out.println("pengawasanUnit "+ list);
         if(list.size()>0){
             model.addAttribute("results", list);
             model.addAttribute("default", true);
@@ -231,7 +224,7 @@ public class AgenController {
     public String betweenDates(@RequestParam String checkIn, @RequestParam String checkOut, Model model){
         List<TransaksiKetersediaanModel> list = ketRepo.findUsedBetweenDates(checkIn, checkOut);
         
-        System.out.println("between "+ list);
+        //////System.out.println("between "+ list);
         if(list.size()>0){
 
             model.addAttribute("results", list);
@@ -280,7 +273,7 @@ public class AgenController {
     int totalSum = results.stream().mapToInt(UtilitasModel::getTotal).sum();
     // Add results to the model for Thymeleaf rendering
     if (!results.isEmpty()) {
-        System.out.println(totalSum);
+        ////////System.out.println(totalSum);
         model.addAttribute("results", results);
         model.addAttribute("total", totalSum);
     }
@@ -349,7 +342,7 @@ public class AgenController {
             int totalSum = results.stream().mapToInt(UtilitasModel::getTotal).sum();
             // Add results to the model for Thymeleaf rendering
             if (!results.isEmpty()) {
-                System.out.println(totalSum);
+                //////System.out.println(totalSum);
                 model.addAttribute("results", results);
                 model.addAttribute("total", totalSum);
             }
