@@ -133,14 +133,12 @@ public class TowerUnitJDBC implements TowerUnitRepo {
         return res.size() > 0 ? Optional.of(res.get(0)) : Optional.empty();        
     }
 
-    //TODO
-    //Tambahan buat page pemesanan, alasan ada di PelangganController
-    // @Override
-    // public List<TowerUnitModel> findUnitJoinTowersByUnitId(int id) {
-    //     String sql = "SELECT * " +
-    //                 "FROM unit AS u " +
-    //                 "INNER JOIN tower AS t ON u.idtower = t.idtower " +
-    //                 "WHERE u.idunit = ?"; 
-    //     return jdbcTemplate.query(sql, this::mapRowToTowerUnit, id);
-    // }
+    @Override
+    public List<TowerUnitModel> findUnitJoinTowersByUnitId(int id) {
+        String sql = "SELECT * " +
+                    "FROM unit AS u " +
+                    "INNER JOIN tower AS t ON u.idtower = t.idtower " +
+                    "WHERE u.nomor = ?"; 
+        return jdbcTemplate.query(sql, this::mapRowToTowerUnit, id);
+    }
 }

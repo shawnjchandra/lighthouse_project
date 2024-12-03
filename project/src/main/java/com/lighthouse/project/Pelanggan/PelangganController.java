@@ -14,7 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+
 import com.lighthouse.project.Tower.TowerModel;
+
 import com.lighthouse.project.Tower.TowerUnitJDBC;
 import com.lighthouse.project.Tower.TowerUnitModel;
 // import com.lighthouse.project.Tower.TowerUnitRepo;
@@ -53,6 +55,7 @@ public class PelangganController {
     @Autowired
     private TowerUnitRepo towerUnitRepo;
 
+
     @GetMapping("/")
     public String index(Model model) {
 
@@ -75,6 +78,7 @@ public class PelangganController {
     }
     @GetMapping("/pencarian")
     public String penc(Model model) {
+
         // List<TowerUnitModel> units = towerRepo.findAllUnitJoinTowers();
         // List<TowerUnitModel> units = towerUnitRepo.findAllUnitJoinTowers();
         // List<TransaksiTowerUnitModel> units = trRepo.findAllTTU();
@@ -120,9 +124,11 @@ public class PelangganController {
 
         }
 
+
         model.addAttribute("units", units);
         return "pencarian";
     }
+
 
     @PostMapping("/filter-pencarian")
     public String filter(
@@ -285,6 +291,7 @@ public class PelangganController {
         httpSession.setAttribute("dataCheckOut", checkOut);
         httpSession.setAttribute("pelanggan", pelanggan);
         
+
 
         return "pembayaran";
     }
