@@ -38,6 +38,8 @@ CREATE TABLE Pengguna (
   NIK char(16) PRIMARY KEY CHECK (NIK ~ ('^[0-9]+$')),
   nama varchar(255) not null,
   noHP varchar(12) UNIQUE,
+  alamat VARCHAR(255) not null,
+  idKel int REFERENCES Kelurahan(idKel) not null,
   tipe TIPE_P not null,
   -- tipe 0 pelanggan, 1 agen
   idAgen int DEFAULT null,
@@ -71,8 +73,8 @@ CREATE TYPE STATS_BAYAR AS ENUM ('P','U');
 
 CREATE TABLE Transaksi(
   idTrsk int PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-  tgglCheckIn DATE not null,
-  tgglCheckOut DATE not null,
+  tgglCheckIn DATE null,
+  tgglCheckOut DATE null,
   statusPembayaran STATS_BAYAR not null,
   -- status 0 belum terbayar, 1 terbayar
   -- Rating dan review hanya bisa setelah status menjadi 1

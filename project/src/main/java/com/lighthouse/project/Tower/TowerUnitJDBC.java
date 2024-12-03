@@ -79,6 +79,13 @@ public class TowerUnitJDBC implements TowerUnitRepo {
         return jdbcTemplate.query(sql, this::mapRowToTowerUnit);
         
     }
+    @Override
+    public List<TowerUnitModel> findUnitTowersByParams(String namatower, int lantai, int nomor){
+        String sql = "select * from unit u\n" + //
+                        "join tower t on u.idtower = t.idtower\n" + //
+                        "where t.namatower like ? and u.nomor = ? and u.lantai = ?";
+        return jdbcTemplate.query(sql, this::mapRowToTowerUnit,namatower,nomor,lantai);
+    }
 
     private TowerUnitModel mapRowToTowerUnit(ResultSet rSet, int rowNum)throws SQLException{
         return new TowerUnitModel(

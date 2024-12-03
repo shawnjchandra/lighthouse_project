@@ -1,4 +1,4 @@
-package com.lighthouse.project.Tower;
+package com.lighthouse.project.Transaksi;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -12,10 +12,6 @@ import lombok.experimental.FieldDefaults;
 @Setter
 @FieldDefaults(makeFinal = false, level = AccessLevel.PRIVATE)
 @AllArgsConstructor
-public class UnitModel {
-    int nomor;
-    int lantai;
-    String jenis;
-    int tarifsewa;
+ public class TransaksiID {
+    int idtrsk;
 }
-

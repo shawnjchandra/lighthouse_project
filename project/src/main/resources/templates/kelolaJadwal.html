@@ -73,7 +73,7 @@
                     <th>Tarif Sewa Harian</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody  >
                 <tr th:each="row,stat :${results}">
                     <td th:name="data" th:text="${row.namatower}+'-'+${row.lantai}+'-'+${row.nomor}" ></td>
                     <td th:name="startDate" th:value="${row.tanggalmulai}" th:text="${row.tanggalmulai}"></td>
@@ -84,6 +84,7 @@
                             <input type="hidden" th:value="${row.namatower}+'-'+${row.lantai}+'-'+${row.nomor}" name="data" ></input>
                             <input type="hidden" th:value="${row.tanggalmulai}"  id="startDate" name="startDate" ></input>
                             <input type="hidden" th:value="${row.tanggalselesai}"   id="end-date" name="endDate" ></input>
+                            
                             <select th:name="status" th:if="${row.statustersedia} != 'NA' " th:onchange="'updateStatus('+ ${stat.index+1}+')'">
                                 <option value="" th:selected="${row.statustersedia} == ''">Select Status</option>
                                 <!-- <option value="NA" th:selected="${row.statustersedia} == 'NA'">Not Available</option> -->

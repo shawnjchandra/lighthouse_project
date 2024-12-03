@@ -24,4 +24,5 @@ public class TransaksiTowerUnitModel{
     String tgglcheckin;
     String tgglcheckout;
 
+    
 }

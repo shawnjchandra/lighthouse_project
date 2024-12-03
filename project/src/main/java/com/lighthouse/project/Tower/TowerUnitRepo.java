@@ -1,5 +1,6 @@
 package com.lighthouse.project.Tower;
 
+import java.sql.ResultSet;
 import java.util.List;
 import java.util.Optional;
 
@@ -7,6 +8,9 @@ public interface TowerUnitRepo {
     List<UnitModel> findAllUnits();
     List<TowerModel> findAllTowers();
     List<TowerUnitModel> findAllUnitJoinTowers();
+
+   
+    List<TowerUnitModel> findUnitTowersByParams(String namatower, int lantai, int nomor);
     boolean changeUnitData
     (   
         String originalTower,

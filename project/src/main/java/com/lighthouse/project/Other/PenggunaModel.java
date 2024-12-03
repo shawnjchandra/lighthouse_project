@@ -17,6 +17,8 @@ public class PenggunaModel {
     String nama;
     String nohp;
     String email;
+    String alamat;
+    int idkel;
     String username;
     String pass;
     String tipe;
